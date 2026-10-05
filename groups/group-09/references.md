@@ -19,3 +19,18 @@
 - Khronos Group. *OpenCL Overview*. Disponível em: https://www.khronos.org/opencl/.
 - Vaswani, Ashish et al. *Attention Is All You Need*. arXiv, 2017. Disponível em: https://arxiv.org/abs/1706.03762.
 - Goodfellow, Ian; Bengio, Yoshua; Courville, Aaron. *Deep Learning*. MIT Press, 2016. Disponível em: https://www.deeplearningbook.org/.
+
+## C. Entrada, saída e interação com o ambiente
+
+- NVIDIA. *CUDA C++ Programming Guide: Asynchronous Concurrent Execution*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#asynchronous-concurrent-execution.
+- NVIDIA. *CUDA Runtime API: Memory Management*. Disponível em: https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__MEMORY.html.
+- NVIDIA. *GPUDirect Technology*. Disponível em: https://developer.nvidia.com/gpudirect.
+- PCI-SIG. *PCI Express Technology*. Disponível em: https://pcisig.com/pci-express.
+- VESA. *DisplayPort Technology*. Disponível em: https://www.displayport.org/.
+
+## D. Armazenamento e hierarquia de memória
+
+- NVIDIA. *CUDA C++ Programming Guide: Memory Hierarchy*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#memory-hierarchy.
+- NVIDIA. *CUDA C++ Best Practices Guide: Memory Optimizations*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#memory-optimizations.
+- JEDEC. *Graphics Double Data Rate (GDDR) Standards*. Disponível em: https://www.jedec.org/standards-documents/focus/memory.
+- NVIDIA. *CUDA Runtime API: Device Management*. Disponível em: https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__DEVICE.html.
