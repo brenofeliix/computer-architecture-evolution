@@ -4,7 +4,7 @@
 * 1 - Iago Henrico Paiva Fouletto
 * 2 - Iago Gabriel Bortuluzzi
 * 3 - Guilherme Simões de Souza
-* 4 - Gustavo Balsam
+* 4 - Gustavo Balsan Jurach
 
 ## Selected Architecture
 * Arquitetura **RISC-V**
