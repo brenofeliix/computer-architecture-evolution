@@ -1,16 +1,13 @@
-# References
+# Referências
 
-Use IEEE style.
+* ESPRESSIF SYSTEMS. **ESP-IDF Programming Guide — ESP32**. Documentação oficial. Disponível em: https://docs.espressif.com/projects/esp-idf/en/stable/esp32/
 
-1- FLYNN, Michael J. Very High-Speed Computing Systems. Proceedings of the IEEE, 1966.
-Artigo de Michael J. Flynn - https://ieeexplore.ieee.org/document/1447203
+* ESPRESSIF SYSTEMS. **Wi-Fi API Reference — ESP32**. Documentação oficial. Disponível em: https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/network/esp_wifi.html
 
-2-  https://tutorialsinhand.com/tutorials/computer-organization-and-architecture-coa-tutorial/flynns-classification-of-computers/misd-architecture.aspx
+* PYTHON SOFTWARE FOUNDATION. **Documentação Python 3.14**. Documentação oficial. Disponível em: https://docs.python.org/pt-br/3.14/
 
-3- https://www.geeksforgeeks.org/computer-organization-architecture/computer-architecture-flynns-taxonomy/
+* PYTHON SOFTWARE FOUNDATION. **Tutorial do Python**. Documentação oficial. Disponível em: https://docs.python.org/pt-br/3.14/tutorial/
 
-4- ESPRESSIF SYSTEMS. ESP32 Series Datasheet. Espressif Systems.
+* INTEL. **Intel Xeon Processors**. Documentação e especificações oficiais. Disponível em: https://www.intel.com/content/www/us/en/products/details/processors/xeon.html
 
-5- PYTHON SOFTWARE FOUNDATION. Python Documentation.
-
-6- FLYNN, Michael J. Some Computer Organizations and Their Effectiveness. IEEE Transactions on Computers, v. C-21, n. 9, p. 948–960, 1972. DOI: 10.1109/TC.1972.5009071.
+* FLYNN, Michael J. **Some Computer Organizations and Their Effectiveness**. IEEE Transactions on Computers, 1972.
