@@ -1,0 +1,353 @@
+# Questão de Pesquisa 2 — Dados de entrada
+
+**Quais dados devem ser coletados pelo sistema e como eles serão utilizados para representar o funcionamento do projeto?**
+
+## Resposta
+
+O principal dado de entrada do protótipo será a **temperatura medida pelo sensor de temperatura**. Esse dado será a informação fundamental utilizada pelo sistema desde a etapa de coleta até as diferentes análises realizadas no computador.
+
+Além da temperatura, poderão ser registradas **informações complementares**, principalmente o momento em que cada medição foi realizada. Esse registro será importante para organizar o histórico das temperaturas e permitir que o sistema relacione determinado valor ao momento em que ele foi coletado.
+
+A escolha desses dados foi feita de forma intencional, pois o projeto possui um **escopo acadêmico e simplificado**. Dessa maneira, não é necessário utilizar diversos sensores ou coletar uma grande quantidade de informações. O objetivo é trabalhar com os dados realmente necessários para demonstrar o funcionamento do monitoramento de temperatura e, principalmente, a relação com o conceito MISD.
+
+---
+
+## 1. Principal dado de entrada
+
+O principal dado de entrada será o **valor numérico correspondente à temperatura medida pelo sensor**.
+
+Por exemplo:
+
+```text
+Temperatura = 38 °C
+```
+
+Esse valor será considerado o dado de entrada do sistema.
+
+Depois da medição, o valor seguirá pelo fluxo definido no projeto:
+
+```text
+Sensor → ESP32 → Wi-Fi → Computador → Python
+```
+
+O sensor será responsável por gerar a informação, enquanto o ESP32 receberá essa leitura e a transmitirá para o computador.
+
+No computador, o programa desenvolvido em Python receberá o valor e disponibilizará essa informação para as diferentes análises.
+
+---
+
+## 2. Por que a temperatura é um dado de entrada?
+
+A temperatura é considerada um dado de entrada porque representa a **informação inicial fornecida ao sistema para que as etapas seguintes possam ser executadas**.
+
+O sistema primeiro precisa receber uma informação do ambiente. Essa informação será obtida pelo sensor de temperatura.
+
+Por exemplo, se o sensor registrar:
+
+```text
+38 °C
+```
+
+o computador receberá esse valor e poderá utilizá-lo para realizar diferentes operações.
+
+Dessa forma, a temperatura não será apenas armazenada. Ela será utilizada como **entrada para os processos de análise**.
+
+---
+
+## 3. Informações complementares
+
+Embora a temperatura seja o principal dado de entrada, o projeto poderá registrar algumas informações complementares para organizar melhor os dados.
+
+A principal informação complementar será o **momento em que a medição foi realizada**.
+
+Por exemplo:
+
+| Temperatura | Momento da medição |
+| ----------- | ------------------ |
+| 25 °C       | 10:00              |
+| 27 °C       | 10:05              |
+| 29 °C       | 10:10              |
+| 35 °C       | 10:15              |
+
+Nesse exemplo, a temperatura continua sendo o dado principal, enquanto o momento da medição permite saber **quando aquele valor foi registrado**.
+
+Essa informação será importante principalmente para a análise histórica, pois permitirá comparar a temperatura atual com valores registrados anteriormente.
+
+---
+
+## 4. Utilização dos dados
+
+Depois que o computador receber o valor da temperatura, esse mesmo dado poderá ser utilizado nas diferentes análises propostas pelo projeto.
+
+Supondo que o sensor envie:
+
+```text
+Temperatura atual = 38 °C
+```
+
+O programa poderá utilizar esse valor para diferentes finalidades.
+
+### 4.1 Verificação de limite
+
+A primeira utilização será verificar se a temperatura ultrapassou um determinado limite.
+
+Por exemplo:
+
+```text
+Limite definido = 40 °C
+Temperatura recebida = 38 °C
+```
+
+Nesse caso:
+
+```text
+38 °C < 40 °C
+Temperatura abaixo do limite.
+```
+
+Se posteriormente o sensor registrar:
+
+```text
+42 °C
+```
+
+o sistema poderá identificar:
+
+```text
+42 °C > 40 °C
+Temperatura acima do limite.
+```
+
+Essa análise permitirá demonstrar uma decisão baseada diretamente no valor recebido.
+
+---
+
+### 4.2 Comparação com o histórico
+
+A segunda utilização será comparar a temperatura atual com temperaturas registradas anteriormente.
+
+Por exemplo, supondo que o histórico contenha:
+
+```text
+25 °C
+26 °C
+25 °C
+27 °C
+```
+
+e uma nova leitura apresente:
+
+```text
+38 °C
+```
+
+o sistema poderá identificar que o valor atual apresenta uma diferença significativa em relação aos valores anteriores.
+
+Essa análise permitirá observar como a temperatura está se comportando ao longo do tempo.
+
+---
+
+### 4.3 Identificação de possíveis anomalias
+
+A terceira utilização será verificar se a temperatura apresenta um comportamento considerado anormal.
+
+Por exemplo:
+
+```text
+24 °C
+25 °C
+25 °C
+26 °C
+45 °C
+```
+
+Nesse caso, o valor de **45 °C** apresenta uma diferença significativa em relação às medições anteriores e poderá ser identificado como uma **possível anomalia**, de acordo com os critérios definidos pelo grupo.
+
+Essa análise não terá como objetivo realizar um diagnóstico complexo, mas demonstrar que o mesmo dado pode ser utilizado para uma finalidade diferente das demais análises.
+
+---
+
+## 5. Relação entre os dados de entrada e o MISD
+
+Os dados de entrada possuem uma relação direta com a demonstração do conceito **MISD (Multiple Instruction, Single Data)**.
+
+A ideia utilizada no projeto é que **um mesmo dado pode ser submetido a diferentes instruções ou processos de análise**.
+
+No protótipo, podemos representar essa ideia da seguinte forma:
+
+```text
+Um único dado:
+
+Temperatura = 38 °C
+```
+
+Esse mesmo valor poderá ser utilizado por diferentes processos:
+
+```text
+                  ┌──→ Verificação de limite
+                  │
+Temperatura ──────┼──→ Comparação com histórico
+                  │
+                  └──→ Identificação de possível anomalia
+```
+
+Portanto, não serão necessários três valores diferentes de temperatura para realizar as três análises.
+
+O sistema poderá utilizar **o mesmo valor recebido** como entrada para os diferentes processos.
+
+Essa é a característica que será utilizada pelo grupo para relacionar o funcionamento do protótipo com o conceito MISD.
+
+---
+
+## 6. Por que utilizar principalmente a temperatura?
+
+O projeto possui um **escopo acadêmico e simplificado**. Por esse motivo, não é necessário adicionar diversos sensores ou coletar informações que não sejam necessárias para demonstrar o conceito estudado.
+
+O foco será trabalhar principalmente com:
+
+```text
+Temperatura
+```
+
+Essa escolha permite que o grupo concentre seus esforços nas etapas de:
+
+```text
+Coleta
+   ↓
+Transmissão
+   ↓
+Processamento
+   ↓
+Análise
+   ↓
+Armazenamento
+   ↓
+Apresentação
+```
+
+Em vez de utilizar sensores de pressão, vibração, umidade ou outros tipos de dados, o grupo utilizará a temperatura como elemento central do protótipo.
+
+Isso também facilita a demonstração do MISD, pois fica mais claro que diferentes processos estão trabalhando sobre **uma mesma informação de entrada**.
+
+---
+
+## 7. Exemplo completo dos dados de entrada
+
+Podemos representar uma situação prática do protótipo.
+
+Suponha que o sensor realize uma medição e obtenha:
+
+```text
+Temperatura: 38 °C
+Horário: 14:30
+```
+
+O ESP32 receberá essa informação e transmitirá os dados ao computador por Wi-Fi.
+
+O programa em Python receberá:
+
+```text
+38 °C
+```
+
+A partir desse mesmo valor, o sistema poderá executar:
+
+### Processo 1 — Limite
+
+Verificar se **38 °C** ultrapassa o limite definido.
+
+### Processo 2 — Histórico
+
+Comparar **38 °C** com as temperaturas registradas anteriormente.
+
+### Processo 3 — Anomalia
+
+Verificar se **38 °C** apresenta comportamento diferente do esperado.
+
+O registro também poderá ser armazenado como:
+
+```text
+14:30 → 38 °C
+```
+
+Posteriormente, essa informação poderá fazer parte do histórico utilizado pelas análises.
+
+---
+
+## 8. Fluxo dos dados de entrada
+
+O funcionamento dos dados pode ser resumido da seguinte maneira:
+
+```text
+1. Sensor
+   ↓
+   Realiza a medição da temperatura
+
+2. ESP32
+   ↓
+   Recebe o valor medido
+
+3. Wi-Fi
+   ↓
+   Transmite o valor para o computador
+
+4. Python
+   ↓
+   Recebe a temperatura
+
+5. Processos de análise
+   ↓
+   Limite + Histórico + Anomalia
+
+6. Armazenamento
+   ↓
+   Guarda as informações necessárias
+
+7. Resultado
+   ↓
+   Apresenta as informações ao usuário
+```
+
+Esse fluxo permite acompanhar o caminho percorrido pelo dado desde sua coleta até sua utilização nas diferentes análises.
+
+---
+
+## 9. Importância dos dados para o funcionamento do projeto
+
+Os dados de entrada são fundamentais porque todas as etapas posteriores dependem deles.
+
+Sem uma temperatura coletada pelo sensor:
+
+* Não seria possível verificar o limite;
+* Não seria possível comparar com o histórico;
+* Não seria possível procurar possíveis anomalias;
+* Não haveria informação para armazenar;
+* Não seria possível apresentar um resultado ao usuário.
+
+Dessa forma, a temperatura funciona como o **ponto de partida de todo o processamento**.
+
+O projeto busca acompanhar esse dado desde sua origem até os resultados finais, permitindo que o grupo compreenda o caminho percorrido pela informação dentro do sistema.
+
+---
+
+## Conclusão da Questão 2
+
+Portanto, o principal dado de entrada do projeto será a **temperatura medida pelo sensor**, podendo ser registrada junto ao momento da medição para organizar o histórico.
+
+Esse dado será coletado pelo sensor, recebido pelo ESP32, transmitido por Wi-Fi para o computador e posteriormente processado pelo programa em Python.
+
+A mesma temperatura poderá ser utilizada em diferentes processos:
+
+```text
+Temperatura
+     │
+     ├──→ Verificação de limite
+     │
+     ├──→ Comparação com histórico
+     │
+     └──→ Identificação de possível anomalia
+```
+
+Dessa forma, os dados de entrada não serão utilizados apenas para registrar uma temperatura, mas servirão como base para todo o funcionamento do protótipo.
+
+A escolha de trabalhar principalmente com a temperatura também mantém o projeto dentro de seu **escopo acadêmico e simplificado**, evitando informações desnecessárias e permitindo que o grupo concentre sua atenção na demonstração do conceito **MISD: um mesmo dado de entrada sendo utilizado por diferentes processos de análise**.
