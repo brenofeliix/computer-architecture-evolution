@@ -4,7 +4,7 @@ A arquitetura CISC (Complex Instruction Set Computer) organiza e acessa a memór
 
 **Modelo de Organização Linear e Unificada**: A memória principal é tratada como uma sequência linear e contínua de bytes endereçáveis, onde dados e instruções compartilham o mesmo espaço físico de endereçamento.
 
-**Modos de Endereçamento Complexos**: Oferece grande variedade de formas para localizar dados (direto, indireto, indexado e base-índice), facilitando o acesso eficiente a estruturas complexas e vetores (arrays) na memória.
+**Modos de Endereçamento Complexos**: Oferece grande variedade de formas para localizar dados (direto, indireto, indexado e base-índice), facilitando o acesso eficiente a estruturas complexas e vetores (arrays) na memória. Por exemplo, o modo indexado permite acessar diferentes posições de um vetor usando um índice, tornando a localização dos dados mais prática.
 
 **Operações Register-to-Memory**: Diferente de arquiteturas mais simples, o CISC permite que uma única instrução busque dados diretamente da memória, execute o processamento aritmético/lógico e grave o resultado de volta na memória, sem exigir comandos intermediários de leitura e escrita.
 
