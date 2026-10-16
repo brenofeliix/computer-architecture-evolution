@@ -19,3 +19,30 @@
 - Khronos Group. *OpenCL Overview*. Disponível em: https://www.khronos.org/opencl/.
 - Vaswani, Ashish et al. *Attention Is All You Need*. arXiv, 2017. Disponível em: https://arxiv.org/abs/1706.03762.
 - Goodfellow, Ian; Bengio, Yoshua; Courville, Aaron. *Deep Learning*. MIT Press, 2016. Disponível em: https://www.deeplearningbook.org/.
+
+## C. Entrada, saída e interação com o ambiente
+
+- NVIDIA. *CUDA C++ Programming Guide: Asynchronous Concurrent Execution*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#asynchronous-concurrent-execution.
+- NVIDIA. *CUDA Runtime API: Memory Management*. Disponível em: https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__MEMORY.html.
+- NVIDIA. *GPUDirect Technology*. Disponível em: https://developer.nvidia.com/gpudirect.
+- PCI-SIG. *PCI Express Technology*. Disponível em: https://pcisig.com/pci-express.
+- VESA. *DisplayPort Technology*. Disponível em: https://www.displayport.org/.
+
+## D. Armazenamento e hierarquia de memória
+
+- NVIDIA. *CUDA C++ Programming Guide: Memory Hierarchy*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#memory-hierarchy.
+- NVIDIA. *CUDA C++ Best Practices Guide: Memory Optimizations*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#memory-optimizations.
+- JEDEC. *Graphics Double Data Rate (GDDR) Standards*. Disponível em: https://www.jedec.org/standards-documents/focus/memory.
+- NVIDIA. *CUDA Runtime API: Device Management*. Disponível em: https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__DEVICE.html.
+
+## E. Acesso e movimentação de dados
+
+- NVIDIA. *CUDA C++ Programming Guide: Device Memory Accesses*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#device-memory-accesses.
+- NVIDIA. *CUDA C++ Best Practices Guide: Coalesced Access to Global Memory*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#coalesced-access-to-global-memory.
+
+## F. Unidades de processamento e execução
+
+- NVIDIA. *CUDA C++ Programming Guide: Hardware Multithreading*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#hardware-multithreading.
+- NVIDIA. *CUDA C++ Programming Guide: SIMT Architecture*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#simt-architecture.
+- NVIDIA. *CUDA C++ Programming Guide: Asynchronous Concurrent Execution*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#asynchronous-concurrent-execution.
+- AMD. *ROCm Documentation: Hardware Implementation*. Disponível em: https://rocm.docs.amd.com/projects/HIP/en/docs-7.0.2/understand/hardware_implementation.html.
