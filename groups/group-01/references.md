@@ -9,3 +9,7 @@
 [4] RANDELL, B. (ed.). The Origins of Digital Computers: Selected Papers. Berlin; New York: Springer-Verlag, 1982. https://archive.org/details/originsofdigital0000unse
 
 [5] UNIVERSITY OF PENNSYLVANIA. Penn Engineering. ENIAC. Philadelphia: University of Pennsylvania, s.d. https://www.engineering.upenn.edu/about/history-heritage/eniac/
+
+[6] STUART, Brian L. Programming the ENIAC. Drexel University, [s. d.]. Disponível em: https://www.cs.drexel.edu/~bls96/eniac/. (melhor fonte de todos os tempos)
+
+[7] DA CRUZ, F. IBM Punch Cards. Columbia University Computing History, 2001, última atualização em 4 set. 2023. Disponível em: https://www.columbia.edu/cu/computinghistory/keypunch.html.
