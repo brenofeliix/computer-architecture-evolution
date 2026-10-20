@@ -17,5 +17,9 @@ A separação entre os caminhos de instruções e dados permite que seus acessos
 ## 11.4 Resultados Intermediários
 
 ## 11.5 Ordem e Independência dos Acessos
+Na arquitetura Harvard clássica, a divisão física dos espaços de armazenamento reflete-se diretamente nos canais de comunicação com o processador. Essa separação estrutural traz implicações diretas na forma como os acessos são geridos:
 
+* **Independência de Caminhos:** Como os barramentos e caminhos de acesso para instruções e para dados são totalmente independentes, as requisições destinadas a cada um dos espaços não disputam o mesmo canal físico de comunicação.
+* **Potencial de Acessos Simultâneos:** Dependendo da implementação específica do hardware, essa independência abre a possibilidade de que ocorram acessos em paralelo — por exemplo, a busca (*fetch*) de uma nova instrução na memória de programa pode decorrer no mesmo ciclo temporal em que a unidade de controlo ou cálculo lê ou escreve dados na memória de dados.
+* **Ausência de Garantia Universal:** É fundamental sublinhar que a simultaneidade de acessos **não é uma regra garantida nem inerente a todos os sistemas** baseados no modelo Harvard[cite: 31, 32]. Determinados sistemas implementam caminhos separados estritamente por razões de organização lógica ou restrições de projeto, mas podem carecer de circuitos internos ou de suporte temporal que permitam o verdadeiro paralelismo de execução, servindo a separação primariamente para evitar colisões e conflitos de barramento e não para assegurar concorrência automática.
 ## 11.6 Armazenamento, Aceleração e Limitações
