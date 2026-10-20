@@ -1,5 +1,3 @@
-<<<<<<< Updated upstrea
-=======
 # Referências — Grupo 03
 
 Este arquivo reúne as fontes acadêmicas e técnicas consultadas para o estudo da taxonomia de Flynn, das características da plataforma ESP32 e da linguagem Python utilizada no protótipo de monitoramento de temperatura.
@@ -49,4 +47,3 @@ Acesso em: 19 out. 2026.
 ## Observação metodológica
 
 As referências técnicas descrevem os recursos de hardware e software utilizados como base para o protótipo. Elas não demonstram, por si só, que o ESP32 implementa uma arquitetura MISD física. A relação com o MISD deve ser discutida a partir da definição arquitetural e das características efetivamente implementadas e testadas pela equipe.
->>>>>>> Stashed changes
