@@ -1,6 +1,7 @@
 # 11. Acesso aos Dados e Fluxo de Informação
 
 ## 11.1 Origem das Informações
+Na Arquitetura de Harvard clássica, as informações utilizadas pelo processador vêm de dois espaços de armazenamento distintos: a memória de instruções e a memória de dados. A memória de instruções armazena o programa, ou seja, a sequência de comandos que determina quais operações o processador deve executar. Essas instruções são buscadas pelo processador durante a execução e podem indicar operações matemáticas, comparações, transferências de informações e desvios na sequência do programa. Já a memória de dados armazena as informações que serão utilizadas nessas operações, como números, variáveis e resultados intermediários. A principal diferença entre essas categorias está em suas funções: as instruções determinam o que deve ser feito, enquanto os dados representam os valores sobre os quais as operações serão realizadas. Na Arquitetura de Harvard clássica, essas memórias possuem caminhos de acesso separados, permitindo que o processador busque instruções e acesse dados simultaneamente, desde que a implementação ofereça os recursos necessários. Portanto, a origem das informações depende de sua finalidade: os comandos são obtidos na memória de instruções, enquanto os valores necessários ao processamento são obtidos na memória de dados.
 
 ## 11.2 Caminho das Instruções
 
