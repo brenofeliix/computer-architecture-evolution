@@ -15,6 +15,9 @@ A separação entre os caminhos de instruções e dados permite que seus acessos
 *Legenda: As setas indicam o sentido do fluxo. A separação permite acessos independentes; a simultaneidade depende da implementação. Fonte: elaboração própria, com base em Arvind et al. (2015).*
 
 ## 11.4 Resultados Intermediários
+No contexto da microarquitetura do processador, os resultados intermediários são valores parciais e temporários gerados pela ULA (Unidade Lógica e Aritmética) durante a execução de cálculos que exigem múltiplos passos ou ciclos de clock. Como a ULA é um circuito puramente combinacional e não consegue reter dados, esses valores parciais precisam ser salvos instantaneamente para não se perderem antes da conclusão da instrução.
+
+Para viabilizar esse fluxo, os registradores atuam como a memória de curto prazo do processador, armazenando tanto os operandos de entrada quanto os resultados intermediários e as flags de status (como zero ou overflow). Dessa forma, esses elementos do datapath permitem que os dados sejam retidos de forma estável entre um ciclo e outro, viabilizando operações encadeadas antes que o resultado final seja gravado no banco de registradores ou na memória principal.
 
 ## 11.5 Ordem e Independência dos Acessos
 Na arquitetura Harvard clássica, a divisão física dos espaços de armazenamento reflete-se diretamente nos canais de comunicação com o processador. Essa separação estrutural traz implicações diretas na forma como os acessos são geridos:
