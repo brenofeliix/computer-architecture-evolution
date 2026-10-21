@@ -8,3 +8,4 @@ Arvind, “Single-Cycle Processors: Datapath & Control,” MIT OpenCourseWare, c
 
 Massachusetts Institute of Technology, “9.1 Annotated Slides,” *Computation Structures*, curso 6.004, MIT OpenCourseWare, primavera de 2017. [Online]. Disponível em: https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c9/c9s1/. Acesso em: 21 out. 2026.
 https://diveintosystems.cs.swarthmore.edu/book/C5-Arch/cpu.html
+- STALLINGS, William. *Arquitetura e Organização de Computadores*. 10. ed. São Paulo: Pearson, 2017.
