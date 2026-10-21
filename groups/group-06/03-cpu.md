@@ -10,7 +10,10 @@ Os registradores e acumuladores desempenham a função de locais de armazenament
 ## 3.3 ULA e Operações Aritméticas e Lógicas
 
 ## 3.4 Unidade de Controle e Coordenação dos Componentes
+A Unidade de Controle (UC) atua como o elemento central de gestão e coordenação dentro do processador. A sua função primordial consiste em direcionar o fluxo de informações e gerir o funcionamento global das restantes unidades (como a ULA e os registadores), garantindo que as operações ocorrem de forma sincronizada e na ordem correta.
 
+* **Emissão de Sinais de Controlo:** A Unidade de Controle interpreta os códigos das instruções provenientes da memória de programa e gera impulsos ou sinais elétricos específicos para os demais componentes. Estes sinais determinam, por exemplo, quando a ULA deve efetuar uma operação, quando os registadores devem reter ou libertar dados, e como os barramentos devem gerir as transferências.
+* **Papel Coordenador:** A UC assume um papel estritamente diretivo sobre os circuitos internos e canais de comunicação, assegurando a articulação entre as ordens lógicas e as ações físicas executadas pelo hardware, sem a necessidade de esgotar o ciclo completo e sequencial detalhado de cada instrução de forma isolada.
 ## 3.5 Clock e Sincronização
 
 ## 3.6 Ciclo de Instrução
