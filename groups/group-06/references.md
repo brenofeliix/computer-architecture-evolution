@@ -38,3 +38,9 @@ Referencias utilizadas na pesquisa para Unidade de Controle:
 https://teachcomputerscience.com/harvard-architecture/
 https://ads.ifba.edu.br/dl2539
 https://www.tme.com/br/pt/news/library-articles/page/56104/arquitetura-de-von-neumann-e-arquitetura-de-harvard/
+
+Arvind, “Single-Cycle Processors: Datapath & Control”, MIT OpenCourseWare, curso 6.823, Lecture 5:
+https://ocw.mit.edu/courses/6-823-computer-system-architecture-fall-2005/964e8d2c1085754ba5ed2eba48269a0b_l05_singlecycle.pdf
+MIT, “9.1 Annotated Slides”, Computation Structures, curso 6.004:
+https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c9/c9s1/
+Stallings, Arquitetura e Organização de Computadores, 10. ed., Pearson, 2017.

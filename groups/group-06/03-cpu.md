@@ -1,29 +1,44 @@
 # 3. CPU
 
-## 3.1 Processor Overview
+## 3.1 Unidades de processamento e Relação Entre Elas
+A unidade de processamento é a parte do computador responsável por executar as instruções de um programa e realizar operações sobre os dados recebidos. Em um modelo geral de CPU, ela envolve três componentes fundamentais: a Unidade Lógica e Aritmética (ULA), os registradores e a unidade de controle. A ULA realiza operações matemáticas, como adição e subtração, e operações lógicas, como comparações entre valores. Os registradores são pequenas unidades de armazenamento de alta velocidade localizadas dentro do processador, utilizadas para guardar temporariamente dados, instruções, endereços e resultados intermediários durante a execução. Já a unidade de controle coordena o funcionamento dos componentes, interpretando as instruções e enviando sinais que determinam quais operações devem ser realizadas e em que sequência. Esses elementos trabalham em conjunto: a unidade de controle identifica a operação necessária, os registradores fornecem os valores utilizados e a ULA executa o processamento. Após a operação, o resultado pode ser armazenado em um registrador ou enviado para a memória, conforme a instrução executada. Embora a organização interna possa variar entre processadores, a ULA, os registradores e a unidade de controle são elementos comuns nos modelos tradicionais de CPU.
+Na Arquitetura de Harvard, esses componentes de processamento desempenham funções semelhantes às encontradas em outras organizações de computadores. A principal diferença não está na definição da ULA, dos registradores ou da unidade de controle, mas na maneira como as instruções e os dados são armazenados e acessados. Na organização Harvard clássica, existe uma memória específica para as instruções do programa e outra para os dados utilizados durante a execução, com caminhos de acesso independentes. Dessa forma, a unidade de controle pode buscar instruções na memória de programa enquanto o processador acessa dados na memória correspondente, desde que a implementação permita essas operações simultâneas. A ULA continua responsável pelos cálculos e pelas operações lógicas, enquanto os registradores armazenam temporariamente as informações necessárias ao processamento. Portanto, é importante distinguir os elementos comuns de uma CPU das características específicas da Arquitetura de Harvard: os componentes internos executam e coordenam as operações, enquanto a separação entre as memórias de instruções e de dados define a organização Harvard.
 
-## 3.2 Registers
+## 3.2 Registradores e Armazenamento Interno Temporário
+Os registradores e acumuladores desempenham a função de locais de armazenamento internos ao processador, caracterizados por altíssima velocidade de acesso, destinados a reter temporariamente dados, operandos, endereços ou estados operacionais necessários durante o fluxo de execução das instruções; diferentemente da memória de dados principal — que oferece uma capacidade de armazenamento ampla e externa ao núcleo para persistir informações do sistema —, esses componentes internos são utilizados de forma transitória para manter valores intermediários e resultados parciais logo após serem manipulados pela unidade lógica e aritmética, agilizando as operações computacionais sem a latência de acessos constantes à memória principal, sendo fundamental destacar que características como a quantidade exata, o tamanho em bits e a organização estrutural desses registradores e acumuladores não possuem um padrão universal fixo, variando inteiramente conforme a arquitetura e a implementação específica adotada por cada fabricante ou modelo de processador.
 
-## 3.3 ALU
+## 3.3 ULA e Operações Aritméticas e Lógicas
+A Unidade Lógica e Aritmética (ULA) executa transformações físicas nos dados por meio de circuitos combinatórios, realizando operações aritméticas (como adição e subtração) e lógicas bit a bit (como AND, OR e deslocamentos). Na Arquitetura Harvard, esse processamento é otimizado devido à separação física entre as memórias e barramentos de instruções e de dados, o que permite que o sistema busque a próxima instrução enquanto a ULA manipula os dados atuais de forma simultânea e sem conflitos.
 
-## 3.4 Control Unit
+A circulação dos dados ocorre em um ciclo fechado e sincronizado: os operandos são lidos do Banco de Registradores e enviados diretamente para as entradas da ULA. Após o processamento, a ULA atualiza o Registrador de Flags com o status do resultado (como indicações de zero ou sinal negativo) e envia o valor final de volta pelo barramento interno para ser gravado no registrador de destino ou na memória de dados.
 
-## 3.5 Clock
+## 3.4 Unidade de Controle e Coordenação dos Componentes
+A Unidade de Controle (UC) atua como o elemento central de gestão e coordenação dentro do processador. A sua função primordial consiste em direcionar o fluxo de informações e gerir o funcionamento global das restantes unidades (como a ULA e os registadores), garantindo que as operações ocorrem de forma sincronizada e na ordem correta.
 
-## 3.6 Instruction Cycle
+* **Emissão de Sinais de Controlo:** A Unidade de Controle interpreta os códigos das instruções provenientes da memória de programa e gera impulsos ou sinais elétricos específicos para os demais componentes. Estes sinais determinam, por exemplo, quando a ULA deve efetuar uma operação, quando os registadores devem reter ou libertar dados, e como os barramentos devem gerir as transferências.
+* **Papel Coordenador:** A UC assume um papel estritamente diretivo sobre os circuitos internos e canais de comunicação, assegurando a articulação entre as ordens lógicas e as ações físicas executadas pelo hardware, sem a necessidade de esgotar o ciclo completo e sequencial detalhado de cada instrução de forma isolada.
 
-Explain
+## 3.5 Clock e Sincronização
+O clock atua como o oscilador principal do sistema, gerando um sinal elétrico pulsante em intervalos regulares que dita o ritmo de todas as operações internas da CPU. A sincronização promovida por esse sinal é fundamental para garantir que a transição de estados ocorra de maneira ordenada: os sinais de controle gerados pela Unidade de Controle, as leituras de memória e os cálculos realizados pela ULA devem ser executados e concluídos no exato momento previsto. Na Arquitetura Harvard, o clock tem o papel crítico de coordenar o tráfego nos barramentos independentes, assegurando que o processamento interno dos dados e a busca de novas instruções fluam compassadamente, evitando a corrupção de valores intermediários ou a sobreposição indevida de ciclos de execução.
 
-Fetch
+## 3.6 Ciclo de Instrução
+A principal vantagem da Arquitetura Harvard reside no seu potencial para o paralelismo de operações, viabilizado pela existência de caminhos físicos independentes. Em uma arquitetura de barramento único, a leitura de uma instrução e o acesso a um dado devem ocorrer sequencialmente para evitar colisões. Na organização Harvard, os canais de comunicação são exclusivos e isolados — um dedicado à memória de programa e outro à memória de dados —, o que significa que não há competição pelo uso da via. Nesse sentido, esses caminhos independentes favorecem os acessos simultâneos: o processador pode buscar a próxima instrução a ser interpretada no mesmo ciclo de clock em que lê ou grava um operando referente à instrução atual. Essa simultaneidade elimina tempos de espera e é a base para otimizar técnicas de pipelining (linha de montagem de instruções), elevando expressivamente o desempenho geral do sistema.
 
-Decode
+## 3.7 Diagrama das Unidades Principais
 
-Execute
+Figura 1 — **Unidades de processamento em um modelo geral com organização Harvard.**
 
-## 3.7 CPU Diagram
+O diagrama apresenta um modelo funcional didático de processador conectado a espaços separados de memória de instruções e de dados. No caminho de instruções, o contador de programa (PC) fornece o endereço da próxima instrução à memória de instruções, e a instrução lida é encaminhada ao processador para interpretação pela Unidade de Controle. No caminho de dados, valores mantidos nos registradores podem ser enviados à ULA como operandos; o resultado pode voltar aos registradores ou, conforme a operação, ser usado para acessar a memória de dados. Em uma operação de escrita, um valor pode sair dos registradores em direção à memória de dados.
 
-(Add image)
+As setas laranjas representam sinais de controle: elas coordenam operações, como selecionar registradores, orientar a ULA e indicar leitura ou escrita na memória. Esses sinais têm função diferente dos caminhos de dados: eles controlam o que os componentes fazem, enquanto os caminhos verdes transportam valores. Os caminhos azuis representam a comunicação das instruções.
 
-## 3.8 Advantages
+A separação entre os caminhos de instruções e dados representa a organização Harvard. Ela permite que os acessos sejam independentes; a realização simultânea depende da implementação. O diagrama é conceitual: não define quantidade ou largura de registradores, frequência de clock, conjunto de instruções nem um projeto único de CPU.
 
-## 3.9 Limitations
+[Visualizar o diagrama das unidades de processamento](images/harvard-unidades-processamento.svg)
+
+## 3.8 Paralelismo e Potencial de Desempenho
+A principal vantagem da Arquitetura Harvard reside no seu potencial para o paralelismo de operações, viabilizado pela existência de caminhos físicos independentes. Em uma arquitetura de barramento único, a leitura de uma instrução e o acesso a um dado devem ocorrer sequencialmente para evitar colisões. Na organização Harvard, os canais de comunicação são exclusivos e isolados — um dedicado à memória de programa e outro à memória de dados —, o que significa que não há competição pelo uso da via. Nesse sentido, esses caminhos independentes favorecem os acessos simultâneos: o processador pode buscar a próxima instrução a ser interpretada no mesmo ciclo de clock em que lê ou grava um operando referente à instrução atual. Essa simultaneidade elimina tempos de espera e é a base para otimizar técnicas de pipelining (linha de montagem de instruções), elevando expressivamente o desempenho geral do sistema.
+
+## 3.9 Limitações e Dependência da Implementação
+Embora a separação física de memórias ofereça amplas vantagens teóricas, o desempenho real e o grau de paralelismo alcançados dependem inteiramente da implementação específica do processador. A simples presença de vias independentes não resulta em operações simultâneas de forma automática; é necessário que o circuito lógico, a Unidade de Controle e o pipeline interno sejam projetados especificamente para orquestrar e explorar essa capacidade arquitetônica.
+Além disso, a organização Harvard impõe limitações práticas e desafios de projeto. A duplicação completa dos barramentos (endereços e dados) aumenta consideravelmente a complexidade do roteamento no circuito impresso, demanda maior área de silício e exige mais pinos no encapsulamento do chip, elevando os custos de fabricação. Existe também uma rigidez inerente na gestão do armazenamento: o espaço não utilizado na memória de dados não pode ser realocado de forma nativa para armazenar mais código de programa (e vice-versa), o que pode levar ao desperdício de recursos em aplicações que possuam perfis de uso de memória assimétricos.
