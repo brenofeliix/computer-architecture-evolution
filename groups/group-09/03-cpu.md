@@ -89,3 +89,45 @@ Portanto, a GPU não é automaticamente mais rápida que a CPU. O melhor resulta
 Threads de um mesmo bloco podem cooperar por meio da memória compartilhada e de barreiras de sincronização. A barreira impede que uma thread avance antes que as outras threads do grupo alcancem o mesmo ponto.
 
 Blocos diferentes são planejados para serem independentes, pois podem ser executados em SMs ou CUs distintos. Quando existe dependência entre kernels, o programa precisa aguardar o término de uma etapa antes de iniciar a próxima. Essa espera garante a ordem correta, mas reduz o paralelismo.
+
+## 3.11 Controle e Sequência de uma Operação
+Na GPU, a CPU ou o programa hospedeiro inicia uma operação ao configurar os dados, escolher a quantidade de blocos e threads e enviar um kernel pelo driver e pelo runtime. A GPU não decide sozinha qual tarefa de alto nível executar; ela recebe o comando e controla sua execução interna.
+
+O front-end identifica o kernel e o divide em blocos. O escalonador coloca os blocos disponíveis nos SMs ou CUs, conforme registradores, memória compartilhada e outras capacidades livres. Dentro de cada unidade, os warps ou wavefronts são alternados conforme ficam prontos para executar.
+
+### Exemplo: soma de dois vetores
+
+Considere a operação `C[i] = A[i] + B[i]` para muitos elementos:
+
+1. **Início:** a aplicação reserva memória, coloca os vetores A e B na memória acessível pela GPU e configura a quantidade de threads.
+2. **Envio:** a CPU chama o kernel e informa a grade de blocos. A chamada pode ser assíncrona, permitindo que a CPU continue outras tarefas.
+3. **Distribuição:** o hardware distribui os blocos entre os SMs ou CUs disponíveis.
+4. **Repetição:** cada thread calcula seu índice `i` e lê um elemento de A e um de B. Threads diferentes repetem a mesma instrução para índices diferentes.
+5. **Desvio:** se `i` estiver fora do tamanho válido do vetor, a thread não grava resultado. Esse teste evita acesso inválido; quando threads do mesmo warp seguem caminhos diferentes, ocorre divergência.
+6. **Execução:** uma ALU soma os valores e a unidade de armazenamento grava o resultado em C.
+7. **Encerramento:** quando todas as threads terminam, o kernel é considerado concluído. A aplicação pode sincronizar, copiar C para a RAM e usar o resultado.
+
+```mermaid
+flowchart TD
+	A[Aplicação na CPU] --> B[Configura dados e threads]
+	B --> C[Envia o kernel pelo runtime]
+	C --> D[GPU distribui blocos]
+	D --> E[SM ou CU escalona warp/wavefront]
+	E --> F[Thread calcula o índice i]
+	F --> G{Índice válido?}
+	G -- Não --> H[Thread encerra sem gravar]
+	G -- Sim --> I[Lê A[i] e B[i]]
+	I --> J[ALU calcula A[i] + B[i]]
+	J --> K[Grava C[i]]
+	K --> L{Todas as threads concluíram?}
+	H --> L
+	L -- Não --> E
+	L -- Sim --> M[Kernel termina e resultado fica disponível]
+```
+
+Nesse exemplo, a participação humana ocorre antes da execução, quando a pessoa escolhe ou inicia o programa e seus parâmetros. Durante o kernel, o controle é automático. A operação termina quando todas as threads e blocos concluíram suas instruções e as dependências necessárias foram sincronizadas.
+
+## 3.12 Mudanças de Fluxo e Sincronização
+O fluxo pode mudar por condicionais, laços e retornos antecipados dentro do kernel. Laços permitem repetir instruções para vários elementos, mas podem fazer threads do mesmo warp executarem quantidades diferentes de trabalho. Condicionais também podem causar divergência.
+
+A sincronização pode ocorrer entre threads do mesmo bloco por meio de uma barreira, ou entre etapas diferentes por meio de eventos, espera da fila de comandos e sincronização do kernel. Blocos diferentes não devem depender de uma ordem específica enquanto estão no mesmo kernel, pois podem ser executados em SMs ou CUs diferentes e em momentos distintos.
