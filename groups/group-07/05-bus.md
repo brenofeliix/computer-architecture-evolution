@@ -101,5 +101,7 @@ Memória Distribuída MIMD: Troca explícita de mensagens via software/hardware 
 
 ​Contenção e Gargalo:
 Memória Compartilhada MIMD: Disputa direta e simultânea pelos barramentos de controle, dados e endereços.
-Memória Distribuída MIMD: Latência de rede e custo de empacotamento das mensagens.
+Memória Distribuída MIMD: Latência de rede e custo de empacotamento das mensagens.    
 ​Arquiteturas Modernas: Congestionamento na malha interna (NoC) e gargalos de largura de banda no controlador de memória.
+.
+
