@@ -149,7 +149,8 @@ Inicialmente, seu estado corresponde ao valor 8 -> ao receber um pulso elétrico
 Assim, os contadores em anel constituíam um dos mecanismos fundamentais para o armazenamento temporário e o processamento numérico do ENIAC.
 
 ## 5.6 Decimal Representation
-### 5.6.1 Os acumuladores do ENIAC eram os blocos de hardware responsáveis por armazenar temporariamente os valores e realizar as operações aritméticas. A máquina possuía 20 acumuladores, e cada um deles conseguia armazenar um número decimal de até 10 dígitos, além de um indicador de sinal (positivo ou negativo).
+Os acumuladores do ENIAC eram os blocos de hardware responsáveis por armazenar temporariamente os valores e realizar as operações aritméticas. 
+### 5.6.1 A máquina possuía 20 acumuladores, e cada um deles conseguia armazenar um número decimal de até 10 dígitos, além de um indicador de sinal (positivo ou negativo).
 Para isso, cada acumulador continha uma sequência de 10 contadores em anel. Cada contador correspondia a uma posição geométrica do número e operava com um peso posicional específico (base 10), da direita para a esquerda: unidades, dezenas, centenas, e assim por diante.
 Como exemplo, o número positivo 12.587 era registrado preenchendo as casas vazias à esquerda com zeros, enquanto o anel de sinal indicava o estado positivo:
 * Sinal: Positivo (+)
