@@ -121,10 +121,10 @@ Cada dígito do multiplicador levava um tempo de adição, os famosos 200 µs. A
 O produto tinha até 20 dígitos, e o operador escolhia 10, sendo os mais significativos e com arredondamento, já o multiplicador e multiplicando eram preservados.Era possível usar o multiplicador enquanto acumuladores somavam e o divisor calculava, desde que as bandejas de dígitos fossem separadas.
 
 ## 7.5 Divider & Square-Rooter
-- Unidade dedicada à aritimética mais complexa
+- Unidade dedicada à aritmética mais complexa
 
 ## 7.6 Internal Components
-- Sobre os tubos à vácuo e relés necessários para o funcionamento de cada undiade
+- Sobre os tubos à vácuo e relés necessários para o funcionamento de cada unidade
 
 ## 7.7 Cycling Unit
 - Equivalente ao clock do sistema
