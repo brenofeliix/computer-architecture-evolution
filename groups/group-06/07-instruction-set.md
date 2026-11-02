@@ -19,6 +19,26 @@ A instrução LPM permite ler informação armazenada na memória de programa, c
 As categorias apresentadas são uma seleção de exemplos da ISA AVR, não uma lista completa. A separação Harvard ajuda a descrever onde instruções e dados estão organizados; ela não determina, por si só, quais instruções aritméticas, de transferência ou de desvio um processador deve possuir.
 
 ## 7.4 Codificação, Operandos e Endereçamento
+No ATmega328P, o modo de endereçamento é a forma como a instrução localiza seu operando (registrador, constante ou endereço de memória). Segundo o manual oficial, os principais modos são:
+
+Registrador Direto: Usa diretamente os registradores de propósito geral (R0 a R31). Ex: ADD Rd, Rr.
+
+Imediato (Constantes): Usa uma constante numérica de 8 bits embutida na instrução (apenas nos registradores R16 a R31). Ex: LDI Rd, K.
+
+Dados Direto (SRAM): Acessa um endereço absoluto de 16 bits na memória RAM. Ex: LDS Rd, k.
+
+Dados Indireto: Usa os pares de registradores X, Y ou Z como ponteiros para a SRAM (com suporte a pré-decremento ou pós-incremento). Ex: LD Rd, X+.
+
+Indireto com Deslocamento: Usa os ponteiros Y ou Z somados a um deslocamento fixo (q). Ex: LDD Rd, Y+q.
+
+E/S Direta (I/O): Acessa rapidamente os primeiros registradores de periféricos. Ex: IN Rd, A.
+
+Memória de Programa (Flash): Lê constantes da memória Flash usando o ponteiro Z. Ex: LPM.
+
+Tamanhos (Conforme o Manual)
+1 palavra (16 bits): A maioria das 131 instruções do microcontrolador.
+
+2 palavras (32 bits): Apenas instruções que exigem saltos ou endereços maiores (como JMP e CALL
 
 ## 7.5 Exemplo de Instrução ou Operação
 Para ilustrar o modelo de operação e o conjunto de instruções na arquitetura AVR do microcontrolador ATmega328P, toma-se como exemplo prático uma operação aritmética simples de adição entre um registador de trabalho e uma constante imediata, documentada no manual oficial da arquitetura:
