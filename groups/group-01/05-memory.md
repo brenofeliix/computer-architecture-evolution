@@ -162,6 +162,7 @@ Essa organização permitia que a lógica eletrônica fizesse cálculos diretos,
 ### 5.6.2 Funcionamento dos Contadores Decimais
 O armazenamento físico de um dígito ocorria por meio dos estados elétricos das válvulas termiônicas dentro de cada contador em anel. O conjunto desses 10 contadores individuais consolidava o valor total do acumulador.
 As operações de adição ocorriam pelo envio de trens de pulsos elétricos de alta frequência para esses contadores. Cada pulso avançava o anel eletrônico em uma posição (de 0 para 1, de 1 para 2, sucessivamente). Quando um contador acumulava pulsos suficientes para ultrapassar o dígito 9, ele zerava o próprio anel e disparava mecanicamente um pulso de transporte (o "vai-um") para incrementar o contador posicional imediatamente à esquerda.
+
 Exemplo prático (Operação de Adição):
 * Estado inicial do contador de unidades: 8
 * Estímulo recebido: 5 pulsos elétricos
