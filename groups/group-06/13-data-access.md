@@ -26,3 +26,4 @@ Para ilustrar de forma concreta como um dado é selecionado e utilizado na arqui
 Este fluxo demonstra que, embora a organização Harvard garanta a separação física entre os caminhos de programa e de dados, a seleção e o endereçamento de um operando dentro da memória de dados seguem as regras específicas da arquitetura interna do microcontrolador escolhido[cite: 32, 35].
 ## 13.6 Limitações e Relação com a Organização Harvard
 
+O princípio geral da arquitetura de Harvard reflete-se no ATmega328P através da separação física entre as memórias de instruções e de dados. Contudo, os mecanismos de acesso aos operandos, a arquitetura Load/Store e os modos de endereçamento são exclusivos desta implementação AVR e não representam regras universais teóricas. Como limitação técnica documentada, as operações na memória externa de dados exigem dois ciclos de relógio, criando um estrangulamento de desempenho face às operações executadas num único ciclo nos registadores internos.   
