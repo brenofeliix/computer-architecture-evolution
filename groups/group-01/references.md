@@ -17,3 +17,5 @@
 [8] MAGNETIC-core memory. In: WIKIPEDIA, the free encyclopedia. Disponível em: https://en.wikipedia.org/wiki/Magnetic-core_memory. Acesso em: 18 out. 2026.
 
 [9] SMITHSONIAN INSTITUTION. National Museum of American History. ENIAC Divider And Square Rooter. Washington, D.C.: Smithsonian Institution, [s. d.]. Disponível em: https://americanhistory.si.edu/collections/object/nmah_334745. Acesso em: 2 nov. 2026.
+
+[10] TESCHLER, Leland. Engineering Essentials: Relays and Contactors. Machine Design, 31 jul. 2014. Disponível em: https://www.machinedesign.com/mechanical-motion-systems/article/21834253/engineering-essentials-relays-and-contactors. Acesso em: 2 nov. 2026.
