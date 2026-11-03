@@ -238,7 +238,44 @@ Assim, as diferentes unidades sabiam quando deveriam:
 Em suma: a Cycling Unit era o sistema central de temporização do ENIAC. Ela não decidia qual cálculo realizar, mas determinava o momento correto para que os circuitos executassem suas respectivas funções.
 
 ## 7.8 Master Programmer
-- Unidade de controle para loops, ramificações e sub-rotinas
+![Mostra a organização física dos controles da unidade.](./images/panels/Panel-Master-Programmer.jpg)
+
+> Descrição da Imagem: Painel frontal do Master Programmer, apresentando os controles utilizados para organizar as sequências de execução do ENIAC.
+
+### 7.8.1 O que era o Master Programmer? 
+O Master Programmer era a unidade responsável por controlar sequências de operações no ENIAC.
+
+Enquanto os controles locais dos acumuladores e de outras unidades determinavam como cada operação seria realizada, o Master Programmer coordenava a sequência geral dessas operações. Sua função era permitir que o computador executasse rotinas repetitivas, organizasse diferentes etapas de processamento e alterasse o caminho da execução conforme determinadas condições. Ele era composto principalmente por dois elementos:
+- Steppers: mecanismos que controlavam a posição atual de uma sequência de operações.
+- Counters: contadores que registravam quantas vezes determinadas etapas haviam sido executadas.
+O projeto final previa dez steppers e vinte counters, organizados em grupos associados.
+
+### 7.8.2 Steppers - Controle de etapas
+Um stepper pode ser entendido como um seletor de etapas. Ele possuía um contador de anel com seis posições, cada uma associada a uma saída de programa. Quando recebia um pulso de avanço, mudava para a próxima posição.
+
+Cada posição possuía um circuito associado a uma saída de programa. Assim, quando um pulso era recebido, o stepper encaminhava o sinal para a saída correspondente à posição em que se encontrava. Isso permitia organizar uma rotina em diferentes etapas sem precisar configurar uma sequência completamente nova a cada repetição.
+
+### 7.8.3 Counter - Controle de Repetições
+Os counters eram responsáveis por contar pulsos e acompanhar o progresso de determinadas sequências. Cada contador representava uma década decimal, ou seja, podia registrar valores de 0 a 9. A cada dez pulsos recebidos, transmitia um pulso ao próximo contador do grupo, quando existente.
+
+Os operadores podiam configurar valores de referência por meio de chaves rotativas. Quando a contagem alcançava a condição configurada, um pulso era enviado ao stepper para avançar a sequência.
+
+### 7.8.4 Loops - Repetição de sequências
+Uma das principais funcionalidades do Master Programmer era permitir a repetição de sequências de operações. Por exemplo, imagine um programa que precise realizar uma sequência de cálculos 100 vezes. Sem o Master Programmer, seria necessário configurar cada repetição individualmente.
+
+Com o Master Programmer, o contador acompanhava o número de execuções e o stepper permitia encaminhar novamente o pulso para o início da sequência. Esse mecanismo era chamado de Sequence Programming na documentação original do ENIAC.
+
+### 7.8.5 Conditional Branching - Desvio Condicional
+O Master Programmer também podia modificar o caminho da execução conforme determinadas condições. Um exemplo era utilizar o sinal positivo ou negativo de um acumulador para determinar qual sequência deveria ser executada. Dessa maneira, o resultado de uma operação matemática podia influenciar a sequência de controle do computador. 
+
+A documentação técnica também descreve o uso dos steppers para selecionar diferentes etapas a partir do valor de um algarismo de um acumulador. Isso permitia formas mais elaboradas de desvio condicional.
+
+### 7.8.6 Sequence Programming - Sub-rotinas e Sequências Reutilizáveis
+Outra capacidade interessante era reutilizar sequências de operações em diferentes momentos de um programa. Por exemplo, uma rotina de interpolação poderia ser configurada uma única vez e acionada sempre que fosse necessária durante a execução de um cálculo maior.
+
+Isso se aproxima conceitualmente da ideia de sub-rotinas utilizada em linguagens de programação modernas. Entretanto, existe uma diferença: o ENIAC não possuía necessariamente instruções de chamada e retorno de funções como as CPUs atuais. A reutilização era construída por meio de conexões físicas, controles locais e mecanismos do Master Programmer.
+
+O próprio relatório oficial descreve o uso de steppers para reutilizar sequências durante a integração de equações diferenciais.
 
 ## 7.9 Mathematical Precision
 
