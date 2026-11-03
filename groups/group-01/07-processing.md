@@ -181,7 +181,61 @@ A confiabilidade global do sistema, portanto, não dependia apenas da qualidade 
 Em síntese, os componentes internos do ENIAC constituíam a base física sobre a qual repousava toda a sua arquitetura digital de vanguarda. A fusão pioneira de válvulas eletrônicas, relés eletromecânicos, componentes passivos e interconexões manuais permitia converter pulsos elétricos efêmeros em informação matemática estruturada, transformando a eletricidade na ferramenta definitiva para a resolução dos problemas computacionais mais complexos de sua época.
 
 ## 7.7 Cycling Unit
-- Equivalente ao clock do sistema
+![Cycling Unit Pulses no ENIAC](./images/conns/cycling-unit-pulses.jpg)
+
+> Descrição da imagem: Diagrama temporal dos pulsos e sinais de controle distribuídos pela Cycling Unit durante um ciclo de adição.
+
+A Cycling Unit, ou Unidade Cíclica, era responsável por gerar e distribuir os sinais de temporização que coordenavam o funcionamento do ENIAC. Podemos compará-la ao clock de um computador moderno. 
+Entretanto, existe uma diferença importante: a Cycling Unit não fornecia apenas um sinal periódico. Ela produzia diferentes sequências de pulsos elétricos, cada uma destinada a uma função específica dentro das unidades da máquina. Esses sinais eram distribuídos pelo sistema de sincronização (Synchronizing Pulse-Gate Trunk).
+
+### 7.7.1 Como funcionava?
+A Cycling Unit utilizava um circuito oscilador para produzir sinais periódicos. Esses sinais eram utilizados para estabelecer uma referência temporal comum para as unidades do ENIAC. 
+- O projeto trabalhava com uma frequência básica de aproximadamente: f = 100.000 Hz = 100 kHz
+
+Isso corresponde a um intervalo de: 
+- T = 1 / f = 10 microssegundos
+
+Ou seja, cada intervalo básico de pulso durava aproximadamente 10 microssegundos. O ciclo de adição, por sua vez, era composto por 20 intervalos de pulso:
+- 20 x 10 microssegundos = 200 microssegundos
+
+A cada ciclo, eram distribuídos diferentes pulsos de controle, como:
+- CPP (Central Programming Pulse): utilizado para disparar operações programadas.
+- 10P: trem de dez pulsos utilizado, entre outras funções, na transmissão dos valores dos acumuladores.
+- 9P: trem de nove pulsos utilizado nos circuitos de transmissão.
+- Reset Pulses: pulsos utilizados para reinicializar determinados estados dos circuitos.
+- Carry-Clear Gate: sinal de controle que permitia a propagação dos pulsos de transporte (carry).
+
+Esses sinais tinham momentos específicos para acontecer. Não eram enviados aleatoriamente: sua sequência era cuidadosamente estabelecida para evitar conflitos entre as operações.
+
+O relatório de 1944 registra que o ciclo de adição foi organizado em vinte tempos de pulso, proporcionando uma margem maior de segurança para as operações internas.
+
+![Mostra a unidade física responsável pela sincronização.](./images/conns/cycling-unit-pulses-front-view.jpg)
+
+> Descrição da Imagem: Vista frontal da Cycling Unit, responsável pela geração e distribuição dos sinais de temporização do ENIAC.
+
+### 7.7.2 Modos de Funcionamento
+
+A Cycling Unit também possuía diferentes modos de operação:
+- Continuous: produzia os ciclos continuamente.
+- One Addition Time: executava um único ciclo de adição.
+- One Pulse: produzia um único pulso.
+Esses modos permitiam controlar a execução da máquina durante testes, configuração e processamento.
+
+A apresentação técnica de Brian Stuart, disponibilizada pela Drexel, também identifica esses três modos.
+
+### 7.7.3 Por que a sincronização era importante?
+
+Imagine que um acumulador esteja transmitindo um número enquanto outro está preparado para recebê-lo. Se os pulsos chegassem fora do momento esperado, o circuito receptor poderia interpretar os sinais incorretamente. A Cycling Unit evitava esse problema ao fornecer uma referência temporal compartilhada.
+
+Assim, as diferentes unidades sabiam quando deveriam:
+1. Preparar seus circuitos;
+2. Receber ou transmitir dados;
+3. Executar operações aritméticas;
+4. Propagar os sinais de transporte;
+5. Reinicializar estados temporários;
+6. Liberar os sinais necessários para a próxima etapa.
+
+Em suma: a Cycling Unit era o sistema central de temporização do ENIAC. Ela não decidia qual cálculo realizar, mas determinava o momento correto para que os circuitos executassem suas respectivas funções.
 
 ## 7.8 Master Programmer
 - Unidade de controle para loops, ramificações e sub-rotinas
