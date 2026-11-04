@@ -89,3 +89,4 @@ Portanto, a GPU não é automaticamente mais rápida que a CPU. O melhor resulta
 Threads de um mesmo bloco podem cooperar por meio da memória compartilhada e de barreiras de sincronização. A barreira impede que uma thread avance antes que as outras threads do grupo alcancem o mesmo ponto.
 
 Blocos diferentes são planejados para serem independentes, pois podem ser executados em SMs ou CUs distintos. Quando existe dependência entre kernels, o programa precisa aguardar o término de uma etapa antes de iniciar a próxima. Essa espera garante a ordem correta, mas reduz o paralelismo.
+
