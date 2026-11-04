@@ -16,10 +16,40 @@
 - Com que frequência as válvulas queimavam e quanto tempo era necessário para encontrar a defeituosa
 
 ## 9.6 I/O Bottleneck
-- Havia um gargalo enorme entre o input/output mecânico e processamento eletrônico
+
+A arquitetura do ENIAC criava um paradoxo de desempenho fascinante: a máquina era um colosso eletrônico capaz de operar na escala dos microssegundos, mas estava fisicamente acorrentada à lentidão de engrenagens, roletes e papel cartonado. Essa disparidade fundamental entre a velocidade de processamento interno e a velocidade de entrada e saída de dados gerava o maior gargalo de performance de todo o sistema.
+
+### 9.6.1 Speed Disparity
+Para compreender a gravidade desse gargalo, é necessário observar os números absolutos. Como detalhado no tópico 9.8.1, o ciclo básico da máquina levava 200 microssegundos, permitindo que um Acumulador realizasse 5.000 adições por segundo. Em contrapartida, os periféricos eletromecânicos da IBM operavam em um ritmo ditado pela física dos materiais:
+
+- Input (Leitor de Cartões): Operava a uma taxa máxima de 125 cartões por minuto (aproximadamente 2 cartões por segundo).
+- Output (Perfurador de Cartões): Era ainda mais lento, operando a uma taxa máxima de 100 cartões por minuto (cerca de 1,6 cartões por segundo), pois a ação mecânica de cravar lâminas de aço no papel exigia mais força e tempo do que simplesmente deslizar escovas elétricas sobre ele.
+
+Isso significava que, no tempo necessário para que o Leitor de Cartões puxasse, lesse e ejetasse uma única folha de papel (cerca de 0,48 segundos), o ENIAC era capaz de executar mais de 2.400 ciclos de adição. Se um algoritmo fosse mal planejado e obrigasse a máquina a parar seus cálculos para esperar a leitura do próximo cartão, as válvulas eletrônicas ficariam ociosas por 99,9% do tempo, anulando completamente o propósito de se construir um computador eletrônico.
+
+### 9.6.2 Algorithmic Mitigation
+Para contornar essa limitação física, as equipes de programação precisavam estruturar o fluxo de dados de forma a isolar a máquina do mundo exterior pelo maior tempo possível. A regra de ouro da performance no ENIAC era: leia o mínimo possível, calcule o máximo possível internamente, e imprima apenas o estritamente necessário.
+
+Foi exatamente para mitigar esse gargalo que unidades como o Constant Transmitter (com suas chaves rotativas manuais) e as Function Tables (Tabelas de Função) foram projetadas. Ao configurar as constantes matemáticas e as funções complexas diretamente no hardware através de interruptores e resistores, os programadores ancoravam os dados pesados dentro da própria máquina. Assim, o Leitor de Cartões era acionado apenas no primeiro segundo de execução para fornecer as variáveis iniciais de um problema. A partir desse ponto, o ENIAC entrava em um loop de processamento puramente eletrônico, rodando milhares de iterações em paralelo sem precisar interagir com o papel, até que o resultado final estivesse pronto para acionar o lento Perfurador de Cartões.
 
 ## 9.7 Suitability for Ballistics
-- Por que essa arquitetura específica era perfeita para calcular trajetórias de artilharia
+O ENIAC não foi financiado e construído pelo Exército dos Estados Unidos apenas para ser uma máquina de calcular genérica. Seu desenvolvimento foi uma resposta direta a uma crise matemática militar: a necessidade de produzir Tabelas de Tiro (Tabelas Balísticas) para a artilharia durante a Segunda Guerra Mundial. A arquitetura descentralizada do ENIAC, incluindo a forma como lidava com o gargalo de I/O, era a tradução perfeita em hardware das equações diferenciais necessárias para resolver esse problema específico.
+
+### 9.7.1 Atillery Trajectories
+Calcular a trajetória de um projétil de artilharia não é uma simples equação de parábola de física de ensino médio. No mundo real, um projétil é afetado pela gravidade, pela densidade do ar (que muda conforme a altitude), pela velocidade do vento, pela rotação da Terra e, principalmente, pelo arrasto aerodinâmico (que varia drasticamente dependendo se o projétil está em velocidade subsônica ou supersônica).
+
+Para descobrir onde uma bomba cairia, os matemáticos precisavam usar métodos de integração numérica (como o Método de Euler ou o Método de Heun). Isso envolvia quebrar o tempo de voo do projétil em frações minúsculas (ex: passos de 0,1 segundo). A equipe calculava a posição e a velocidade no tempo 0; usava esses resultados para calcular o arrasto e a nova posição no tempo 0,1; usava esses novos resultados para o tempo 0,2, e assim sucessivamente até que a altitude chegasse a zero (o impacto). Uma única trajetória exigia milhares de cálculos repetitivos em cascata.
+
+### 9.7.2 Architectural Alignment
+A arquitetura do ENIAC era um espelho exato desse método de integração numérica. O problema balístico era o cenário perfeito para o hardware da máquina pelos seguintes motivos:
+
+- Paralelismo Físico: Como a posição de um projétil possui eixos X (distância) e Y (altitude), os cálculos de ambos os eixos precisavam ser atualizados a cada passo de tempo. O ENIAC podia usar um grupo de Acumuladores para processar a física do eixo X simultaneamente a outro grupo de Acumuladores processando a física do eixo Y. Isso cortava o tempo de execução da integração numérica pela metade.
+
+- Hardcoding do Arrasto Aerodinâmico: A função de arrasto do ar era a parte mais complexa da equação, pois não era linear. O ENIAC possuía três Function Tables portáteis gigantescas. Os engenheiros mapeavam a curva de arrasto do ar diretamente nas centenas de interruptores dessas tabelas. Durante o voo simulado, a máquina consultava a tabela em velocidades eletrônicas para descobrir a resistência do ar na exata velocidade atual do projétil, sem precisar ler um único cartão perfurado para obter essa informação.
+
+- A Simbiose com o Gargalo de I/O: O cálculo balístico era imune ao gargalo do Leitor de Cartões. Para calcular uma trajetória que durava 60 segundos de tempo de voo real, o ENIAC precisava ler apenas um ou dois cartões iniciais contendo o ângulo do canhão, a velocidade da pólvora e a densidade do ar local. A máquina então passava os próximos 20 segundos rodando loops internos furiosamente, calculando centenas de passos de tempo. O Perfurador de Cartões só era acionado de forma intermitente para registrar a posição do projétil a cada poucos segundos de voo simulado.
+
+Em resumo, a arquitetura do ENIAC era perfeitamente adequada para a balística porque o problema exigia um volume massivo de iterações matemáticas internas e processamento paralelo, mas exigia uma quantidade minúscula de tráfego de entrada e saída, permitindo que a máquina operasse em sua velocidade eletrônica máxima sem ser estrangulada por seus periféricos mecânicos.
 
 ## 9.8 Architectural Decisions
 O ENIAC foi desenvolvido para executar cálculos complexos em alta velocidade comparado às opções da época. Uma das suas funções era o processamento paralelo, que auxiliava justamente na contagem balística dos EUA na época em que foi lançado publicamente.
