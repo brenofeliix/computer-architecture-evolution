@@ -83,10 +83,35 @@ Dessa maneira, o ENIAC de 1948 passava a se assemelhar mais com o conceito de um
 - Como loops e condições eram cabeadas através do Programador Mestre
 
 ## 10.5 The First Programmers
-- A papel histórico das 6 programadoras do ENIAC
+A história da programação do ENIAC é indissociável da história de seis mulheres: Kathleen McNulty, Frances Bilas, Betty Jean Jennings, Ruth Lichterman, Elizabeth Snyder e Marlyn Wescoff. Antes mesmo de o ENIAC ser concluído, essas mulheres já trabalhavam para o Exército dos Estados Unidos com o cargo oficial de "Computers" (Computadores). O trabalho delas consistia em calcular manualmente as exaustivas tabelas de trajetórias balísticas usando calculadoras de mesa mecânicas e o Analisador Diferencial (uma máquina analógica gigantesca).
+
+Quando o hardware do ENIAC ficou pronto, os engenheiros que o construíram (John Mauchly e J. Presper Eckert) focaram na viabilidade elétrica da máquina. Não existiam manuais de instrução, linguagens de programação ou guias de melhores práticas. A tarefa de descobrir como fazer aquele leviatã de 30 toneladas de fato calcular as trajetórias foi entregue a essas seis mulheres.
+
+O trabalho delas foi monumental. Como o ENIAC não tinha uma ISA (conforme visto no tópico 10.1), elas precisaram aprender a lógica da máquina estudando os diagramas de blocos e os esquemas elétricos do hardware. Elas tinham que quebrar equações diferenciais complexas em passos minúsculos (adições, multiplicações, transferências de dados) e, em seguida, mapear fisicamente qual Acumulador faria qual conta, em qual momento, e para onde o resultado seria enviado.
+
+Elas essencialmente inventaram a disciplina da programação de computadores eletrônicos. O processo de roteamento de cabos nas Digit Trays e Program Trays e a configuração de milhares de chaves rotativas (detalhado nos tópicos anteriores) era executado por elas. Apesar de terem sido as mentes lógicas que deram vida à máquina, durante a demonstração pública do ENIAC em 1946, elas não foram devidamente creditadas. Nas fotografias da época, a mídia frequentemente assumia que elas eram apenas modelos contratadas para posar ao lado dos painéis, ou "refrigerator ladies" (moças da geladeira, em referência às propagandas de eletrodomésticos da época). O reconhecimento formal como as primeiras programadoras do mundo só veio décadas mais tarde.
 
 ## 10.6 Debugging Process
-- Como a equipe de operação encontrava erros (ou bugs literais kkkk)
+Se configurar os cabos do ENIAC já era uma tarefa monumental, descobrir onde um erro havia ocorrido era um verdadeiro trabalho de detetive físico. Em uma máquina com mais de 17.000 válvulas, quilômetros de fiação interna e milhares de cabos externos, os erros podiam ter duas naturezas: lógicos (um cabo plugado no soquete errado) ou de hardware (um tubo queimado ou um relé travado).
+
+Para encontrar e corrigir esses erros, a equipe desenvolveu técnicas engenhosas que, de forma analógica, deram origem a muitos dos conceitos de depuração (debugging) que conhecemos hoje.
+
+### 10.6.1 Visual Inspection
+A principal interface de feedback do ENIAC não era uma tela, mas sim milhares de pequenas lâmpadas de neon âmbar espalhadas pelos painéis. Cada Acumulador possuía lâmpadas conectadas aos seus contadores de anel, permitindo que as programadoras "lessem" o número exato que estava armazenado naquela unidade apenas olhando para as luzes acesas.
+
+Se um cálculo estivesse dando o resultado final errado, a primeira etapa do debug era rodar um problema de teste (uma equação cuja resposta exata já havia sido calculada à mão). As programadoras observavam as luzes piscarem. Se o Acumulador 7 devesse mostrar o número 5.000 no meio da equação, mas as luzes mostrassem 0, elas sabiam exatamente em qual painel físico o erro estava ocorrendo.
+
+### 10.6.2 Physical Breakpoints
+Como a máquina rodava a 100 kHz, as luzes de neon durante a execução normal piscavam tão rápido que formavam apenas um borrão luminoso. Era impossível ver onde o erro acontecia em tempo real. Para resolver isso, a equipe inventou o conceito de Breakpoint (Ponto de Parada) de forma literal.
+
+Se elas desconfiassem que o erro estava acontecendo na 15ª etapa do programa, elas caminhavam até o painel correspondente e simplesmente desconectavam o cabo coaxial de Program Pulse que ligaria a 16ª etapa. Quando a máquina rodava, ela executava tudo em velocidade máxima até chegar no cabo desconectado. Sem o pulso para continuar, o ENIAC "congelava" com todos os dados estáticos salvos nos Acumuladores. As programadoras podiam então caminhar pela sala com uma prancheta, anotando os valores das lâmpadas de neon de cada painel para verificar se a matemática estava correta até aquele ponto.
+
+### 10.6.3 Stepping
+Se o erro fosse muito sutil, congelar a máquina não era suficiente; era preciso ver a operação acontecendo em câmera lenta. Como vimos no tópico 3.3, a Unidade Cíclica possuía modos de operação manual.
+
+As programadoras podiam alterar a chave da Unidade Cíclica do modo contínuo para o modo One Add Time (Um Tempo de Adição). Nesse modo, a máquina não rodava sozinha. A operadora segurava um controle remoto com um botão (ligado à máquina por um longo fio). Cada vez que ela apertava o botão, a Unidade Cíclica disparava os pulsos correspondentes a apenas um único ciclo de 200 microssegundos e parava. Isso permitia que a equipe "stepasse" (avançasse passo a passo) a execução do programa, observando fisicamente as válvulas acenderem e apagarem, rastreando o caminho exato do pulso elétrico pelos cabos frontais até encontrar o ponto exato onde a lógica falhava.
+
+> Nota: Sobre bugs literais, embora a famosa história da mariposa encontrada presa em um relé (que popularizou o termo "bug") tenha acontecido com a cientista Grace Hopper no computador Harvard Mark II em 1947, o ENIAC tinha seus próprios problemas biológicos. O intenso calor e a luz gerados pelas milhares de válvulas atraíam insetos voadores que frequentemente causavam curtos-circuitos nos painéis abertos. Além disso, ratos ocasionalmente roíam o isolamento dos cabos inferiores, criando falhas de aterramento que exigiam que os engenheiros caçassem os fios mastigados pelas calhas da sala. Literalmente, caçando bugs e roedores.
 
 ## 10.7 Operation Example
 - Passo a passo de como, por exemplo, uma adição era feita
