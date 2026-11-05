@@ -13,7 +13,7 @@ A integração do hardware do ENIAC ocorria por meio da conexão entre suas unid
 Portanto, a integração do hardware do ENIAC representou um avanço importante na computação eletrônica, pois permitiu que diferentes unidades especializadas trabalhassem de maneira coordenada. Entretanto, a dependência de conexões físicas e a ausência de uma memória central para armazenar o programa limitavam a flexibilidade do sistema e tornavam a reconfiguração para novos problemas um processo demorado.
 
 ## 9.2 Computational Speed
-O ENIAC foi projetado para ser uma máquina muito mais rápida que outras máquinas eletromecânicas de sua época. Porém, existia uma diferença no tempo de execução entre suas operações matemáticas: geralmente adições e subtrações eram realizadas muito mais rápidas que multiplicações, divisões e raíz quadrada.
+O ENIAC foi projetado para ser uma máquina muito mais rápida que outras máquinas eletromecânicas de sua época. Porém, existia uma diferença no tempo de execução entre suas operações matemáticas: geralmente adições e subtrações eram realizadas de modo muito mais rápido que multiplicações, divisões e raíz quadrada.
 
 Um artigo técnico publicado em 1946 por J. G. Brainerd e T. K. Sharpless [17], engenheiros envolvidos no desenvolvimento do ENIAC, apresenta os seguintes valores de desempenho:
 
@@ -34,7 +34,17 @@ Uma publicação técnica de 1949 [18] registra que o ENIAC conseguia realizar a
 Além disso, outros documentos históricos registram que o desempenho podia mudar com modificações na configuração. Em 1952, por exemplo, um relatório [16] registrou taxas de 1.666 adições, 1.000 subtrações, 294 multiplicações e aproximadamente 40 divisões ou extrações de raiz quadrada por segundo.
 
 ## 9.3 Setup x Execution
-- Levar dias para conectar os cabos de um programa que era executado em segundos
+Uma das características mais marcantes do ENIAC era o tempo destinado a sua preparação em comparação com sua execução dos cálculos. Além disso, devido a ausência de uma memória central, o ENIAC dependia de uma configuração física da máquina, como conexão de cabos nos painéis de programação, ajuste de interruptores e configuração das unidades de processamento.
+
+Esse processo envolvia várias etapas:
+1. Planejamento: os matemáticos precisavam estudar o problema e dividir os cálculos em sequências de operações que o ENIAC pudesse executar.
+2. Programação: era necessário determinar quais unidades seriam utilizadas, como os dados circulariam e em que ordem as operações aconteceriam.
+3. Configuração física: os operadores conectavam os cabos nos painéis e ajustavam os interruptores e as tabelas de funções.
+4. Testes e verificação: a equipe verificava as conexões, executava testes e corrigia possíveis erros antes de realizar os cálculos definitivos.
+
+Assim, o tempo de preparação podia ser muito maior que o próprio tempo de execução.
+
+Continuar em Evidências históricas....
 
 ## 9.4 Energy Consumption
 - Quanta energia o ENIAC usava para operar normalmente
