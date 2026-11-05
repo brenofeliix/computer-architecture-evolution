@@ -13,7 +13,25 @@ A integração do hardware do ENIAC ocorria por meio da conexão entre suas unid
 Portanto, a integração do hardware do ENIAC representou um avanço importante na computação eletrônica, pois permitiu que diferentes unidades especializadas trabalhassem de maneira coordenada. Entretanto, a dependência de conexões físicas e a ausência de uma memória central para armazenar o programa limitavam a flexibilidade do sistema e tornavam a reconfiguração para novos problemas um processo demorado.
 
 ## 9.2 Computational Speed
-- Avaliação comparativa do desempenho das diferentes operaçãoes que o ENIAC fazia
+O ENIAC foi projetado para ser uma máquina muito mais rápida que outras máquinas eletromecânicas de sua época. Porém, existia uma diferença no tempo de execução entre suas operações matemáticas: geralmente adições e subtrações eram realizadas muito mais rápidas que multiplicações, divisões e raíz quadrada.
+
+Um artigo técnico publicado em 1946 por J. G. Brainerd e T. K. Sharpless [17], engenheiros envolvidos no desenvolvimento do ENIAC, apresenta os seguintes valores de desempenho:
+
+| Operation | Execution Time | Operations per Second |
+|---|---:|---:|
+| Adição ou Subtração | 200 μs | 5.000 |
+| Multiplicação de dois números de 10 dígitos | 2.800 μs (2,8 ms) | 360 |
+| Consulta a uma função na Function Table | 1.000 μs (1 ms) | 1.000 |
+> Fonte: artigo técnico The ENIAC, publicado em 1946.
+
+Para compreender esses números:
+- Adição e subtração: eram as operações mais rápidas. Uma adição podia ser concluída em 200 microssegundos, ou seja, 0,0002 segundo.
+- Multiplicação: exigia aproximadamente 2,8 milissegundos, o equivalente a 14 ciclos básicos de adição.
+- Consulta às Function Tables: levava aproximadamente 1 milissegundo para recuperar um valor armazenado nas tabelas de funções.
+
+Uma publicação técnica de 1949 [18] registra que o ENIAC conseguia realizar aproximadamente 50 divisões ou extrações de raiz quadrada por segundo. Já um relatório do Office of Naval Research, referente ao período de 1951–1952 [16], registra cerca de 40 operações por segundo. Essa diferença é pontual: os valores podem variar conforme a configuração e as condições de operação da máquina. Portanto, é possível inferir que existia uma faixa aproximada de 40 a 50 operações por segundo para essas operações.
+
+Além disso, outros documentos históricos registram que o desempenho podia mudar com modificações na configuração. Em 1952, por exemplo, um relatório [16] registrou taxas de 1.666 adições, 1.000 subtrações, 294 multiplicações e aproximadamente 40 divisões ou extrações de raiz quadrada por segundo.
 
 ## 9.3 Setup x Execution
 - Levar dias para conectar os cabos de um programa que era executado em segundos

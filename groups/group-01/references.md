@@ -29,3 +29,9 @@
 [14] TESCHLER, Leland. Engineering Essentials: Relays and Contactors. Machine Design, 31 jul. 2014. Disponível em: https://www.machinedesign.com/mechanical-motion-systems/article/21834253/engineering-essentials-relays-and-contactors. Acesso em: 2 nov. 2026.
 
 [15] NATIONAL ASSOCIATION OF SCHOLARS. Inovação americana: ENIAC — o primeiro computador. YouTube, [s. d.]. Disponível em: https://www.youtube.com/watch?v=T1WvOfus4qo. Acesso em: 4 nov. 2026.
+
+[16] OFFICE OF NAVAL RESEARCH. Mathematical Sciences Division. Digital Computer Newsletter, v. 4, n. 3, 15 jul. 1952. Washington, D.C.: Office of Naval Research, 1952. Disponível em: https://nsarchive.gwu.edu/sites/default/files/documents/5008293/Office-of-Naval-Research-Mathematical-Sciences.pdf. Acesso em: 5 nov. 2026.
+
+[17] BRAINERD, J. G.; SHARPLESS, T. K. The ENIAC. 1950. Computer History Museum, Donald Knuth Digital Archive. Disponível em: https://archive.computerhistory.org/resources/text/Knuth_Don_X4100/PDF_index/k-8-pdf/k-8-r5372-ENIAC.pdf. Acesso em: 5 nov. 2026.
+
+[18] AUTOMATIC COMPUTING MACHINERY. Mathematical Tables and Other Aids to Computation, v. 3, n. 26, p. 426, 1949. American Mathematical Society. Disponível em: https://www.ams.org/journals/mcom/1949-03-026/S0025-5718-49-99511-3/S0025-5718-49-99511-3.pdf. Acesso em: 5 nov. 2026.
