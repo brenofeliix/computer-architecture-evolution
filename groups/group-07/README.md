@@ -105,7 +105,7 @@ MIMD makes complex simulations possible, including weather forecasting, quantum 
 
 | Week | Status |
 |-------|---------|
-|1|⬜|
+|1|🟩|
 |2|⬜|
 |3|⬜|
 |4|⬜|
