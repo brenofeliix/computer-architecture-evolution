@@ -114,7 +114,108 @@ As programadoras podiam alterar a chave da Unidade Cíclica do modo contínuo pa
 > Nota: Sobre bugs literais, embora a famosa história da mariposa encontrada presa em um relé (que popularizou o termo "bug") tenha acontecido com a cientista Grace Hopper no computador Harvard Mark II em 1947, o ENIAC tinha seus próprios problemas biológicos. O intenso calor e a luz gerados pelas milhares de válvulas atraíam insetos voadores que frequentemente causavam curtos-circuitos nos painéis abertos. Além disso, ratos ocasionalmente roíam o isolamento dos cabos inferiores, criando falhas de aterramento que exigiam que os engenheiros caçassem os fios mastigados pelas calhas da sala. Literalmente, caçando bugs e roedores.
 
 ## 10.7 Operation Example
-- Passo a passo de como, por exemplo, uma adição era feita
+
+Descrição do passo a passo de como ações e equações eram preparadas e feitas pelo sistema.
+
+### 10.7.1 Elementos
+
+Descrição de quais eram, onde se encontravam e qual a serventia dos elementos para o processo.
+
+#### 10.7.1.1 Bandejas de dígitos	
+
+Se encontravam empilhadas acima dos painéis, contendo 11 fios e um terra, cada bandeja passava por 4 painéis. Sua principal serventia era levar números entre unidades, sendo 10 fios para os dígitos e 1 para o sinal, todos ao mesmo tempo.
+
+#### 10.7.1.2 Cabos de dígito	
+
+Vinham das tomadas de entrada e saída de dígito de cada unidade, sendo levados até os terminais de 12 pontos das bandejas. Eram responsaveis por conectar a unidade ao “tronco” de dígitos.
+
+#### 10.7.1.3 Bandejas e cabos de programa	
+
+Montadas na parte de baixo do painel, continham 11 linhas de programa por tronco, essas bandejas levavam os pulsos de programa (CPP) que eram a forma do sistema dar um sinal de "início" e "final" de processo.
+
+#### 10.7.1.4 Chaves de programa	
+
+Ficavam na frente de cada unidade, nos controles de programa, as chaves definiam o que a unidade faz quando o pulso chega.
+
+#### 10.7.1.5 Caixa de carga resistiva	
+
+Era plugada em um terminal livre na ponta do tronco, permitindo ligar vários dispositivos em paralelo no mesmo tronco.
+
+#### 10.7.1.6 Neons	
+
+separados um por flip-flop, nos painéis, usados para mostrar o estado interno. Com os modos de “um tempo de adição” e “um pulso”, permitiam parar a máquina e conferir.
+
+### 10.7.2 Explicação da razão de montagem
+
+Tendo em vista que apenas um número de 10 dígitos circula por tronco de cada vez, a caixa de carga resistiva em complemento com o restante permitia várias unidades poderem “ouvir” o mesmo número.
+
+Com vários troncos era possivel realizar transferências simultâneas, e é o operador quem planeja esse paralelismo.
+
+Quando os controles são ligados à mesma linha de programa começam juntos. Já a saída de programa de um controle de repetição, ligada a outra linha, dispara o que vem depois.
+
+
+### 10.7.3 Exemplos diretos
+
+Exemplos de operação própriamnete ditos.
+
+#### 10.7.3.1 Adição
+
+A adição, representada por (x + y) tinha seu resultado no acumulador de y. Nessa operação, o papel dos cabos de digíto era levar a saída de transmissão do acumulador que guarda x para uma bandeja de dígitos, e a entrada α do acumulador de y é ligada à mesma bandeja. Já nas chaves, a primeira era ligada em A (transmitir, sem limpar, repetição 1) e a segunda em α (receber). Os cabos de programa se organizavam para que uma linha de programa fosse conectada às entradas de programa dos dois controles, para que comecem juntos. O pulso chega e, num único tempo de adição (200 µs), o primeiro emite os pulsos de dígito e o segundo avança seus anéis, propagando o vai-um após isso a saída de programa do controle vai a outra linha, iniciando a operação seguinte.
+
+Um exemplo mais simples seria: os acumuladores 6, 7 e 8 guardam A, B e C. O acumulador 6 transmite A pela bandeja 1 e retém, o acumulador 7 só limpa, e o 8 recebe A e mantém. Resultando em A, 0 e A + C.
+
+#### 10.7.3.2 Subtração
+
+A montagem fisíca é a mesma, mas a chave fica em S e o cabo sai da tomada de saída “subtract”. Por exemplo, no acumulador 7 essa saída levaria a bandeja 3. O número saía como complemento, com sinal invertido.
+
+##### 10.7.3.2.1 Transferência dos dados
+
+Um acumulador transmite e outro recebe. Se o emissor tem a chave de limpeza, o valor é movido, não copiado.
+
+##### 10.7.3.2.2 Consulta a tabela de função
+
+Um acumulador envia o argumento (0 a 99) à tabela, por cabo de dígito, lá chaves da tabela escolhem entre F(x−2) e F(x+2) e o número de repetições. A tabela transmite pela bandeja, e um acumulador receptor guarda o valor.
+
+#### 10.7.3.3 Multiplicação
+
+Os acumuladores 11 (multiplicador) e 12 (multiplicando) recebem os operandos pelos canais α e β. O multiplicador tem conexões fixas com os acumuladores associados, e seus receptores ligam direto aos circuitos dos acumuladores de produto, sem usar os controles deles, já a saída de resposta liga por cabo direto, sem carga resistiva. Assim a o valor do multiplicador + 4 tempos de adição (11 para um multiplicador de 7 dígitos) era o tempo de ciclos usado, a tabuada de resistores faz o trabalho de encontrar e selecionar o resultado, nisso o acumulador 15 transmite o produto, positivo e negativo, e limpa. Dos 20 dígitos do produto, ficam os 10 mais significativos. No fim um CPP sai do 11º tempo, para que algum acumulador receba o resultado e os operandos sejam preservados.
+
+#### 10.7.3.4 Divisão e raiz quadrada
+
+os acumuladores associados para a operação eram: 4 (quociente), 5 (numerador), 7 (denominador) e 9 (deslocador), o método consistia em subtrações e somas repetidas. Testa-se o sinal do resto parcial a cada passo. Se ficou negativo, desloca-se o resto e soma-se o divisor até voltar a positivo. O acumulador de quociente conta as operações em cada casa decimal para manter a conta das divisões.
+
+Na raiz quadrada o processo é semelhante, onde apenas se difere que no fim, o acumulador 7 guarda o dobro da raiz e o 5 guarda o resto.
+
+para ambos os processos, a disposição dos cabos é a mesma do multiplicador, com saída ligada direto à entrada de dígito, sem carga.
+
+### 10.7.4 Leitura e impressão
+
+O leitor lê 8 números de 10 dígitos de um cartão para os relés do transmissor de constantes, em cerca de 2.500 tempos de adição (0,5 s). Cada número pode sair inteiro ou só a metade esquerda ou direita, em um tempo de adição. A impressora grava os 8 acumuladores (1, 2, 15 a 20) em cerca de 1.500 tempos de adição (0,3 s). A relação entre dígitos do acumulador e colunas do cartão é feita em plugboard.
+Após todo o processo o leitor só emite seu CPP de término depois de receber um pulso de programa de outra unidade. Isso deixa o resto da máquina trabalhar em paralelo enquanto o cartão é lido.
+
 
 ## 10.8 1948 Modification
-- Evolução para um mecanismo de programa armazenado central
+
+A evolução para um mecanismo de programa armazenado central
+
+### 10.8.1 Razão
+
+Sabendo que montar um problema novo levava semanas de preparo e verificação , e acertar chaves e cabos podia levar dias, e que seu uso principal era balística, com problemas parecidos entre si. Von Neumann sugeriu escolher o código por chaves, mantendo os cabos fixos em problemas-padrão. A execução paralela dificultava a programação, e um código “conversor” foi criado para operar em série. No fim, a velocidade perdida era aceitável, quase todo problema real já era limitado pela E/S eletromecânica, mesmo sem usar o paralelismo.
+
+### 10.8.2 data
+
+O projeto foi idealizado em 1947. Em julho daquele ano, Adele Goldstine escreveu um plano de controle central e Clippinger sintetizou o trabalho do grupo de programação em um código de 60 ordens. O conversor foi instalado em março de 1948 com o primeiro programa complexo rodou em 12 de abril de 1948: uma simulação de Monte Carlo de nêutrons, de John e Klara von Neumann.
+
+### 10.8.3 Instalação
+
+Havia propostas de 51, 60 e 94 ordens. A de 51 usava só o hardware original, e as outras exigiam o conversor. Cada tabela de função guardava 600 instruções de dois dígitos: uma linha de 12 dígitos guarda seis pares.
+
+#### 10.8.3.1 O mecanismo
+
+Um seletor de ordens, formado por 12 portas controladas em pares por um anel de 6 estágios, libera um par de dígitos por vez de cada linha, depois dos seis pares, o argumento da tabela aumenta em 1 e o anel volta ao início. Isso funciona como o contador de programa, já o conversor é um stepper de 10 estágios combinado com os 10 steppers de 6 estágios do programador mestre. Um dígito α (0 a 9) entra no primeiro, e o dígito β (0 a 5) entra nos outros. O resultado são 60 pulsos distintos, cada um estimulando uma ordem. Dessa forma um endereço de três dígitos no acumulador 6 escolhe entre as 3 tabelas.
+A sequência básica antes de cada ordem leva 7 tempos de adição, mas costuma começar antes de a ordem anterior terminar. Já os acumuladores ganharam papéis fixos, sendo o 6 como contador de programa, o 15 como acumulador principal e o 8 como ponteiro das tabelas. Dessa forma as conexões originais passaram a ser tratadas como fiação permanente.
+
+### 10.8.4 Impacto
+
+O principal ganho foi que reprogramar agora passou de dias para horas. contudo, a velocidade caiu por um fator de 6 e o paralelismo acabou. Houve também uma limitação nova, o programa ficava em chaves de tabelas de função, ou seja, memória só de leitura. Por isso alguns historiadores não o consideram um verdadeiro computador de programa armazenado. Tanto que Haigh, Priestley e Rope preferem chamá-lo de “paradigma de código moderno”
+Na sequência de evolução do Eniac, foi percebido que o programa original não ficava na memória de dados porque os 20 acumuladores eram pequenos demais para guardar dados e programa. Sendo assim um motivo para a expansão posterior para núcleo magnético em 1953.
