@@ -24,7 +24,7 @@
 
 [12] UNIVERSITY OF MICHIGAN. ENIAC Display. Computer Science and Engineering. Ann Arbor, [s. d.]. Disponível em: https://cse.engin.umich.edu/about/history/eniac-display/. Acesso em: 29 out. 2026.  
 
-[13] DA CRUZ, Frank. ENIAC Programmers. Columbia University, 2011. Disponível em: https://www.columbia.edu/cu/computinghistory/eniac.html. Acesso em: 29 out. 2026.
+[13] DA CRUZ, Frank. Programming the ENIAC. Columbia University Computing History, jan. 2011. Última atualização em 4 fev. 2025. Disponível em: https://www.columbia.edu/cu/computinghistory/eniac.html. Acesso em: 5 nov. 2026.
 
 [14] TESCHLER, Leland. Engineering Essentials: Relays and Contactors. Machine Design, 31 jul. 2014. Disponível em: https://www.machinedesign.com/mechanical-motion-systems/article/21834253/engineering-essentials-relays-and-contactors. Acesso em: 2 nov. 2026.
 

@@ -17,7 +17,7 @@ O ENIAC foi projetado para ser uma máquina muito mais rápida que outras máqui
 
 Um artigo técnico publicado em 1946 por J. G. Brainerd e T. K. Sharpless [17], engenheiros envolvidos no desenvolvimento do ENIAC, apresenta os seguintes valores de desempenho:
 
-| Operation | Execution Time | Operations per Second |
+| Operação | Tempo de Execução | Operações por Segundo |
 |---|---:|---:|
 | Adição ou Subtração | 200 μs | 5.000 |
 | Multiplicação de dois números de 10 dígitos | 2.800 μs (2,8 ms) | 360 |
@@ -44,7 +44,10 @@ Esse processo envolvia várias etapas:
 
 Assim, o tempo de preparação podia ser muito maior que o próprio tempo de execução.
 
-Continuar em Evidências históricas....
+![Arthur Burks and Betty Jean Jennings operando o ENIAC](./images/photos/eniac2.gif)
+> Arthur Burks and Betty Jean Jennings operando o ENIAC
+
+De acordo com Franz Alt, ....
 
 ## 9.4 Energy Consumption
 - Quanta energia o ENIAC usava para operar normalmente
