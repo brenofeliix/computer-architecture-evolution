@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1160" viewBox="0 0 1600 1160" role="img" aria-labelledby="title desc">
+  <title id="title">Unidades de processamento em um modelo geral Harvard</title>
+  <desc id="desc">Diagrama conceitual de um processador com contador de programa, unidade de controle, registradores e ULA, conectado a memórias separadas de instruções e dados por caminhos identificados.</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/></marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#138a72"/></marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c56a16"/></marker>
+    <style>
+      text { font-family: Inter, "Segoe UI", Arial, sans-serif; fill: #172033; }
+      .title { font-size: 32px; font-weight: 750; }
+      .subtitle { font-size: 17px; fill: #526078; }
+      .panel-title { font-size: 23px; font-weight: 700; }
+      .block-title { font-size: 19px; font-weight: 700; }
+      .block-sub { font-size: 14px; fill: #526078; }
+      .edge-label { font-size: 15px; font-weight: 650; paint-order: stroke; stroke: #ffffff; stroke-width: 6px; stroke-linejoin: round; }
+      .small { font-size: 14px; fill: #526078; }
+      .legend { font-size: 15px; font-weight: 600; }
+      .memory { fill: #eff6ff; stroke: #2563eb; stroke-width: 2.5; }
+      .cpu-block { fill: #f8fafc; stroke: #53647d; stroke-width: 2; }
+      .control-block { fill: #fff7ed; stroke: #c56a16; stroke-width: 2.5; }
+      .processor { fill: #ffffff; stroke: #aab5c5; stroke-width: 2; }
+      .inst { fill: none; stroke: #2563eb; stroke-width: 4; marker-end: url(#arrow-blue); }
+      .data { fill: none; stroke: #138a72; stroke-width: 4; marker-end: url(#arrow-green); }
+      .control { fill: none; stroke: #c56a16; stroke-width: 3.2; stroke-dasharray: 9 7; marker-end: url(#arrow-orange); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1160" fill="#f4f7fb"/>
+  <text x="70" y="62" class="title">Unidades de processamento — modelo geral com organização Harvard</text>
+  <text x="70" y="94" class="subtitle">Caminhos de instruções, dados e controle são mostrados separadamente para destacar suas funções.</text>
+
+  <g transform="translate(75 125)">
+    <path d="M0 0 H45" class="inst"/><text x="60" y="6" class="legend" fill="#2563eb">instruções</text>
+    <path d="M220 0 H265" class="data"/><text x="280" y="6" class="legend" fill="#138a72">dados</text>
+    <path d="M420 0 H465" class="control"/><text x="480" y="6" class="legend" fill="#c56a16">controle</text>
+  </g>
+
+  <rect x="520" y="170" width="1015" height="790" rx="24" class="processor"/>
+  <text x="565" y="210" class="panel-title">Processador</text>
+
+  <rect x="65" y="250" width="325" height="205" rx="18" class="memory"/>
+  <text x="92" y="292" class="block-title">Memória de instruções</text>
+  <text x="92" y="324" class="block-sub">Armazena as instruções do programa</text>
+  <text x="92" y="351" class="block-sub">Endereço de instrução → palavra lida</text>
+
+  <rect x="65" y="690" width="325" height="235" rx="18" class="memory"/>
+  <text x="92" y="733" class="block-title">Memória de dados</text>
+  <text x="92" y="765" class="block-sub">Mantém valores acessados durante</text>
+  <text x="92" y="788" class="block-sub">o processamento</text>
+  <text x="92" y="855" class="block-sub">Endereço, dado lido ou dado escrito</text>
+
+  <rect x="650" y="245" width="240" height="115" rx="15" class="cpu-block"/>
+  <text x="770" y="284" text-anchor="middle" class="block-title">Contador de programa</text>
+  <text x="770" y="312" text-anchor="middle" class="block-sub">PC — mantém o endereço da</text>
+  <text x="770" y="333" text-anchor="middle" class="block-sub">próxima instrução a buscar</text>
+
+  <rect x="1015" y="245" width="225" height="115" rx="15" class="cpu-block"/>
+  <text x="1127" y="284" text-anchor="middle" class="block-title">Instrução atual</text>
+  <text x="1127" y="313" text-anchor="middle" class="block-sub">Registrador/entrada para</text>
+  <text x="1127" y="334" text-anchor="middle" class="block-sub">interpretação pelo controle</text>
+
+  <rect x="1270" y="245" width="225" height="180" rx="15" class="control-block"/>
+  <text x="1382" y="286" text-anchor="middle" class="block-title">Unidade de Controle</text>
+  <text x="1382" y="319" text-anchor="middle" class="block-sub">Interpreta a instrução e coordena</text>
+  <text x="1382" y="341" text-anchor="middle" class="block-sub">as operações por sinais de controle</text>
+  <text x="1382" y="383" text-anchor="middle" class="block-sub">Não transporta os operandos</text>
+
+  <rect x="650" y="500" width="330" height="190" rx="15" class="cpu-block"/>
+  <text x="815" y="541" text-anchor="middle" class="block-title">Banco de registradores</text>
+  <text x="815" y="572" text-anchor="middle" class="block-sub">Guarda valores temporários usados</text>
+  <text x="815" y="594" text-anchor="middle" class="block-sub">como operandos e resultados</text>
+  <text x="815" y="652" text-anchor="middle" class="block-sub">Quantidade e organização variam</text>
+
+  <rect x="1100" y="510" width="300" height="155" rx="15" class="cpu-block"/>
+  <text x="1250" y="552" text-anchor="middle" class="block-title">ULA</text>
+  <text x="1250" y="582" text-anchor="middle" class="block-sub">Realiza operações aritméticas</text>
+  <text x="1250" y="604" text-anchor="middle" class="block-sub">e lógicas selecionadas pelo controle</text>
+  <text x="1250" y="638" text-anchor="middle" class="block-sub">Unidade funcional típica, não exclusiva de Harvard</text>
+
+  <!-- Caminho independente de instruções -->
+  <path d="M650 275 H390" class="inst"/>
+  <text x="405" y="258" class="edge-label" fill="#2563eb">endereço da instrução</text>
+  <path d="M390 385 H445 V195 H1127 V245" class="inst"/>
+  <text x="620" y="185" class="edge-label" fill="#2563eb">instrução lida</text>
+  <path d="M1240 302 H1270" class="inst"/>
+
+  <!-- Caminhos de dados dentro do processador -->
+  <path d="M980 550 H1100" class="data"/>
+  <text x="990" y="535" class="edge-label" fill="#138a72">operandos</text>
+  <path d="M1100 630 H980" class="data"/>
+  <text x="993" y="654" class="edge-label" fill="#138a72">resultado</text>
+
+  <!-- Sinais de controle -->
+  <path d="M1270 390 H1195 V465 H815 V500" class="control"/>
+  <text x="880" y="455" class="edge-label" fill="#c56a16">seleção de registradores e escrita</text>
+  <path d="M1382 425 V510" class="control"/>
+  <text x="1395" y="476" class="edge-label" fill="#c56a16">operação da ULA</text>
+  <path d="M1270 355 H1220 V390 H770 V360" class="control"/>
+  <text x="925" y="382" class="edge-label" fill="#c56a16">controle da próxima busca</text>
+  <path d="M1495 400 H1510 V945 H430 V900 H390" class="control"/>
+  <text x="780" y="938" class="edge-label" fill="#c56a16">sinais de leitura/escrita da memória</text>
+
+  <!-- Acesso à memória de dados -->
+  <path d="M1100 645 V820 H420 V800 H390" class="data"/>
+  <text x="680" y="844" class="edge-label" fill="#138a72">endereço calculado para leitura ou escrita</text>
+  <path d="M650 650 H470 V730 H390" class="data"/>
+  <text x="448" y="716" class="edge-label" fill="#138a72">valor a gravar</text>
+  <path d="M390 875 H450 V715 H620 V675 H650" class="data"/>
+  <text x="455" y="897" class="edge-label" fill="#138a72">valor lido, encaminhado a um registrador</text>
+
+  <rect x="65" y="990" width="1470" height="105" rx="16" fill="#ffffff" stroke="#d6deea" stroke-width="1.5"/>
+  <text x="92" y="1025" class="block-title">Como ler o diagrama</text>
+  <text x="92" y="1054" class="small">É um modelo funcional didático, não o projeto de uma CPU específica. A separação dos caminhos permite acessos independentes;</text>
+  <text x="92" y="1078" class="small">a realização simultânea, a organização das unidades e o desempenho dependem da implementação.</text>
+</svg>
