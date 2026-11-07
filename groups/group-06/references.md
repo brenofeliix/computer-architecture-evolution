@@ -38,3 +38,7 @@ Referencias utilizadas na pesquisa para Unidade de Controle:
 https://teachcomputerscience.com/harvard-architecture/
 https://ads.ifba.edu.br/dl2539
 https://www.tme.com/br/pt/news/library-articles/page/56104/arquitetura-de-von-neumann-e-arquitetura-de-harvard/
+
+Arvind, R. S. Nikhil, J. S. Emer e M. Vijayaraghavan, *Computer Architecture: A Constructive Approach: Using Executable and Synthesizable Specifications*, rev. 25 ago. 2015, cap. 5, seção 5.3. MIT 6.175. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/resources/archbook_2015-08-25.pdf. Acesso em: 28 out. 2026.
+
+Massachusetts Institute of Technology, “Lab 5: RISC-V Introduction—Multi-Cycle and Two-Stage Pipeline,” *6.175: Constructive Computer Architecture*. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/labs/lab5-riscv-intro.html. Acesso em: 28 out. 2026.
