@@ -39,6 +39,11 @@ https://teachcomputerscience.com/harvard-architecture/
 https://ads.ifba.edu.br/dl2539
 https://www.tme.com/br/pt/news/library-articles/page/56104/arquitetura-de-von-neumann-e-arquitetura-de-harvard/
 
+Microchip Technology Inc., AVR Instruction Set Manual. [Online]. Disponível na documentação AVR da Microchip. Acesso em: 30 out. 2026.
+
+Microchip Technology Inc., ATmega328P — 8-bit AVR Microcontroller, datasheet e documentação do produto. [Online]. Disponível em: página oficial do ATmega328P. Acesso em: 30 out. 2026.
+
+Arduino, UNO Rev3. [Online]. Disponível em: documentação oficial da placa. Acesso em: 30 out. 2026.
 Microchip Technology Inc., AVR Instruction Set Manual. [Online]. Disponível em: documentação de microcontroladores AVR da Microchip. Acesso em: 30 out. 2026.
 
 Microchip Technology Inc., ATmega328P — 8-bit AVR Microcontroller. [Online]. Disponível em: página oficial do ATmega328P. Acesso em: 30 out. 2026.
