@@ -128,10 +128,46 @@ A comparação pode até ser feita para compreender a função dos painéis do E
 ![Seletores da Function Table](./images/photos/seletores-function-table.jpg)
 
 ## 5.5 Decimal Ring Counters
-- Como funcionava a configuração dos tubos usados para armazenar números de base 10
+O ENIAC não utilizava o sistema binário como os computadores atuais, mas sim o sistema decimal (base 10) e, para armazenar e manipular números decimais, ele empregava circuitos chamados de contadores decimais em anel (Decimal Ring Counters).
+Esses contadores eram constituídos por válvulas eletrônicas, que controlavam os estados elétricos responsáveis pela representação de cada dígito decimal. Dessa forma, cada posição decimal podia assumir dez estados diferentes, correspondentes aos dígitos de 0 a 9.
+### 5.5.1 Como funcionavam os contadores em anel:
+Cada contador decimal era organizado para manter um entre dez estados possíveis. Esses estados eram controlados por circuitos eletrônicos construídos com válvulas a vácuo, que direcionavam os sinais elétricos de acordo com o dígito representado.
+O funcionamento ocorria assim:
+* Representação do dígito: o circuito mantinha um estado eletrônico correspondente a um dos dez dígitos decimais, de 0 a 9. Em um dado momento, apenas uma das dez posições do anel permanecia ativa (conduzindo corrente), enquanto as outras nove permaneciam inativas.
+* Recebimento de pulsos: quando o contador recebia um pulso elétrico de entrada, avançava para o estado seguinte.
+* Transição entre estados: ao receber pulsos sucessivos, o contador percorria os estados decimais em sequência. Por exemplo, ao passar do estado 3 para o 4, o dígito representado era incrementado em uma unidade.
+* Retorno ao zero: quando o contador passava do estado 9, retornava ao estado 0. Quando o contador completava uma volta inteira (passando do 9 de volta para o 0), ele enviava automaticamente um pulso elétrico para o contador da coluna seguinte (à esquerda), realizando a operação de transporte decimal, o chamado mecanismo Carry
+Ou seja, o contador utilizava um circuito eletrônico com dez estados possíveis para representar diretamente cada dígito decimal.
+### 5.5.2 Como as válvulas eletrônicas armazenavam os números:
+As válvulas a vácuo eram componentes fundamentais do ENIAC, pois permitiam controlar os sinais elétricos que mantmham e modificavam os estados dos circuitos.
+Nos contadores decimais, os circuitos eram organizados na forma de gatilhos biestáveis (flip-flops) interconectados. Esses estados eletrônicos representavam os dígitos de 0 a 9 e a combinação desses circuitos permitia conservar temporariamente os valores numéricos durante a execução das operações.
+Por exemplo, para representar o dígito 7, o contador correspondente permanecia no estado eletrônico associado a esse valor. Quando o circuito recebia os pulsos necessários para avançar, seu estado mudava conforme a sequência estabelecida.
+Caso a alimentação elétrica fosse interrompida, os valores mantidos nos circuitos não eram preservados, pois eram valores temporários e dependiam do fluxo contínuo de energia (memória volátil).
+5.5.3 Exemplo do funcionamento:
+Se um contador decimal estiver representando o dígito 8:
+Inicialmente, seu estado corresponde ao valor 8 -> ao receber um pulso elétrico, o contador avança para o estado 9 -> ao receber outro pulso, retorna ao estado 0 e gera um sinal de transporte (carry) para a posição seguinte.
+Assim, os contadores em anel constituíam um dos mecanismos fundamentais para o armazenamento temporário e o processamento numérico do ENIAC.
 
 ## 5.6 Decimal Representation
-- Como os dados eram armazenados usando contadores em anel (base 10, não binária)
+Os acumuladores do ENIAC eram os blocos de hardware responsáveis por armazenar temporariamente os valores e realizar as operações aritméticas. 
+### 5.6.1 Como os números eram representados:
+A máquina possuía 20 acumuladores, e cada um deles conseguia armazenar um número decimal de até 10 dígitos, além de um indicador de sinal (positivo ou negativo).
+Para isso, cada acumulador continha uma sequência de 10 contadores em anel. Cada contador correspondia a uma posição geométrica do número e operava com um peso posicional específico (base 10), da direita para a esquerda: unidades, dezenas, centenas, e assim por diante.
+Como exemplo, o número positivo 12.587 era registrado preenchendo as casas vazias à esquerda com zeros, enquanto o anel de sinal indicava o estado positivo:
+* Sinal: Positivo (+)
+* Dígitos nos contadores: 0 0 0 0 0 1 2 5 8 7
+Matematicamente, os circuitos decodificavam essa disposição respeitando a notação posicional convencional:
+12.587 = (1 x 10.000)+(2 x 1.000)+(5 x 100)+(8 x 10)+(7 x 1)
+Essa organização permitia que a lógica eletrônica fizesse cálculos diretos, simulando a escrita numérica humana e dispensando a conversão para o sistema binário.
+### 5.6.2 Funcionamento dos Contadores Decimais
+O armazenamento físico de um dígito ocorria por meio dos estados elétricos das válvulas termiônicas dentro de cada contador em anel. O conjunto desses 10 contadores individuais consolidava o valor total do acumulador.
+As operações de adição ocorriam pelo envio de trens de pulsos elétricos de alta frequência para esses contadores. Cada pulso avançava o anel eletrônico em uma posição (de 0 para 1, de 1 para 2, sucessivamente). Quando um contador acumulava pulsos suficientes para ultrapassar o dígito 9, ele zerava o próprio anel e disparava mecanicamente um pulso de transporte (o "vai-um") para incrementar o contador posicional imediatamente à esquerda.
+
+Exemplo prático (Operação de Adição):
+* Estado inicial do contador de unidades: 8
+* Estímulo recebido: 5 pulsos elétricos
+* Dinâmica do circuito: O contador recebe os pulsos, passa pelo 9, resseta para o 0 (momento em que emite um sinal de transporte para o anel das dezenas) e avança os pulsos restantes até parar no dígito 3.
+* Resultado final: O contador de unidades passa a exibir 3, e o contador de dezenas é incrementado em 1, registrando eletronicamente o valor 13.
 
 ## 5.7 Memory Capacity
 

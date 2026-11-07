@@ -234,5 +234,69 @@ A operação já havia sido determinada pelas conexões físicas e pelos control
 ![Painéis e Cabos do ENIAC](./images/photos/panels-and-cables.jpg)
 
 ## 8.7 Operation Sequence
-- Diagrama lógico, passo a passo, de como as operações eram encadeadas e detalhamento do processo
-(Add image)
+O ENIAC executava cálculos por meio de uma sequência de operações interligadas, coordenadas por sinais elétricos de temporização e pulsos de programa. Diferentemente dos computadores modernos, que buscam instruções armazenadas na memória para executá-las, o ENIAC dependia fundamentalmente de cabos, chaves e circuitos de controle configurados manualmente para estabelecer a ordem das operações.
+Cada unidade funcional desempenhava uma tarefa específica e tinha a capacidade de iniciar a etapa seguinte do processamento por meio da transmissão de um pulso de programa através das calhas de programa (Program Trays).
+A sequência de execução dependia de três mecanismos fundamentais: a Unidade Iniciadora, responsável por disparar o processamento; a Unidade Cíclica, responsável por gerar os sinais de temporização contínuos necessários à sincronização das operações; e o Programador Mestre, responsável por controlar sequências repetitivas e determinados desvios de execução. Em conjunto, esses componentes coordenavam as operações matemáticas distribuídas pelas diferentes unidades funcionais da máquina.
+
+### 8.7.1 Diagrama Lógico da Sequência de Operação
+O fluxo geral de preparação e execução de um programa no ENIAC pode ser representado pelo seguinte diagrama:
+
+Exemplo
+## mermaid
+flowchart TD
+    subgraph Fase de Preparação (Manual)
+        A["1. Energização e inicialização do sistema"] --> B["2. Initial Clear: limpeza dos estados internos"]
+        B --> C["3. Configuração física das conexões e chaves"]
+    end
+
+    subgraph Ciclo de Execução Dinâmica (Eletrônica)
+        C --> D["4. Unidade Iniciadora envia o primeiro pulso (Io)"]
+        D --> F["5. Unidade funcional recebe pulso e executa operação"]
+        F --> G["6. Unidade funcional emite pulso de saída"]
+        G --> H{"7. É necessário repetir ou desviar?"}
+        H -- Sim --> I["Programador Mestre altera o caminho do pulso"]
+        I --> F
+        H -- Não --> J["8. Destinação do pulso para a próxima unidade / saída"]
+    end
+
+    J --> K["9. Resultado final retido ou impresso"]
+    K --> L["10. Encerramento do processamento"]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style L fill:#9ff,stroke:#333,stroke-width:2px
+
+Nota: A Unidade Cíclica opera em paralelo a todo o Bloco de Execução Dinâmica, fornecendo pulsos de clock contínuos a cada 10 µs.
+
+### 8.7.2 Processo de Execução Passo a Passo
+#### 1. Energização e inicialização do sistema
+Antes do início de qualquer cálculo, as fontes de alimentação de alta tensão e os sistemas de refrigeração por ar forçado precisavam ser ativados de forma faseada para preservar a vida útil das válvulas termiônicas. A Unidade Iniciadora concentrava os comandos de controle primários necessários para ligar, parar e supervisionar o computador, garantindo que os níveis elétricos estivessem estáveis antes do processamento.
+
+#### 2. Limpeza inicial (Initial Clear)
+Após a energização, as válvulas podiam assumir estados lógicos imprevisíveis. Para estabelecer um estado inicial conhecido, o operador acionava manualmente o comando Initial Clear. Esse procedimento gerava o sinal Initial Clear Gate (ICG), que era distribuído por toda a máquina através dos cabos de sincronização. O ICG zerava os contadores numéricos dos Acumuladores, limpava os flip-flops de controle e restaurava os contadores de passo do Programador Mestre às suas posições iniciais.
+
+#### 3. Configuração do programa (Programação Estática)
+Com o sistema limpo, os operadores realizavam a programação física inserindo cabos de conexão (patch cords) nos terminais das calhas de programa e ajustando as chaves seletoras nos painéis de cada unidade funcional. Essas conexões mecânicas determinavam rigidamente a ordem das operações aritméticas, o fluxo de dados e o percurso dos pulsos de controle. Não havia busca automática de instruções em uma memória convencional de programa; a arquitetura era essencialmente uma máquina de fluxo de dados (dataflow) configurada à mão.
+
+#### 4. Início da primeira operação
+Após a verificação das conexões, o operador pressionava o botão de disparo na Unidade Iniciadora para emitir o Initiating Pulse (pulso iniciador). A unidade sincronizava esse comando com o relógio interno do sistema e transmitia o primeiro pulso elétrico de programa por meio de sua saída física identifieda como \(I_{o}\). Esse pulso trafegava pelas calhas até a primeira unidade designada, que podia ser o Transmissor de Constantes para ler cartões perfurados IBM ou um Acumulador inicial.
+
+#### 5. Sincronização pela Unidade Cíclica
+Durante toda a execução, a Unidade Cíclica atuava como o metrônomo do ENIAC. Seu oscilador a cristal de 100 kHz gerava pulsos contínuos divididos em intervalos básicos de 10 microssegundos. Vinte desses pulsos formavam o ciclo de 200 microssegundos denominado Addition Time (Tempo de Adição). Todos os painéis da máquina recebiam esses sinais simultaneamente, permitindo que unidades fisicamente distantes operassem de forma perfeitamente síncrona.
+
+#### 6. Execução da operação matemática
+Ao receber um pulso de programa em seu terminal de entrada, os circuitos de controle interno de uma unidade específica eram ativados. Se configurado para somar, um Acumulador abria suas portas lógicas para receber os pulsos decimais de alta velocidade que vinham dos barramentos numéricos, incrementando seus contadores de anel decádicos. Operações complexas como multiplicação ou divisão acionavam unidades especializadas que retinham o controle por múltiplos ciclos de tempo de adição.
+
+#### 7. Transmissão do próximo pulso de programa
+No exato instante em que uma unidade funcional concluía sua operação programada, seus circuitos geravam autonomamente um novo pulso elétrico de saída (Program Output). Este sinal era injetado de volta nas calhas de programa e viajava fisicamente até a entrada de controle da próxima unidade da sequência, atuando como um gatilho causador para a próxima tarefa e mantendo a cadeia de processamento ativa.
+
+#### 8. Repetição de operações e desvios de execução
+Quando o algoritmo exigia repetições (loops), o pulso de saída de uma operação era conectado às entradas do Programador Mestre. Esta unidade utilizava contadores locais para registrar o número de iterações executadas. Enquanto o número estipulado de repetições não fosse alcançado, o Programador Mestre desviava o pulso elétrico de volta para o início do laço.
+Da mesma forma, desvios condicionais eram realizados utilizando o pulso de estouro (overflow) de sinal de um Acumulador: se um resultado mudasse de positivo para negativo, o circuito abria um caminho elétrico diferente para o pulso de programa seguinte. Esse mecanismo permitia que o ENIAC tomasse decisões lógicas baseadas em dados em tempo de execução.
+
+#### 9. Retenção e saída dos resultados
+Ao quebrar os laços de repetição ou finalizar a árvore de conexões do algoritmo, o pulso elétrico final era direcionado para acionar a unidade de saída do sistema. Os dados matemáticos finais, que permaneciam temporariamente retidos nos contadores eletrônicos dos Acumuladores designados, eram transmitidos para a unidade de impressão ou perfuradora de cartões IBM para fins de registro permanente.
+
+#### 10. Encerramento do processamento
+Com a gravação dos dados e a ausência de novos pulsos circulando pelas calhas de programa, a máquina cessava dinamicamente suas atividades, retornando ao estado de espera (idle). Os resultados físicos podiam então ser coletados pelo operador humano, e a máquina ficava disponível para receber uma nova configuração de cabos ou uma nova carga de cartões de entrada.
+
+
