@@ -196,3 +196,4 @@ Assim, a utilização do ENIAC era especialmente importante em problemas que exi
 ## 9.8 Architectural Decisions
 - Sobre a velocidade do processamento paralelo e a dificuldade de configuração
 - Sobre a velocidade do processamento paralelo e a dificuldade de configuração
+- Sobre a velocidade do processamento paralelo e a dificuldade de configuração
