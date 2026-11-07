@@ -21,11 +21,11 @@ Embora esse método permitisse adaptar o ENIAC a diferentes tarefas, a configura
 ## 10.5 The First Programmers
 - A papel histórico das 6 programadoras do ENIAC
 
-## 10.6 Operation Example
-- Passo a passo de como, por exemplo, uma adição era feita
-
-## 10.7 Debugging Process
+## 10.6 Debugging Process
 - Como a equipe de operação encontrava erros (ou bugs literais kkkk)
+
+## 10.7 Operation Example
+- Passo a passo de como, por exemplo, uma adição era feita
 
 ## 10.8 1948 Modification
 - Evolução para um mecanismo de programa armazenado central
