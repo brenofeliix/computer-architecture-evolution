@@ -1,6 +1,21 @@
 ## 5. Bus Architecture (Arquitetura de Barramento)
 
 ## 5.1 Bus Overview (Visão Geral do Barramento)
+A arquitetura MIMD (Multiple Instruction, Multiple Data) na Taxonomia de Flynn caracteriza sistemas paralelos nos quais múltiplos núcleos/ processadores executam instruções diferentes de forma assíncrona sobre conjuntos de dados distintos. A organização do sistema de comunicação e barramentos na MIMD varia conforme o paradigma da memória adotado:
+
+Memória Compartilhada MIMD (Sistemas Fortemente Acoplados/ SMP/ NUMA/ UMA): Aplicação direta, ou seja, múltiplos processadores compartilham um barramento de sistemas para acessar a memória principal compartilhada e os módulos de E/S.
+
+Memória Distribuída MIMD (Sistemas Fracamente Acoplados/ Clusters/ MPPs): Cada nó possui seu próprio processador, memória local e barramento interno de sistema. A comunicação global entre nós não utiliza um barramento centralizado tradicional, eles utilizam uma Rede de Interconexão (Interconnection Network) ou barramentos/ chaves de alta velocidade baseados em troca de mensagens (Message Passing).
+
+## 5.2 Data Bus (Barramento de Dados)
+O barramento de dados é classificado como aplicação direta em sistemas MIMD de memória compartilhada, e também no barramento local de cada nó em sistemas de memória distribuída. Trata-se do conjunto de linhas físicas responsáveis por transportar as instruções lidas da memória e os operandos lidos/ escritos entre processadores, memórias e dispositivos.
+
+## 5.3 Address Bus (Barramento de Endereço)
+O barramento de endereços é classificado como aplicação direta em sistemas SMP/UMA e como equivalente técnico em sistemas NUMA e de memória distribuída. Sua função principal é de transportar os endereços físicos de memória ou endereços de E/S emitidos por um processador que deseja realizar uma operação de leitura ou escrita. A estrutura é dividida em duas partes:
+
+Memória Compartilhada (UMA): Todos os processadores enxergam um único espaço de endereçamento contínuo no barramento de endereços compartilhado.
+
+Memória Distribuída: Cada processador acessa apenas seu espaço de endereçamento local através de seu próprio barramento de endereços locais. Para acessar a memória de outro nó utiliza-se envio de pacotes de dados via rede de interconexão contendo o ID do nó de destino e o deslocamento de memória (Remote Direct Memory Access - RDMA ou Message Passing).
 A arquitetura MIMD (Multiple Instruction, Multiple Data) na Taxonomia de Flynn carateza sistemas paralelos nos quais múltiplos núcleos/ processadores executam intruções diferentes de forma assíncrona sobre conjuntos de dados distintos. A organização do sistema de comunicação e barramentos na MIMD varia conforme o paradigma da memória adotado:
 
 Memória Compartilhada MIMD (Sistemas Fortemente Acoplados/ SMP/ NUMA/ UMA): Aplicação é direta, ou seja, múltiplos processadores compartilham um barramento de sistemas para acessar a memória principal compartilhada e os módulos de E/S.
@@ -20,6 +35,9 @@ Memória Distribuída: Cada processador acessa apenas seu espaço de endereçame
 ## 5.4 Control Bus (Barramento de Controle)
 O barramento de controle é classificado como aplicação direta em barramentos compartilhados e como equivalente técnico em redes de interconexão. Sua função principal é de transportar sinais de controle, temporização, requisição, autorização e status. Entre os mecanismos e sinais específicos na MIMD, destacam-se:
 
+Sinais de Arbitragem de Barramento (Bus Request/ Bus Grant): Coordenam qual processador recebe permissão do árbitro central ou distribuído para utilizar o barramento.
+
+Sinais de Leitura/Escrita e Confirmação (Read/Write e ACK/ NACK): Sinalizam operações de leitura, escrita e término da transferência.
 Sinais de Arbitragem de Barramento (Bus Request/ Bus Grant): Coordenam qual processador recebe permissão so árbitro central ou distribuído para utilizar o barramento.
 
 Sinais de Leitura/Escrita e Confirmação (Read/Write e ACK/ NACK): Sinalizam operações de leitura, escrita e término da tranferência.
@@ -36,6 +54,21 @@ Memória Compartilhada MIMD (Ex: Barramento Único Compartilhado com Snooping): 
 Memória distribuída MIMD (Ex: Message Passing) Solicitação Local: P1 determina que precisa de dados localizados na memória do nó N2. Empacotamento de Mensagem: P1 constrói uma mensagem via software (ex: biblioteca MPI) ou hardware contendo o nó de destino (N2), tamanho da mensagem e dados/comando. Envio via Interface de Rede: A mensagem é enviada pelo barramento local de P1 para a sua interface de rede local. Roteamento: A mensagem trafega pela rede de interconexão (ex: Mesh, Hypercube, Crossbar) até o nó N2. Processamento e Resposta: O controlador do nó N2 lê a memória local de N2 via seu barramento interno e envia uma mensagem de resposta com os dados de volta para P1.
 
 ## 5.6 Bus Width (Largura do Barramento)
+A largura do barramento classifica-se como Aplicação Direta nos barramentos locais e de memória, e como Equivalente Técnico na largura dos canais e links das redes de interconexão. Sua análise dimensional abrange: 
+Barramento de Dados (Data Bus Width): Apresenta dimensões típicas de 64, 128, 256 ou 512 bits — ou a largura de uma linha de cache completa em transferências por bloco via modo burst — visando maximizar o rendimento da memória compartilhada.
+
+Barramento de Endereços (Address Bus Width): Varia geralmente de 32 a 64 bits, definindo o limite físico e o espaço de endereçamento da memória compartilhada.
+
+Canais de Interconexão em Redes de Mensagem: Definidos pela largura do flit ou phit (normalmente 16, 32 ou 64 bits em paralelo por link físico ou via interfaces seriais de alta velocidade multipista, como PCIe e InfiniBand).
+
+## 5.7 Performance Impact (Impacto no Desempenho)
+O projeto do barramento e dos mecanismos de comunicação representa o principal gargalo de desempenho nas arquiteturas MIMD:
+
+Contenção de Barramento (Bus Contention): Em sistemas de barramento único compartilhado, a quantidade de processadores escaláveis é severamente limitada (em geral entre 8 e 32 processadores), pois a tentativa simultânea de acesso à memória por múltiplos núcleos gera contenção e altas latências de espera.
+
+Overhead de Coerência de Cache (Cache Coherence Overhead): O volume extra de mensagens de invalidação e atualização transmitido no barramento de controle tende a saturar a largura de banda disponível à medida que o número de núcleos aumenta.
+
+Latência de Comunicação Inter-nós: Em sistemas distribuídos, a latência de transferência de dados via Message Passing é significativamente maior do que o acesso local à memória, demandando algoritmos otimizados para minimizar a troca de dados.
 ​A largura do barramento classifica-se como Aplicação Direta nos barramentos locais e de memória, e como Equivalente Técnico na largura dos canais e links das redes de interconexão.​Sua análise dimensional abrange:​Barramento de Dados (Data Bus Width): Apresenta dimensões típicas de 64, 128, 256 ou 512 bits — ou a largura de uma linha de cache completa em transferências por bloco via modo burst — visando maximizar o rendimento da memória compartilhada.
 
 ​Barramento de Endereços (Address Bus Width): Varia geralmente de 32 a 64 bits, definindo o limite físico e o espaço de endereçamento da memória compartilhada.
@@ -54,6 +87,28 @@ Overhead de Coerência de Cache (Cache Coherence Overhead): O volume extra de me
 Escalabilidade (Scalability): Barramentos compartilhados possuem baixa escalabilidade (O(N) de contenção). Em contrapartida, redes de interconexão dinâmicas (Crossbar) ou estáticas (Mesh, Hypercube) oferecem suporte para centenas ou milhares de processadores, embora aumentem a complexidade do hardware.
 
 ## 5.8 Comparison with Current Architectures (Comparação com Arquiteturas Atuais)
+Topologia de Barramento/Conexão: Memória Compartilhada MIMD (Histórica/Tradicional ex: Sequent Symmetry): Barramento físico único e compartilhado (Shared Multi-drop Bus). Memória Distribuída MIMD (ex: Clusters HPC / Supercomputadores): Redes de interconexão (Mesh, Torus, Hypercube, InfiniBand). Arquiteturas Modernas de Múltiplos Núcleos (Multicore / NUMA / SOC): Malhas no-chip (Network-on-Chip - NoC), Crossbar interno e links ponto a ponto (PCIe, CXL, UPI/Infinity Fabric).
+
+Acesso à Memória: Memória Compartilhada MIMD: UMA (Uniform Memory Access), com latência uniforme para qualquer endereço lido por qualquer CPU. Memória Distribuída MIMD: NORMA (No Remote Memory Access), onde apenas a memória local é acessada diretamente por instruções do processador. Arquiteturas Modernas: NUMA (Non-Uniform Memory Access), onde o acesso à memória local do socket é consideravelmente mais rápido do que à memória remota.
+
+Escalabilidade: Memória Compartilhada MIMD: Baixa, devido à rápida saturação do barramento compartilhado. Memória Distribuída MIMD: Altíssima, permitindo dimensionamento para milhares de nós e processadores. Arquiteturas Modernas: Média a Alta em nível de chip/nó (de dezenas a centenas de núcleos por sistema).
+
+Mecanismo de Comunicação Principal: Memória Compartilhada MIMD: Leitura/escrita direta na memória compartilhada com coerência de cache mantida por Snooping. Memória Distribuída MIMD: Troca explícita de mensagens via software/hardware (Message Passing / MPI). Arquiteturas Modernas: Protocolos de coerência baseados em diretórios (Directory-based) sobre redes NoC e uso de CXL para expansão de memória.
+
+Contenção e Gargalo: Memória Compartilhada MIMD: Disputa direta e simultânea pelos barramentos de controle, dados e endereços. Memória Distribuída MIMD: Latência de rede e custo de empacotamento das mensagens. Arquiteturas Modernas: Congestionamento na malha interna (NoC) e gargalos de largura de banda no controlador de memória.
+
+## 5.9 Information Movement, Access Priority and Bottlenecks (Movimentação, Prioridade de Acesso e Gargalos)
+Para responder diretamente ao fluxo de informações e restrições de acesso na arquitetura MIMD:
+- **Movimentação das Informações:** Ocorre de forma assíncrona. Quando um núcleo necessita de um dado ausente em sua cache local (*Cache Miss*), a requisição é empacotada e despachada pelo barramento de endereços e controle. O dado correspondente flui de volta através do barramento de dados ou da rede de interconexão ponto a ponto.
+- **Ordem e Prioridade de Acessos (Arbitragem):** Em sistemas de barramento compartilhado, a prioridade de acesso é gerida por um **Árbitro de Barramento (Bus Arbiter)**, que utiliza esquemas de prioridade fixa, rotação (*round-robin*) ou filas de requisição para evitar colisões e determinar qual núcleo tem o direito de transmissão por ciclo de clock. Em sistemas distribuídos, a prioridade é gerida pelas políticas de roteamento da rede de interconexão.
+- **Mecanismos para Acelerar Acessos:** 
+  - **Hierarquia de Caches (L1/L2/L3):** Reduz drasticamente a latência ao manter cópias de dados frequentes próximas aos núcleos.
+  - **Transferências em Bloco (Burst Mode):** Permite carregar blocos inteiros de linhas de cache de uma só vez, otimizando a largura de banda do barramento.
+  - **Protocolos de Coerência (ex: Snooping):** Asseguram que os núcleos leiam sempre a versão mais atualizada de um dado sem varreduras desnecessárias na memória principal.
+- **Limitações e Gargalos Principais:**
+  - **Contenção de Barramento / Saturação:** A disputa simultânea de múltiplos núcleos pelo mesmo canal físico de comunicação gera filas de espera e latência elevada.
+  - **Overhead de Coerência:** O tráfego gerado pelas mensagens de invalidação de cache consome largura de banda útil do barramento.
+  - **Latência de Rede em Sistemas Distribuídos:** O empacotamento e o salto de mensagens entre nós remotos introduzem atrasos consideráveis se comparados ao acesso à memória local.
 Topologia de Barramento/Conexão: Memória Compartilhada MIMD (Histórica/Tradicional ex: Sequent Symmetry): Barramento físico único e compartilhado (Shared Multi-drop Bus). Memória Distribuída MIMD (ex: Clusters HPC / Supercomputadores): Redes de interconexão (Mesh, Torus, Hypercube, InfiniBand).​Arquiteturas Modernas de Múltiplos Núcleos (Multicore / NUMA / SOC): Malhas no-chip (Network-on-Chip - NoC), Crossbar interno e links ponto a ponto (PCIe, CXL, UPI/Infinity Fabric).
 
 ​Acesso à Memória: Memória Compartilhada MIMD: UMA (Uniform Memory Access), com latência uniforme para qualquer endereço lido por qualquer CPU. Memória Distribuída MIMD: NORMA (No Remote Memory Access), onde apenas a memória local é acessada diretamente por instruções do processador.​Arquiteturas Modernas: NUMA (Non-Uniform Memory Access), onde o acesso à memória local do socket é consideravelmente mais rápido do que à memória remota.
