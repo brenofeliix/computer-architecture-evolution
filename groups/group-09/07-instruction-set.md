@@ -61,3 +61,51 @@ A participação humana acontece na escrita do programa e na escolha desses par�
 - Erros de acesso à memória ou de sincronização podem produzir resultados incorretos.
 - Transferências entre CPU e GPU podem custar mais que a própria execução.
 - O código precisa respeitar os limites de registradores, memória compartilhada, VRAM e número de threads.
+
+## 7.9 Seleção e Localização dos Dados
+Na GPU, os operandos podem ser fornecidos diretamente por registradores, calculados a partir dos identificadores da thread ou buscados em diferentes espaços de memória. A instrução não precisa receber um valor fixo: ela pode receber um endereço calculado para localizar o elemento correto de um vetor, matriz ou tensor.
+
+Os mecanismos mais importantes são:
+
+- **Registradores:** guardam valores temporários e operandos já carregados. Cada thread possui seus próprios registradores.
+- **Índice da thread:** `threadIdx`, `blockIdx`, `blockDim` e `gridDim` identificam a posição da thread na grade de execução.
+- **Endereço base e deslocamento:** um ponteiro indica o início de uma estrutura e um índice ou deslocamento localiza um elemento.
+- **Memória compartilhada:** permite que threads do mesmo bloco selecionem dados reutilizados com baixa latência.
+- **Memória global/VRAM:** armazena vetores, matrizes, imagens e tensores acessados por endereços calculados.
+- **Memória constante e de textura:** podem atender padrões específicos de leitura, como parâmetros compartilhados ou dados gráficos.
+
+Esses mecanismos não são modos de endereçamento idênticos aos de uma CPU x86. Eles representam a forma como a GPU combina identificadores de threads, ponteiros, deslocamentos e espaços de memória para encontrar os dados.
+
+## 7.10 Exemplo Concreto de Acesso
+Considere o kernel de soma de vetores:
+
+```cuda
+__global__ void soma(const float* A, const float* B, float* C, int n) {
+	int i = blockIdx.x * blockDim.x + threadIdx.x;
+	if (i < n) {
+		C[i] = A[i] + B[i];
+	}
+}
+```
+
+Para uma thread específica, a seleção dos dados ocorre assim:
+
+1. `blockIdx.x` identifica o bloco onde a thread está.
+2. `blockDim.x` informa quantas threads existem em cada bloco.
+3. `threadIdx.x` identifica a posição da thread dentro do bloco.
+4. A multiplicação e a soma calculam o índice global `i`.
+5. O endereço de `A[i]` é calculado a partir do endereço inicial de `A` mais o deslocamento do elemento `i`. O mesmo ocorre com `B[i]` e `C[i]`.
+6. As instruções de carregamento buscam `A[i]` e `B[i]` na memória global e colocam os valores nos registradores da thread.
+7. A ALU soma os registradores e a instrução de armazenamento grava o resultado no endereço de `C[i]`.
+8. O teste `i < n` impede que uma thread tente acessar uma posição fora dos vetores.
+
+Quando threads consecutivas acessam posições consecutivas, os acessos podem ser agrupados e aproveitar melhor a largura de banda da memória. Se cada thread acessar posições espalhadas, o hardware precisará realizar mais transações e o desempenho poderá cair.
+
+## 7.11 Limitações do Acesso aos Dados
+- A capacidade da VRAM limita a quantidade de dados disponível para acesso rápido.
+- Endereços incorretos podem causar resultados inválidos ou falhas de execução.
+- Acessos não coalescidos desperdiçam largura de banda.
+- Conflitos na memória compartilhada podem serializar acessos.
+- Dados ausentes nas caches precisam ser buscados em níveis mais lentos.
+- Transferências entre RAM e VRAM acrescentam latência antes do processamento.
+- O programador precisa garantir que índices, tipos e sincronizações estejam corretos.

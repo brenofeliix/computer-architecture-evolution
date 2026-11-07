@@ -60,3 +60,10 @@
 - NVIDIA. *CUDA C++ Programming Guide: Programming Interface*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#programming-interface.
 - Khronos Group. *OpenCL Specification*. Disponível em: https://registry.khronos.org/OpenCL/specs/.
 - AMD. *ROCm Documentation: HIP Programming Guide*. Disponível em: https://rocm.docs.amd.com/projects/HIP/en/latest/how-to/hip-porting.html.
+
+## I. Endereçamento e acesso aos dados
+
+- NVIDIA. *CUDA C++ Programming Guide: Device Memory Accesses*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#device-memory-accesses.
+- NVIDIA. *CUDA C++ Programming Guide: Thread Hierarchy*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#thread-hierarchy.
+- NVIDIA. *CUDA C++ Best Practices Guide: Coalesced Access to Global Memory*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#coalesced-access-to-global-memory.
+- NVIDIA. *CUDA C++ Programming Guide: Shared Memory*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#shared-memory.
