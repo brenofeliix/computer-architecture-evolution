@@ -35,3 +35,7 @@
 [17] BRAINERD, J. G.; SHARPLESS, T. K. The ENIAC. 1950. Computer History Museum, Donald Knuth Digital Archive. Disponível em: https://archive.computerhistory.org/resources/text/Knuth_Don_X4100/PDF_index/k-8-pdf/k-8-r5372-ENIAC.pdf. Acesso em: 5 nov. 2026.
 
 [18] AUTOMATIC COMPUTING MACHINERY. Mathematical Tables and Other Aids to Computation, v. 3, n. 26, p. 426, 1949. American Mathematical Society. Disponível em: https://www.ams.org/journals/mcom/1949-03-026/S0025-5718-49-99511-3/S0025-5718-49-99511-3.pdf. Acesso em: 5 nov. 2026.
+
+[19] UNITED STATES. War Department. Bureau of Public Relations. Physical aspects, operation of ENIAC are described. Comunicado de imprensa, 16 fev. 1946. Smithsonian National Museum of American History. Disponível em: https://americanhistory.si.edu/comphist/pr4.pdf. Acesso em: 6 nov. 2026.
+
+[20] RANDALL, Alexander, 5th. The Eckert Tapes: computer pioneer says ENIAC team couldn't afford to fail — and didn't. Computerworld, 2006 (entrevista gravada em 1989). Disponível em: https://www.computerworld.com/article/1697959/the-eckert-tapes-computer-pioneer-says-eniac-team-couldn-t-afford-to-fail-and.html.

@@ -50,11 +50,55 @@ Assim, o tempo de preparação podia ser muito maior que o próprio tempo de exe
 De acordo com Franz Alt, ....
 
 ## 9.4 Energy Consumption
-- Quanta energia o ENIAC usava para operar normalmente
+
+Por ser uma máquina derivada de uum trabalho impressionante de engenharia elétrica, o Eniac tinha um consumo avassalador, em decorrência de ter sido projeto de uma forma mais bruta, sem a preocupação com refinamento em sua economia energetica. Logo, cada ligação de válvula termionica e seus componentes eram altamente energizados, e principalemnte, ficavam ligados constantemente.
+
+Desse modo, a estimativa direta seria que o sistema consumia cerca de 150 kW em 1946. Sendo que em alguns ápices de processamento e em certas circunstâncias poderia alcançar 174 kW.
+
+> O valor de 174 Kw é estimativo e não foram encontradas citações oficias. Porém em determinadas circunstâncias, como quando o Eniac foi movido para a cidade de Maryland, onde foi remontado na Aberdeen Proving Ground. A região por ser mais ao sul é mais quente que a cidade natal do Eniac, Pensilvânia. Logo, existe uma base real para acreditar que seu consumo energético subiu após ser transferido.
+
+### 9.4.1 Divisão do consumo
+
+segundo o comunicado de imprensa do Departamento de Guerra (fev. 1946). Os componentes e seus gastos seriam, o aquecimento dos filamentos das válvulas com 80 kW, no total resultando em cerca de 53% do consumo geral. A geração das tensões CC com 45 kW e complementando 30% do gasto. A ventilação (sopradores), que consumiam 20 kW, totalizando 13% (muito provacelmente foram os componentes que sofreram um aumento de consumo em Maryland). E por fim as máquinas de cartão auxiliares com um consumo mais moderado de 5 kW, sendo apenas 3% do total. 
+A alimentação era trifásica, regulada, de 240 V e 60 Hz. Sendo uma montagem elétrica bem parruda para a época, reforçando a ideia de que o Eniac foi projetado pensando em resultados e não em economia.
+
+### 9.4.2 Explicação do maior gasto
+
+Como foi demonstrando, os filamentos das vávulas representam mais da metado do consumo de energia do Eniac, e isso se dá pelo fato de que toda válvula precisa de seu aquecedor ligado o tempo todo, mesmo sem conduzir. Como a operação era 24 h por dia, 7 dias por semana, esse gasto nunca parava. Com aproximadamente 17.500 válvulas, isso chegava a um valor absurdo, próximo de 4,6 W por válvula só de aquecimento. Nessas circunstâncias, com uma conta simples chegamos na conclusão que, com o sistema gastando 150 kW × 24 h = 3.600 kWh. Se considerarmos o aumento para 174, o valor sobe mais ainda, chegando a impressionates 4.200 KWh. 
+
+> Um fato curioso é que quase toda essa energia virava calor na sala. O ENIAC usava ar externo forçado, sem ar-condicionado dedicado, e os sopradores não bastavam no clima quente e úmido de Maryland. Aparentemente esse problema nunca foi resolvido.
+
+### 9.4.3 Qualidade da rede e upgrades
+
+Posteriormente algumas modificações (como o mecanismo de programa central) eliminaram cerca de 3.000 válvulas, o que também reduziu o consumo, e em meados de 1950, as oscilações de tensão da rede comercial causavam erros e perda de informação. A solução foi um grupo motor-gerador, em que a inércia do motor estabilizava a alimentação. 
+
+> Outra curiosidade é que surgiram mitos em jornais da época, afirmando que algumas regiões, como a Filadélfia sofreram com quedas de energia e blackouts em decorrência do uso do Eniac na rede. Contudo, alguns pesquisadores como Eckert, desmentiram, e considerando que posteriormente o sistema recebeu um gerador próprio. É bem crivel que tenha sido sensacionalismo da mídia.
 
 ## 9.5 Vacuum Tube Failure Rate
-- Com que frequência as válvulas queimavam e quanto tempo era necessário para encontrar a defeituosa
 
+Como as válvulas termionicas podem ser vistas como uma peça análoga a uma lampâda em seu funcionamento básico, era comum que devido ao uso e estresse elas acabassem queimando, e existia não só uma preocupação com esse tipo de erro, mas também métodos para precaver não exatamente a queima, mas sim, sua  troca.
+
+### 9.5.1 Frequência
+
+Quando montado na faculdade de Moore School, uma válvula falhava a cada cerca de dois dias, e o defeito era localizado em até 15 minutos. Um tempo um tanto maior para um uso tão intenso. Já após ser movido para Aberdeen as válvulas queimavam quase todo dia e a máquina ficava fora do ar cerca de metade do tempo. A taxa foi reduzida para uma a cada dois dias, e em 1954 houve uma operação contínua de 116 h. Todo esse aumento pode ser explicado novamente pelo aumento de temperatura média da região.
+
+### 9.5.2 Motivo das falhas
+
+O motivo mais claro é o choque termico, a maior parte das falhas ocorria ao ligar e desligar, quando filamentos e catodos sofrem mais. Por isso o ENIAC passou a ficar ligado direto. O próprio uso 24 horas todos os dias é um efeito dessa escolha. Outro problema era o calor ambiente, a ventilação inadequada encurtava a vida das válvulas e causava longas paradas. Ambos os problemas eram amplificados pela qualidade das peças, eram válvulas comuns de prateleira, sendo que por se tratarem de peças convencionais não eram ideais para computadores. Válvulas especiais de alta confiabilidade só chegaram em 1948.
+
+> Havia também o efeito do catodo ocioso. Em computadores a válvula, tubos longos sem condução podem formar uma camada de alta resistência no catodo. Esse problema era comum e generalizado em máquinas com válvulas termionicas. Embora não haja documentação oficial indicando este no Eniac, é justo imaginar que era um risco comum e poderia ocorrer com certa frequência.
+
+### 9.5.3 Métodos de mapeamento
+
+Era possivel utilizar os modos de operação para localizar o problema, o ciclador permitia rodar em um pulso ou um tempo de adição por vez, e depois de 1948 também por instrução. Assim a máquina parava no meio da operação. Isso era somado as lampâdas de neon, cada flip-flop tinha uma no painel, quando comparavam o estado esperado com o real, o resultado apontava qual estágio, e portanto qual válvula havia falhado.
+
+> Imagine que numa soma, justamente a lampâda de um dos anéis se acsendia de forma não esperada. Isso significava que alguma das válvulas presentes naquele painel estava deturpada.
+
+Quando as programadoras faziam testes, muitas vezes localizavam o defeito até uma válvula individual, que o técnico então trocava de forma bem prática, visto que o sistema contava com chassis removíveis, tinham 44 tipos de unidades plug-in, e a troca levava segundos. No entanto esse tempo é considerado quando o problema já havia sido determinad, e para isso era necessário passar pela rotina de checagem. Só ela levava cerca de 8 horas.
+A partir de 1950, válvulas eram testadas e as falhas, registradas em estatística. A ideia era usar os dados para prever e remediar falhas mais comuns do sistemas, sem depender de erros imprevistos. Gerando assim uma espécie de "tabela de erros".
+
+> Outro truque comum era o teste de margem, que é a prática geral de baixar tensões para provocar falhas antes que atrapalhem. Essa era uma técnica usada de forma ampla em computadores com válvulas termiônicas. Da mesma forma que o problema de efeito cátodo, não há documentação oficial ligando esse método ao Eniac, mas visto que era uma prática comum para lidar erros das válvulas, é muito provavel que tenha sido utilizado amplamente.
+ 
 ## 9.6 I/O Bottleneck
 
 A arquitetura do ENIAC criava um paradoxo de desempenho fascinante: a máquina era um colosso eletrônico capaz de operar na escala dos microssegundos, mas estava fisicamente acorrentada à lentidão de engrenagens, roletes e papel cartonado. Essa disparidade fundamental entre a velocidade de processamento interno e a velocidade de entrada e saída de dados gerava o maior gargalo de performance de todo o sistema.
