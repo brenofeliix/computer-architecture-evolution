@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="470" viewBox="0 0 1200 470" role="img" aria-labelledby="title desc">
+  <title id="title">Fluxo de informação na organização Harvard clássica</title>
+  <desc id="desc">A memória de programa envia instruções ao processador. A memória de dados envia dados ao processador e recebe dados escritos por ele. Os caminhos de instruções e dados são independentes.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#234f78"/>
+    </marker>
+    <style>
+      .heading { font: 700 26px sans-serif; fill: #142b3d; }
+      .box-title { font: 700 22px sans-serif; fill: #142b3d; }
+      .box-text { font: 17px sans-serif; fill: #263746; }
+      .path-label { font: 600 16px sans-serif; fill: #234f78; }
+      .note { font: 14px sans-serif; fill: #4b5965; }
+      .box { fill: #f3f8fc; stroke: #3975a5; stroke-width: 3; rx: 16; }
+      .cpu { fill: #e9f3fa; stroke: #234f78; stroke-width: 3; rx: 16; }
+      .path { fill: none; stroke: #234f78; stroke-width: 4; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="470" fill="#ffffff"/>
+  <text x="600" y="48" text-anchor="middle" class="heading">Organização Harvard clássica: fluxo de informação</text>
+
+  <rect x="45" y="145" width="300" height="190" class="box"/>
+  <text x="195" y="205" text-anchor="middle" class="box-title">Memória de programa</text>
+  <text x="195" y="244" text-anchor="middle" class="box-text">Armazena instruções</text>
+  <text x="195" y="273" text-anchor="middle" class="box-text">do programa</text>
+
+  <rect x="450" y="125" width="300" height="230" class="cpu"/>
+  <text x="600" y="185" text-anchor="middle" class="box-title">Processador</text>
+  <text x="600" y="231" text-anchor="middle" class="box-text">Unidade de Controle</text>
+  <text x="600" y="263" text-anchor="middle" class="box-text">Registradores</text>
+  <text x="600" y="295" text-anchor="middle" class="box-text">ULA</text>
+
+  <rect x="855" y="145" width="300" height="190" class="box"/>
+  <text x="1005" y="205" text-anchor="middle" class="box-title">Memória de dados</text>
+  <text x="1005" y="244" text-anchor="middle" class="box-text">Fornece operandos</text>
+  <text x="1005" y="273" text-anchor="middle" class="box-text">e recebe resultados</text>
+
+  <path d="M 345 205 H 450" class="path"/>
+  <text x="398" y="183" text-anchor="middle" class="path-label">Instruções</text>
+
+  <path d="M 855 225 H 750" class="path"/>
+  <text x="803" y="204" text-anchor="middle" class="path-label">Leitura de dados</text>
+
+  <path d="M 750 285 H 855" class="path"/>
+  <text x="803" y="314" text-anchor="middle" class="path-label">Escrita de dados</text>
+
+  <text x="600" y="405" text-anchor="middle" class="note">Modelo conceitual: a separação permite acessos independentes; simultaneidade depende da implementação.</text>
+  <text x="600" y="430" text-anchor="middle" class="note">Controle, registradores e ULA são elementos ilustrativos do processador, não características definidoras da arquitetura.</text>
+</svg>
