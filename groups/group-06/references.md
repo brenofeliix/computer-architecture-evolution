@@ -39,6 +39,18 @@ https://teachcomputerscience.com/harvard-architecture/
 https://ads.ifba.edu.br/dl2539
 https://www.tme.com/br/pt/news/library-articles/page/56104/arquitetura-de-von-neumann-e-arquitetura-de-harvard/
 
+ Arvind, R. S. Nikhil, J. S. Emer e M. Vijayaraghavan, *Computer Architecture: A Constructive Approach: Using Executable and Synthesizable Specifications*, rev. 25 ago. 2015. MIT 6.175. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/resources/archbook_2015-08-25.pdf. Acesso em: 28 out. 2026.
+
+ Massachusetts Institute of Technology, “Lab 5: RISC-V Introduction—Multi-Cycle and Two-Stage Pipeline,” *6.175: Constructive Computer Architecture*. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/labs/lab5-riscv-intro.html. Acesso em: 28 out. 2026.
+ - TANENBAUM, Andrew S. *Organização Estruturada de Computadores*. 6. ed. São Paulo: Pearson, 2013.
+https://onlinedocs.microchip.com/oxy/GUID-74578654-4F5F-4B29-9F3C-6C3B1F1DF670-en-US-2/GUID-AA5CC158-9A54-4C01-A3E3-47AABEEF987C.html
+
+Referencias utilizadas na pesquisa para desempenho e capacidade de processamento:
+MICROCHIP TECHNOLOGY INC. ATmega328P 8-bit AVR Microcontroller with 32K Bytes In-System Programmable Flash Datasheet. Seção 1: "Features" e Seção 6: "AVR CPU Core". Disponível em documentação técnica oficial da Microchip.
+
+PATTERSON, David A.; HENNESSY, John L. Organização e Projeto de Computadores: A Hardware/Software Interface. 5ª ed. Rio de Janeiro: Elsevier, 2017. (Capítulo dedicado a conceitos de desempenho, barramentos, arquiteturas Harvard/Princeton e pipelining).
+
+STALLINGS, William. Arquitetura e Organização de Computadores. 10ª ed. São Paulo: Pearson Education do Brasil, 2017. (Fundamentos de separação de memórias de instruções e dados em arquiteturas avançadas).
 Microchip Technology Inc., AVR Instruction Set Manual. [Online]. Disponível na documentação AVR da Microchip. Acesso em: 30 out. 2026.
 
 Microchip Technology Inc., ATmega328P — 8-bit AVR Microcontroller, datasheet e documentação do produto. [Online]. Disponível em: página oficial do ATmega328P. Acesso em: 30 out. 2026.

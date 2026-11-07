@@ -36,6 +36,9 @@ Na arquitetura MIMD cache é importante pois vários processadores podem trabalh
 Storage é o armazenamento permanente utilizado para guardar arquivos, programas, sistemas operacionais e documentos.
 O armazenamento possui como principais dispositivos:
 HDD: usa discos magnéticos para armazenar informações.
+SDD: usa memória Flash, maaior velocidade de leitura e gravção.
+NVMe: permite que SSDs se comuniquem com o sistema por meio de interfaces de alta velocidade, como PCIe.
+Sistemas MIMD podem utilizar dispositivos de armazenamento compartilhados ou independentes para fornecer dados aos diferentes processadores.
 SDD: usa memória Flash, maior velocidade de leitura e gravação.
 NVMe: permite que SSDs se comuniquem com o sistema por meio de interfaces de alta velocidade, como PCIe.
 Sistemas MIMD podem utilizar dispositivos de armazenamento compartilhados ou independentes para fornecer dados aos diferentes processadores.
@@ -55,6 +58,7 @@ A capacidade de memória influencia na quantidade de processos executados simult
 A arquitetura MIMD é amplamente utilizada nos computadores modernos, principalmente em processadores multicore, servidores e supercomputadores.
 Atualmente, os sistemas combinam diferentes tecnologias de memória para melhorar o desempenho e permitir o processamento paralelo.
 MIMD tradicional- múltiplos processadores, memória compartilhada ou distribuída, cache por processador, HDD e outros dispositivos, barramentos e redes, capacidade dependente da organização.
+Sistemas  Modernos- CPUs multicore e múltiplos processadores, DDR4, DDR5 e HBM, cache L1, L2 e L3 com diferentes organizações, SSD, NVMe e armazenamento distribuído, interconexões de alta velocidade, pode alcançar grandes capacidades em servidores e clusters.
 Sistemas Modernos- CPUs multicore e múltiplos processadores, DDR4, DDR5 e HBM, cache L1, L2 e L3 com diferentes organizações, SSD, NVMe e armazenamento distribuído, interconexões de alta velocidade, pode alcançar grandes capacidades em servidores e clusters.
 Exemplos de uso do MIMD são:
 Computadores multicore
