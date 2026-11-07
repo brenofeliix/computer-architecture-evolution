@@ -44,3 +44,6 @@ https://ocw.mit.edu/courses/6-823-computer-system-architecture-fall-2005/964e8d2
 MIT, “9.1 Annotated Slides”, Computation Structures, curso 6.004:
 https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c9/c9s1/
 Stallings, Arquitetura e Organização de Computadores, 10. ed., Pearson, 2017.
+Arvind, R. S. Nikhil, J. S. Emer e M. Vijayaraghavan, *Computer Architecture: A Constructive Approach: Using Executable and Synthesizable Specifications*, rev. 25 ago. 2015, cap. 5, seção 5.3. MIT 6.175. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/resources/archbook_2015-08-25.pdf. Acesso em: 28 out. 2026.
+
+Massachusetts Institute of Technology, “Lab 5: RISC-V Introduction—Multi-Cycle and Two-Stage Pipeline,” *6.175: Constructive Computer Architecture*. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/labs/lab5-riscv-intro.html. Acesso em: 28 out. 2026.
