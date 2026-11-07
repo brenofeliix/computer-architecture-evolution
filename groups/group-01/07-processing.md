@@ -121,16 +121,161 @@ Cada dígito do multiplicador levava um tempo de adição, os famosos 200 µs. A
 O produto tinha até 20 dígitos, e o operador escolhia 10, sendo os mais significativos e com arredondamento, já o multiplicador e multiplicando eram preservados.Era possível usar o multiplicador enquanto acumuladores somavam e o divisor calculava, desde que as bandejas de dígitos fossem separadas.
 
 ## 7.5 Divider & Square-Rooter
-- Unidade dedicada à aritimética mais complexa
+A Unidade Divisora e Extratora de Raiz Quadrada (Divider & Square-Rooter) era o módulo especializado do ENIAC projetado para executar as duas operações aritméticas mais complexas do sistema. Assim como o High-Speed Multiplier, essa unidade possuía circuitos lógicos dedicados, mas não operava de forma isolada: ela dependia diretamente de componentes externos para armazenar operandos, registrar resultados intermediários e sincronizar a execução dos cálculos. Para viabilizar essas operações, o módulo assumia o controle de um conjunto de cinco acumuladores específicos, que atuavam como registradores temporários integrados ao longo do processamento.
+
+### 7.5.1 Funcionamento da divisão
+A divisão no ENIAC não ocorria em um único ciclo eletrônico instantâneo. O processo baseava-se em um método iterativo de subtrações e adições repetidas (semelhante ao algoritmo de divisão longa), gerenciado dinamicamente pelos circuitos de controle sobre os acumuladores interconectados.
+Na prática, a unidade manipulava o dividendo e o divisor para determinar os dígitos do quociente de maneira progressiva, da esquerda para a direita. O circuito de controle interno testava o sinal numérico a cada passo: o divisor era subtraído sucessivamente até que o resto parcial se tornasse negativo; quando isso ocorria, o sinal comandava a restauração do valor por adição, realizava o deslocamento (shift) de casa decimal através de um acumulador especificamente configurado como deslocador e avançava para o próximo dígito.
+Esse arranjo puramente digital eliminava a necessidade de engrenagens ou restrições mecânicas comuns nas calculadoras da época. No entanto, por ser um processo sequencial onde cada etapa dependia do resultado lógico anterior, a divisão demandava um tempo consideravelmente maior se comparada às somas ou subtrações diretas. Os dados e sinais trafegavam na forma de pulsos elétricos através dos barramentos de dados (Digit Trunks), respeitando a representação decimal nativa da máquina. 
+### 7.5.2 Funcionamento da extração de raiz quadrada
+A extração de raiz quadrada compartilhava a mesma unidade física e grande parte da infraestrutura de circuitos aritméticos da divisão. Essa arquitetura unificada otimizava o hardware do ENIAC, empregando rotinas de controle distintas mapeadas de acordo com a operação solicitada pelo programador.
+O cálculo da raiz quadrada também ocorria por aproximações sucessivas através de subtrações repetidas. A unidade coordenava os acumuladores para atualizar os saldos parciais e deduzir progressivamente cada dígito do resultado final. Da mesma forma que na divisão, a complexidade algorítmica exigia múltiplos subciclos de processamento. A integração de ambas as funções em um único módulo eletrotécnico foi uma solução de engenharia elegante e eficiente para a época, economizando dezenas de válvulas termiônicas que seriam necessárias caso os circuitos fossem totalmente independentes.
+### 7.5.3 Tempo de operação e utilização dos acumuladores
+A natureza iterativa dessas duas operações exigia uma quantidade massiva de ciclos de clock fornecidos pela Unidade Cíclica (Cycling Unit). Tomando como base o ciclo de adição padrão do ENIAC de 200 microssegundos, uma divisão típica para números de 10 dígitos levava cerca de 25 milissegundos, o equivalente a 125 ciclos de adição. 
+25.000 microsegundos/200 microsegundos =125 ciclos de adição
+Essa métrica serve como referência média, visto que a duração exata do cálculo variava conforme os valores dos operandos processados. Durante esse intervalo, os cinco acumuladores acoplados operavam sob o comando estrito da unidade coordenadora. Eles alternavam papéis entre armazenar o numerador, o denominador, o quociente e os restos parciais, embora nem todos realizassem computações ativas em cada ciclo individual. 
+Por haver apenas uma unidade de Divider & Square-Rooter em todo o computador, era impossível processar duas divisões ou raízes simultaneamente de forma independente. Contudo, a arquitetura paralela do ENIAC permitia que os acumuladores restantes e a unidade de multiplicação continuassem operando em outras frentes do algoritmo, desde que o fluxo de dados e os pulsos de controle fossem corretamente programados por meio dos painéis de cabos (patch cords). Esse comportamento evidenciava o princípio central da máquina: o desempenho global não dependia apenas da velocidade nominal de seus componentes, mas da eficiência do programador em explorar o paralelismo e a concorrência das tarefas.
 
 ## 7.6 Internal Components
-- Sobre os tubos à vácuo e relés necessários para o funcionamento de cada undiade
+O funcionamento do ENIAC dependia de uma vasta malha de componentes eletrônicos e eletromecânicos interligados, responsáveis por realizar operações lógicas, armazenar dados temporariamente, transmitir pulsos de sincronismo e controlar a sequência de cálculos. Diferentemente dos computadores modernos, que condensam bilhões de transistores em circuitos integrados (microchips), o ENIAC era construído a partir de componentes discretos individuais montados e soldados manualmente.
+A máquina utilizava aproximadamente 17.468 válvulas a vácuo, 7.200 diodos de cristal, 1.500 relés, 70.000 resistores e 10.000 capacitores. Esses componentes estavam distribuídos modularmente por painéis funcionais, formando circuitos especializados. Esta abordagem puramente eletrônica para o processamento aritmético permitia que o ENIAC realizasse cálculos a velocidades milhares de vezes superiores às dos computadores eletromecânicos baseados em engrenagens ou relés térmicos daquela década.
+### 7.6.1 Válvulas a vácuo (Vacuum Tubes)
+As válvulas a vácuo constituíam os elementos ativos primários dos circuitos lógicos do ENIAC. Seu funcionamento baseava-se no controle do fluxo de elétrons em um ambiente sob vácuo, atuando tanto como amplificadores de sinais quanto como interruptores eletrônicos de alta velocidade (comutadores).
+Uma das aplicações mais críticas dessas válvulas era a implementação de circuitos biestáveis, conhecidos como flip-flops. Capazes de alternar e reter um de dois estados elétricos estáveis (ligado/desligado), os flip-flops serviam como a memória volátil fundamental da máquina enquanto o sistema estivesse energizado.
+No ENIAC, os flip-flops eram agrupados para construir os "contadores de anel" (ring counters) dos acumuladores. Em vez de utilizar o sistema binário puro, cada casa decimal era representada por um anel composto por dez estados possíveis, dos quais apenas um permanecia ativo por vez para indicar o dígito armazenado (de 0 a 9).
+* Mecanismo de Avanço: Se o estado ativo de um acumulador correspondesse ao dígito 6, a recepção de um pulso elétrico de controle fazia a condução saltar para a próxima válvula do anel, avançando o valor para 7.
+* Sinal de Transporte (Carry): Ao atingir e ultrapassar o décimo estado (9), o contador retornava automaticamente ao zero e disparava um sinal de transporte para a casa decimal imediatamente superior.
+Além do armazenamento aritmético, as válvulas operavam em portas lógicas (AND, OR, NOT), geradores de clock, matrizes de comutação e circuitos de controle. Como o ENIAC carecia de uma Unidade Central de Processamento (CPU) integrada, cada painel funcional precisava hospedar sua própria lógica e infraestrutura de processamento local, resultando na descentralização e no imenso volume de válvulas espalhadas pela máquina.
+O principal calcanhar de Aquiles das válvulas residia em sua fragilidade operacional. Elas dissipavam quantidades massivas de calor, consumiam muita energia e sofriam desgaste acelerado dos filamentos. Dado que a falha de uma única válvula corrompia todo o cálculo, a rotina de manutenção preventiva, isolamento de circuitos e substituição diária de componentes era uma atividade contínua e crítica.
+### 7.6.2 Relés (Relays)
+Os relés eram dispositivos eletromecânicos que controlavam a abertura e o fechamento de contatos físicos por meio de acionamento eletromagnético. Quando uma corrente elétrica energizava a bobina interna do relé, o campo magnético gerado deslocava uma armadura mecânica para abrir ou fechar um circuito; interrompida a corrente, uma mola forçava os contatos de volta à posição original.
+Embora o processamento matemático do ENIAC ocorresse em velocidade eletrônica dentro das válvulas, os relés desempenhavam um papel vital na automação de suporte e na coordenação sistêmica. Eles eram aplicados no isolamento de circuitos de alta potência, no sequenciamento de rotinas de inicialização e desligamento, e na distribuição de sinais de controle de longa duração.
+Por dependerem de movimentação mecânica, os relés operavam na escala de milissegundos — uma velocidade muito inferior à das válvulas, que operavam na escala de microssegundos. Além disso, estavam sujeitos a desgaste mecânico e oxidação de contatos.
+A arquitetura do ENIAC equilibrava essas características utilizando as válvulas para o processamento aritmético de alta velocidade e reservando os relés para as interfaces físicas e tarefas estruturais mais lentas. Essa engenharia híbrida exemplificava a transição tecnológica da década de 1940, combinando a maturidade dos sistemas eletromecânicos com o pioneirismo da eletrônica digital.
+### 7.6.3 Resistores, capacitores e diodos
+O sistema eletrônico do ENIAC dependia do suporte de componentes passivos e semicondutores primitivos para estabilizar e direcionar o tráfego de sinais.
+* Resistores: Utilizados para limitar correntes, estabelecer divisores de tensão e definir os pontos de operação (bias) das válvulas. No Multiplicador de Alta Velocidade (High-Speed Multiplier), uma densa matriz de resistores implementava fisicamente uma tabela de multiplicação pré-programada. A seleção de coordenadas elétricas baseada nos dígitos dos operandos direcionava a corrente através dessa rede de resistores, retornando o produto de forma quase instantânea.
+* Capacitores: Responsáveis pelo armazenamento temporário de cargas elétricas, filtragem de ruídos nas linhas de alimentação e acoplamento de sinais entre estágios de amplificação. Eles eram vitais nos circuitos de temporização, moldando a largura e a crista dos pulsos elétricos para garantir o sincronismo rigoroso entre os painéis.
+* Diodos de Cristal: Fabricados em germânio, permitiam o fluxo de corrente em um único sentido. Eram empregados para o direcionamento de sinais, isolamento de circuitos de retorno e na simplificação de funções lógicas auxiliares. Em uma máquina com milhares de interconexões, os diodos impediam o efeito de "retorno de corrente" (backfeed), evitando interferências destrutivas e garantindo que os puasos atingissem estritamente as entradas corretas.
+A integração desses componentes passivos permitia projetar circuitos complexos e robustos, otimizando o uso das dispendiosas válvulas a vácuo.
+### 7.6.4 Amplificadores e condicionamento de pulsos
+A coordenação do ENIAC dependia do tráfego contínuo de pulsos elétricos agudos através de linhas de transmissão internas e longos cabos externos. À medida que esses sinais atravessavam circuitos, chaves e linhas capacitivas, eles sofriam atenuação (perda de amplitude) e distorção de forma, o que exigia módulos de regeneração.
+Os amplificadores de pulso coletavam os sinais degradados e os restabeleciam aos níveis de tensão ideais, garantindo que fossem interpretados corretamente pelas unidades receptoras. O sistema lidava essencialmente com dois tipos de sinais:
+* Pulsos de Controle: Sinais de temporização que determinavam o momento exato em que uma unidade deveria iniciar uma operação, cessar um cálculo ou liberar seus dados para o barramento.
+* Pulsos de Dígitos: Sinais quantitativos que transportavam os valores numéricos reais entre os acumuladores e as unidades aritméticas.
+Como o ENIAC operava sem redundância digital interna (como checagem de paridade), a integridade desses pulsos era absoluta. A perda de um único pulso ou a leitura de um ruído como um sinal duplicado desestabilizava a lógica do programa, resultando em erros matemáticos severos ou no travamento completo da execução.
+### 7.6.5 Interruptores, conectores e cabeamento
+Os interruptores, conectores e cabos constituíam a interface física e o método primário de programação do ENIAC. Devido à ausência de um conceito de programa armazenado em memória eletrônica (arquitetura que só surgiria anos mais tarde), a reprogramação do computador exigia a reconfiguração manual de seu hardware.
+As mesas de funções incorporavam milhares de interruptores rotativos manuais (chaves seletoras), nos quais as operadoras inseriam coeficientes e dados numéricos constantes antes de iniciar os cálculos. Para a lógica de controle do fluxo do programa, utilizava-se um complexo sistema de cabos flexíveis blindados (plugboards), semelhantes aos painéis das centrais telefônicas da época.
+Como a programação original da máquina dependia da configuração manual dos painéis, os operadores utilizavam cabos flexíveis para estabelecer as conexões diretas entre as saídas de uma unidade e as entradas da unidade subsequente. Interruptores manuais e chaves rotativas definiam parâmetros operacionais, habilitavam funções aritméticas específicas e modificavam o comportamento lógico dos circuitos internos.
+O tráfego de dados e comandos era rigidamente segregado por meio de duas estruturas principais de barramento externo:
+* Bandejas de Dígitos (Digit Trunks): Linhas de transmissão blindadas de múltiplos canais que transportavam os sinais numéricos em paralelo entre os módulos aritméticos e os acumuladores.
+* Linhas de Programação (Program Trunks): Redes de cabos que encaminhavam os pulsos de controle responsáveis por engatilhar, encadear e coordenar a ordem de execução das operações.
+Essa arquitetura tornava a configuração de hardware a própria essência da programação. Para executar um novo algoritmo, não se escreviam linhas de código abstratas para uma memória volátil interna; em vez disso, o programa era fisicamente "refeito" na máquina por meio do mapeamento de circuitos, do roteamento de cabos e do ajuste manual de centenas de chaves seletoras nos painéis.
+### 7.6.6 Integração dos componentes e confiabilidade
+O sucesso operacional do ENIAC residia na integração harmônica e no equilíbrio de todas essas tecnologias discretas. Enquanto as válvulas a vácuo processavam a lógica de alta velocidade e sustentavam a memória volátil, os relés proviam o isolamento elétrico e o controle estrutural de baixa frequência. Paralelamente, a rede de resistores, capacitores e diodos de cristal estabilizava as grandezas elétricas e moldava as ondas dos sinais, enquanto a malha de conectores e cabos determinava o fluxo dos algoritmos.
+Essa arquitetura descentralizada e modular permitia o processamento paralelo escalável, mas impunha severos desafios de engenharia diagnóstica, eficiência energética e tolerância a falhas:
+* Demanda Energética e Térmica: A máquina exigia uma potência contínua estimada entre 140 kW e 150 kW, dependendo da referência utilizada. Essa imensa demanda gerava uma dissipação térmica massiva, tornando obrigatória a instalação de um robusto sistema de exaustão e ventilação forçada industrial para impedir o superaquecimento catastrófico dos painéis.
+* A Taxa de Falha das Válvulas: O volume estatístico de quase 17.500 válvulas operando simultaneamente elevava drasticamente o Tempo Médio Entre Falhas (MTBF). O mau funcionamento ou a queima de um único filamento interrompia a cadeia de cálculo, demandando rotinas rigorosas de manutenção preditiva e testes de isolamento de circuitos (checkouts) para identificar e substituir componentes defeituosos.
+A confiabilidade global do sistema, portanto, não dependia apenas da qualidade individual de cada peça. Ela exigia o projeto de circuitos tolerantes a variações de tensão, a mitigação de ruídos eletromagnéticos entre os cabos, o sincronismo temporal absoluto dos pulsos de clock e o desenvolvimento de painéis de diagnóstico que permitissem aos técnicos localizar falhas rapidamente.
+Em síntese, os componentes internos do ENIAC constituíam a base física sobre a qual repousava toda a sua arquitetura digital de vanguarda. A fusão pioneira de válvulas eletrônicas, relés eletromecânicos, componentes passivos e interconexões manuais permitia converter pulsos elétricos efêmeros em informação matemática estruturada, transformando a eletricidade na ferramenta definitiva para a resolução dos problemas computacionais mais complexos de sua época.
 
 ## 7.7 Cycling Unit
-- Equivalente ao clock do sistema
+![Cycling Unit Pulses no ENIAC](./images/conns/cycling-unit-pulses.jpg)
+
+> Descrição da imagem: Diagrama temporal dos pulsos e sinais de controle distribuídos pela Cycling Unit durante um ciclo de adição.
+
+A Cycling Unit, ou Unidade Cíclica, era responsável por gerar e distribuir os sinais de temporização que coordenavam o funcionamento do ENIAC. Podemos compará-la ao clock de um computador moderno. 
+Entretanto, existe uma diferença importante: a Cycling Unit não fornecia apenas um sinal periódico. Ela produzia diferentes sequências de pulsos elétricos, cada uma destinada a uma função específica dentro das unidades da máquina. Esses sinais eram distribuídos pelo sistema de sincronização (Synchronizing Pulse-Gate Trunk).
+
+### 7.7.1 Como funcionava?
+A Cycling Unit utilizava um circuito oscilador para produzir sinais periódicos. Esses sinais eram utilizados para estabelecer uma referência temporal comum para as unidades do ENIAC. 
+- O projeto trabalhava com uma frequência básica de aproximadamente: f = 100.000 Hz = 100 kHz
+
+Isso corresponde a um intervalo de: 
+- T = 1 / f = 10 microssegundos
+
+Ou seja, cada intervalo básico de pulso durava aproximadamente 10 microssegundos. O ciclo de adição, por sua vez, era composto por 20 intervalos de pulso:
+- 20 x 10 microssegundos = 200 microssegundos
+
+A cada ciclo, eram distribuídos diferentes pulsos de controle, como:
+- CPP (Central Programming Pulse): utilizado para disparar operações programadas.
+- 10P: trem de dez pulsos utilizado, entre outras funções, na transmissão dos valores dos acumuladores.
+- 9P: trem de nove pulsos utilizado nos circuitos de transmissão.
+- Reset Pulses: pulsos utilizados para reinicializar determinados estados dos circuitos.
+- Carry-Clear Gate: sinal de controle que permitia a propagação dos pulsos de transporte (carry).
+
+Esses sinais tinham momentos específicos para acontecer. Não eram enviados aleatoriamente: sua sequência era cuidadosamente estabelecida para evitar conflitos entre as operações.
+
+O relatório de 1944 registra que o ciclo de adição foi organizado em vinte tempos de pulso, proporcionando uma margem maior de segurança para as operações internas.
+
+![Mostra a unidade física responsável pela sincronização.](./images/conns/cycling-unit-pulses-front-view.jpg)
+
+> Descrição da Imagem: Vista frontal da Cycling Unit, responsável pela geração e distribuição dos sinais de temporização do ENIAC.
+
+### 7.7.2 Modos de Funcionamento
+
+A Cycling Unit também possuía diferentes modos de operação:
+- Continuous: produzia os ciclos continuamente.
+- One Addition Time: executava um único ciclo de adição.
+- One Pulse: produzia um único pulso.
+Esses modos permitiam controlar a execução da máquina durante testes, configuração e processamento.
+
+A apresentação técnica de Brian Stuart, disponibilizada pela Drexel, também identifica esses três modos.
+
+### 7.7.3 Por que a sincronização era importante?
+
+Imagine que um acumulador esteja transmitindo um número enquanto outro está preparado para recebê-lo. Se os pulsos chegassem fora do momento esperado, o circuito receptor poderia interpretar os sinais incorretamente. A Cycling Unit evitava esse problema ao fornecer uma referência temporal compartilhada.
+
+Assim, as diferentes unidades sabiam quando deveriam:
+1. Preparar seus circuitos;
+2. Receber ou transmitir dados;
+3. Executar operações aritméticas;
+4. Propagar os sinais de transporte;
+5. Reinicializar estados temporários;
+6. Liberar os sinais necessários para a próxima etapa.
+
+Em suma: a Cycling Unit era o sistema central de temporização do ENIAC. Ela não decidia qual cálculo realizar, mas determinava o momento correto para que os circuitos executassem suas respectivas funções.
 
 ## 7.8 Master Programmer
-- Unidade de controle para loops, ramificações e sub-rotinas
+![Mostra a organização física dos controles da unidade.](./images/panels/Panel-Master-Programmer.jpg)
+
+> Descrição da Imagem: Painel frontal do Master Programmer, apresentando os controles utilizados para organizar as sequências de execução do ENIAC.
+
+### 7.8.1 O que era o Master Programmer? 
+O Master Programmer era a unidade responsável por controlar sequências de operações no ENIAC.
+
+Enquanto os controles locais dos acumuladores e de outras unidades determinavam como cada operação seria realizada, o Master Programmer coordenava a sequência geral dessas operações. Sua função era permitir que o computador executasse rotinas repetitivas, organizasse diferentes etapas de processamento e alterasse o caminho da execução conforme determinadas condições. Ele era composto principalmente por dois elementos:
+- Steppers: mecanismos que controlavam a posição atual de uma sequência de operações.
+- Counters: contadores que registravam quantas vezes determinadas etapas haviam sido executadas.
+O projeto final previa dez steppers e vinte counters, organizados em grupos associados.
+
+### 7.8.2 Steppers - Controle de etapas
+Um stepper pode ser entendido como um seletor de etapas. Ele possuía um contador de anel com seis posições, cada uma associada a uma saída de programa. Quando recebia um pulso de avanço, mudava para a próxima posição.
+
+Cada posição possuía um circuito associado a uma saída de programa. Assim, quando um pulso era recebido, o stepper encaminhava o sinal para a saída correspondente à posição em que se encontrava. Isso permitia organizar uma rotina em diferentes etapas sem precisar configurar uma sequência completamente nova a cada repetição.
+
+### 7.8.3 Counter - Controle de Repetições
+Os counters eram responsáveis por contar pulsos e acompanhar o progresso de determinadas sequências. Cada contador representava uma década decimal, ou seja, podia registrar valores de 0 a 9. A cada dez pulsos recebidos, transmitia um pulso ao próximo contador do grupo, quando existente.
+
+Os operadores podiam configurar valores de referência por meio de chaves rotativas. Quando a contagem alcançava a condição configurada, um pulso era enviado ao stepper para avançar a sequência.
+
+### 7.8.4 Loops - Repetição de sequências
+Uma das principais funcionalidades do Master Programmer era permitir a repetição de sequências de operações. Por exemplo, imagine um programa que precise realizar uma sequência de cálculos 100 vezes. Sem o Master Programmer, seria necessário configurar cada repetição individualmente.
+
+Com o Master Programmer, o contador acompanhava o número de execuções e o stepper permitia encaminhar novamente o pulso para o início da sequência. Esse mecanismo era chamado de Sequence Programming na documentação original do ENIAC.
+
+### 7.8.5 Conditional Branching - Desvio Condicional
+O Master Programmer também podia modificar o caminho da execução conforme determinadas condições. Um exemplo era utilizar o sinal positivo ou negativo de um acumulador para determinar qual sequência deveria ser executada. Dessa maneira, o resultado de uma operação matemática podia influenciar a sequência de controle do computador. 
+
+A documentação técnica também descreve o uso dos steppers para selecionar diferentes etapas a partir do valor de um algarismo de um acumulador. Isso permitia formas mais elaboradas de desvio condicional.
+
+### 7.8.6 Sequence Programming - Sub-rotinas e Sequências Reutilizáveis
+Outra capacidade interessante era reutilizar sequências de operações em diferentes momentos de um programa. Por exemplo, uma rotina de interpolação poderia ser configurada uma única vez e acionada sempre que fosse necessária durante a execução de um cálculo maior.
+
+Isso se aproxima conceitualmente da ideia de sub-rotinas utilizada em linguagens de programação modernas. Entretanto, existe uma diferença: o ENIAC não possuía necessariamente instruções de chamada e retorno de funções como as CPUs atuais. A reutilização era construída por meio de conexões físicas, controles locais e mecanismos do Master Programmer.
+
+O próprio relatório oficial descreve o uso de steppers para reutilizar sequências durante a integração de equações diferenciais.
 
 ## 7.9 Mathematical Precision
 
