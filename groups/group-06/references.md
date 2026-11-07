@@ -39,6 +39,13 @@ https://teachcomputerscience.com/harvard-architecture/
 https://ads.ifba.edu.br/dl2539
 https://www.tme.com/br/pt/news/library-articles/page/56104/arquitetura-de-von-neumann-e-arquitetura-de-harvard/
 
+Microchip Technology Inc., AVR Instruction Set Manual. [Online]. Disponível em: documentação de microcontroladores AVR da Microchip. Acesso em: 30 out. 2026.
+
+Microchip Technology Inc., ATmega328P — 8-bit AVR Microcontroller. [Online]. Disponível em: página oficial do ATmega328P. Acesso em: 30 out. 2026.
+
+Arduino, UNO Rev3. [Online]. Disponível em: documentação oficial da placa. Acesso em: 30 out. 2026.
+https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
+- ATMEL CORPORATION. *ATmega328P 8-bit AVR Microcontroller with 32K Bytes In-System Programmable Flash Datasheet*. Document 7810D–AVR–01/15. San Jose: Atmel Corporation, 2015.
 Arvind, “Single-Cycle Processors: Datapath & Control”, MIT OpenCourseWare, curso 6.823, Lecture 5:
 https://ocw.mit.edu/courses/6-823-computer-system-architecture-fall-2005/964e8d2c1085754ba5ed2eba48269a0b_l05_singlecycle.pdf
 MIT, “9.1 Annotated Slides”, Computation Structures, curso 6.004:
