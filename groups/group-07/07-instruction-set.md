@@ -44,3 +44,27 @@ for t in threads:
 
 Nas arquiteturas modernas de processadores (como as famílias x86 e ARM), o modelo MIMD manifesta-se principalmente através do suporte a multiprocessamento simétrico (SMP) em nível de chip. Os processadores modernos integram múltiplos núcleos físicos e lógicos, onde cada um possui seus próprios registradores e caches locais (L1/L2), enquanto compartilham níveis superiores de memória cache (L3) e a memória RAM principal. Em contraste com os sistemas de memória distribuída (clusters), onde o compartilhamento de dados exige explicitamente o envio de mensagens através de protocolos de rede como o MPI, os sistemas SMP modernos permitem uma programação mais direta, onde as threads leem e escrevem em um espaço de endereçamento comum. No entanto, enquanto a escalabilidade dos sistemas SMP é limitada pela capacidade física e pelos gargalos de barramento de uma única máquina, os clusters conseguem escalabilidade quase ilimitada adicionando novos nós à rede, tornando-se o padrão dominante para supercomputadores e processamento de Big Data.
 ​Apesar da alta capacidade de processamento oferecida pelo modelo MIMD em sistemas modernos, a programação paralela introduz limitações teóricas e práticas significativas. A primeira delas é descrita pela Lei de Amdahl, que estabelece que o ganho máximo de velocidade de um programa em uma arquitetura paralela é estritamente limitado pela fração do código que permanece inerentemente sequencial. Além disso, a complexidade do software aumenta consideravelmente devido ao assincronismo dos núcleos: como a ordem de execução deixa de ser determinística, o sistema torna-se vulnerável a falhas graves de concorrência, como deadlocks (bloqueios mútuos entre processos), starvation (privação de recursos) e condições de corrida (race conditions). Por fim, existe um overhead substancial de infraestrutura e comunicação; em sistemas SMP, o tráfego excessivo para manter a coerência das caches pode degradar o desempenho, enquanto em clusters a latência e a largura de banda da rede de interconexão frequentemente se tornam o principal gargalo da aplicação.
+
+## Operand Representation and Data Access in MIMD (Representação de Operandos e Acesso aos Dados)
+
+### 1. Como os Operandos e Valores são Fornecidos
+Na arquitetura MIMD, as instruções executadas de forma independente por cada núcleo precisam buscar operandos de diferentes origens dependendo da organização da memória (compartilhada ou distribuída):
+- **Registradores Internos:** Valores imediatos ou operandos de trabalho rápido carregados diretamente nos registradores da ALU de cada núcleo.
+- **Endereçamento de Memória Local/Compartilhada:** Campos de endereço dentro da instrução indicam posições específicas na RAM principal ou nas caches dedicadas.
+- **Canais e Mensagens (Em Memória Distribuída):** Em vez de endereços lineares de memória tradicional, os operandos podem ser fornecidos através de pacotes de dados transmitidos explicitamente via rede de interconexão (*Message Passing*).
+
+### 2. Modos de Seleção e Endereçamento de Dados
+Embora sistemas MIMD modernos utilizem variações dos modos de endereçamento clássicos (como Imediato, Direto, Indireto e Indexado/Registrador), a seleção de dados é caracterizada por:
+- **Endereçamento Direto e de Registrador:** Utilizado para manipulação rápida de dados locais na cache e registradores do núcleo.
+- **Endereçamento Relativo / Baseado em Ponteiros:** Essencial para percorrer estruturas de dados paralelas (como matrizes repartidas entre múltiplos threads).
+- **Endereçamento Remoto (RDMA / Espaço de Endereçamento Global):** Mecanismos onde um núcleo identifica e seleciona dados localizados na memória de outro nó através de identificadores de nó e deslocamentos de endereço (*offsets*).
+
+### 3. Exemplo Concreto de Seleção e Execução de Operação
+- **Cenário:** Soma paralela de elementos de um vetor distribuído entre o Núcleo 1 e o Núcleo 2.
+1. **Identificação da Operação:** A Unidade de Controle do Núcleo 1 descodifica a instrução `ADD R1, [R2]` (somar o conteúdo do registrador R1 com o valor apontado pelo endereço armazenado em R2).
+2. **Localização e Seleção do Dado:** O endereço contido em R2 é traduzido pelo controlador. Se o dado estiver na cache L1/L2 local do núcleo, é selecionado instantaneamente; caso ocorra *cache miss*, o barramento de endereços localiza o dado na RAM compartilhada ou requisita-o via rede.
+3. **Execução:** O operando recuperado é enviado para a ALU juntamente com o registrador, concluindo a instrução de forma totalmente assíncrona em relação aos outros núcleos do sistema.
+
+### 4. Limitações Destes Mecanismos
+- **Latência de Acesso Remoto:** Em arquiteturas de memória distribuída, localizar dados fora do nó local exige tempo de empacotamento e transmissão via rede.
+- **Contenção no Barramento de Endereços:** Múltiplos núcleos a tentar traduzir e selecionar endereços de memória simultaneamente podem gerar gargalos e filas de espera.
