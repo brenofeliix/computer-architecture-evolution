@@ -39,3 +39,6 @@
 [19] UNITED STATES. War Department. Bureau of Public Relations. Physical aspects, operation of ENIAC are described. Comunicado de imprensa, 16 fev. 1946. Smithsonian National Museum of American History. Disponível em: https://americanhistory.si.edu/comphist/pr4.pdf. Acesso em: 6 nov. 2026.
 
 [20] RANDALL, Alexander, 5th. The Eckert Tapes: computer pioneer says ENIAC team couldn't afford to fail — and didn't. Computerworld, 2006 (entrevista gravada em 1989). Disponível em: https://www.computerworld.com/article/1697959/the-eckert-tapes-computer-pioneer-says-eniac-team-couldn-t-afford-to-fail-and.html.
+[9] SMITHSONIAN INSTITUTION. National Museum of American History. ENIAC Divider And Square Rooter. Washington, D.C.: Smithsonian Institution, [s. d.]. Disponível em: https://americanhistory.si.edu/collections/object/nmah_334745. Acesso em: 2 nov. 2026.
+
+[10] TESCHLER, Leland. Engineering Essentials: Relays and Contactors. Machine Design, 31 jul. 2014. Disponível em: https://www.machinedesign.com/mechanical-motion-systems/article/21834253/engineering-essentials-relays-and-contactors. Acesso em: 2 nov. 2026.

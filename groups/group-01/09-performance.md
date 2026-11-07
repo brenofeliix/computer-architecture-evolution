@@ -12,6 +12,7 @@ A integração do hardware do ENIAC ocorria por meio da conexão entre suas unid
 **Integração entre os componentes:** O funcionamento conjunto dessas unidades dependia da coordenação entre os sinais de controle e a transferência de dados. O sistema de controle determinava a ordem das operações, os módulos de processamento realizavam os cálculos e os acumuladores mantinham os valores necessários para as etapas seguintes. Dessa forma, o ENIAC conseguia executar sequências complexas de operações matemáticas, embora sua integração dependesse de uma infraestrutura física extensa e de uma configuração manual relativamente trabalhosa.
 Portanto, a integração do hardware do ENIAC representou um avanço importante na computação eletrônica, pois permitiu que diferentes unidades especializadas trabalhassem de maneira coordenada. Entretanto, a dependência de conexões físicas e a ausência de uma memória central para armazenar o programa limitavam a flexibilidade do sistema e tornavam a reconfiguração para novos problemas um processo demorado.
 
+
 ## 9.2 Computational Speed
 O ENIAC foi projetado para ser uma máquina muito mais rápida que outras máquinas eletromecânicas de sua época. Porém, existia uma diferença no tempo de execução entre suas operações matemáticas: geralmente adições e subtrações eram realizadas de modo muito mais rápido que multiplicações, divisões e raíz quadrada.
 
@@ -180,3 +181,17 @@ A relação entre ambos se assemelhava ao conceito do gargalo de Von Neumann. En
 Assim, a utilização do ENIAC era especialmente importante em problemas que exigiam cálculos repetitivos, como as tabelas balísticas dos EUA. 
 
 ![Cabos na Bandeja](./images/photos/lil-cables-in-tray.png)
+## 9.4 Energy Consumption
+- Quanta energia o ENIAC usava para operar normalmente
+
+## 9.5 Vacuum Tube Failure Rate
+- Com que frequência as válvulas queimavam e quanto tempo era necessário para encontrar a defeituosa
+
+## 9.6 I/O Bottleneck
+- Havia um gargalo enorme entre o input/output mecânico e processamento eletrônico
+
+## 9.7 Suitability for Ballistics
+- Por que essa arquitetura específica era perfeita para calcular trajetórias de artilharia
+
+## 9.8 Architectural Decisions
+- Sobre a velocidade do processamento paralelo e a dificuldade de configuração
