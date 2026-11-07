@@ -54,3 +54,4 @@ Como limitações da saída do ENIAC, podemos citar diversos fatores, tais quais
 > Vale citar que um cartão não equivale à uma adição, mas ainda assim a discrepância segue sendo muito grande.
 
 ![Mulher inserindo cartões em uma leitora de cartões perfurados](./images/photos/inserting-cards-in-card-reader.jpg)
+- Como o resultado é produzido
