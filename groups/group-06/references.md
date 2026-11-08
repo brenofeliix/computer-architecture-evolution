@@ -71,3 +71,7 @@ Stallings, Arquitetura e Organização de Computadores, 10. ed., Pearson, 2017.
 Arvind, R. S. Nikhil, J. S. Emer e M. Vijayaraghavan, *Computer Architecture: A Constructive Approach: Using Executable and Synthesizable Specifications*, rev. 25 ago. 2015, cap. 5, seção 5.3. MIT 6.175. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/resources/archbook_2015-08-25.pdf. Acesso em: 28 out. 2026.
 
 Massachusetts Institute of Technology, “Lab 5: RISC-V Introduction—Multi-Cycle and Two-Stage Pipeline,” *6.175: Constructive Computer Architecture*. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/labs/lab5-riscv-intro.html. Acesso em: 28 out. 2026.
+
+University of California, Berkeley, “Structural Hazards,” CS 61C Course Notes. [Online]. Disponível em: https://notes.cs61c.org/content/pipeline-hazards/structural-hazards/. Acesso em: 7 nov. 2026.
+
+Massachusetts Institute of Technology, “15.1 Annotated Slides,” Computation Structures, curso 6.004, Spring 2017. [Online]. Disponível em: https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c15/c15s1/. Acesso em: 7 nov. 2026.
