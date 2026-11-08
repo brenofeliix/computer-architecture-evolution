@@ -7,7 +7,13 @@ As instruções eram fornecidas por meio de uma fita de papel perfurada, que det
 É importante destacar que o funcionamento eletromecânico e o uso de fita perfurada eram características específicas do Harvard Mark I, relacionadas à tecnologia disponível na época. Essas características não devem ser transportadas diretamente para diagramas modernos da arquitetura de Harvard, pois representam escolhas de implementação daquela máquina histórica. O conceito principal está na separação funcional entre instruções e dados, que pode ser aplicada utilizando tecnologias e componentes diferentes, sem depender dos mecanismos físicos utilizados pelo Mark I.
 
 ## 9.2 Scientific Contributions
+A evolução das abordagens inspiradas na organização Harvard demonstra mudanças significativas na forma de implementar a separação de instruções e dados ao longo do tempo:
 
+* **Diferença entre modelos históricos e eletrônicos:** Enquanto máquinas pioneiras utilizavam suportes físicos distintos e desconectados (como fitas de papel perfurado para instruções e cartões ou relés para dados), as implementações eletrônicas posteriores consolidaram circuitos integrados e memórias semicondutoras de alta velocidade.
+* **Aplicação em sistemas modernos:** A separação funcional evoluiu para o conceito de "Harvard Modificada" em microcontroladores modernos (como a arquitetura AVR), onde as memórias físicas de programa e dados continuam separadas, mas com permissões controladas de leitura cruzada.
+* **Flexibilização da separação estrita:** Sistemas computacionais contemporâneos de alto desempenho adotam caches L1 separadas (instruções e dados) para ganho de velocidade imediata, unificando os níveis superiores de memória para otimizar o uso do espaço.
+* **Características preservadas:** O princípio fundamental de garantir canais de acesso simultâneo e isolados para o fluxo de instruções e de operandos permaneceu como base estrutural em processadores embarcados e de arquitetura RISC.
+* **Sistemas relacionados e distinção histórica:** Arquiteturas modernas com caches divididas são funcionalmente tributárias do princípio de acesso independente, mas não devem ser tratadas como sucessoras diretas e lineares da máquina eletromecânica original sem a devida evidência documental da evolução tecnológica.
 ## 9.3 Industrial Impact
 
 ## 9.4 Social Impact
