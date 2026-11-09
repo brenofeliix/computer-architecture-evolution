@@ -1,13 +1,13 @@
-# 7. Instruction Set
+# 7. Conjunto de instruções
 
-## 7.1 ISA Overview
+## 7.1 Visão geral da ISA
 Uma GPU não é programada normalmente como uma CPU tradicional. O programador escreve um kernel em CUDA C++, HIP, OpenCL ou outra linguagem, e o compilador transforma esse código em instruções que a GPU consegue executar.
 
 Para GPUs NVIDIA, o código costuma ser compilado para **PTX (Parallel Thread Execution)**, uma ISA virtual intermediária. Em tempo de execução, o driver pode traduzir o PTX para a instrução nativa da geração da GPU, chamada SASS. Em GPUs AMD, o HIP e o ROCm utilizam outra cadeia de compilação e instruções próprias, mas a ideia geral também é transformar kernels em operações executáveis pelas unidades paralelas.
 
 O modelo de execução é SIMT (Single Instruction, Multiple Threads). A mesma instrução é aplicada por várias threads, normalmente agrupadas em warps ou wavefronts, sobre dados diferentes.
 
-## 7.2 Instruction Types
+## 7.2 Tipos de instrução
 As instruções disponíveis variam conforme o fabricante e a geração, mas podem ser organizadas em grupos:
 
 - **Aritméticas:** soma, subtração, multiplicação, divisão e operações de ponto flutuante.
@@ -18,12 +18,12 @@ As instruções disponíveis variam conforme o fabricante e a geração, mas pod
 - **Conversão:** transformação entre tipos como inteiros, FP32, FP16, BF16 e outros formatos.
 - **Especializadas:** operações matriciais, de vídeo, ray tracing e outras funções específicas do hardware.
 
-## 7.3 Addressing Modes
+## 7.3 Modos de endereçamento
 Os endereços podem apontar para diferentes espaços de memória. Uma instrução pode acessar registradores privados da thread, memória compartilhada do bloco, memória global na VRAM ou regiões constantes e de textura.
 
 O endereço geralmente é calculado a partir de um registrador, um índice de thread e um deslocamento. Por exemplo, em um vetor, a thread pode calcular `i = blockIdx.x * blockDim.x + threadIdx.x` e usar `i` para acessar `A[i]`. A forma como as threads acessam posições consecutivas influencia o aproveitamento da largura de banda.
 
-## 7.4 Assembly Example
+## 7.4 Exemplo em Assembly
 O exemplo abaixo usa uma instrução PTX representativa para somar dois valores em registradores:
 
 ```ptx
@@ -32,7 +32,7 @@ add.s32 %r3, %r1, %r2;
 
 Essa instrução soma os valores inteiros de 32 bits em `%r1` e `%r2` e grava o resultado em `%r3`. Os registradores são privados da thread. Em um warp, várias threads podem executar a mesma instrução simultaneamente com seus próprios valores.
 
-## 7.5 Execution Example
+## 7.5 Exemplo de execução
 Considere a operação de soma de vetores `C[i] = A[i] + B[i]`:
 
 1. A aplicação configura os vetores, a grade e o número de threads por bloco.
@@ -44,17 +44,17 @@ Considere a operação de soma de vetores `C[i] = A[i] + B[i]`:
 7. Uma condição impede que threads fora do tamanho do vetor escrevam em posições inválidas.
 8. Após todas as threads terminarem, o programa pode sincronizar e usar o vetor resultante.
 
-## 7.6 Modern Architectures
+## 7.6 Arquiteturas modernas
 Não é adequado comparar uma GPU diretamente com ARM ou x86 como se fossem o mesmo tipo de processador. ARM e x86 são ISAs de CPUs de propósito geral, enquanto a GPU usa um modelo paralelo com grupos de threads e muitas unidades funcionais.
 
 CUDA, HIP e OpenCL escondem parte das instruções nativas e oferecem uma camada de programação mais portátil. Essa abstração facilita o desenvolvimento, mas pode esconder diferenças de desempenho entre fabricantes e gerações.
 
-## 7.7 Configuração e Modelo de Programação
+## 7.7 Configuração e modelo de programação
 Antes de executar um kernel, o programa precisa configurar o dispositivo, buffers de memória, quantidade de blocos e threads, parâmetros, ordem das operações e sincronizações.
 
 A participação humana acontece na escrita do programa e na escolha desses parâmetros. Depois que o kernel é enviado, a distribuição de blocos, o escalonamento de warps e a execução das instruções ocorrem automaticamente.
 
-## 7.8 Limitações do Modelo
+## 7.8 Limitações do modelo
 - O desempenho depende de haver trabalho suficiente para muitas threads.
 - Desvios diferentes dentro do mesmo warp ou wavefront podem causar divergência.
 - A ISA nativa varia entre fabricantes e gerações.
@@ -62,7 +62,7 @@ A participação humana acontece na escrita do programa e na escolha desses par�
 - Transferências entre CPU e GPU podem custar mais que a própria execução.
 - O código precisa respeitar os limites de registradores, memória compartilhada, VRAM e número de threads.
 
-## 7.9 Seleção e Localização dos Dados
+## 7.9 Seleção e localização dos dados
 Na GPU, os operandos podem ser fornecidos diretamente por registradores, calculados a partir dos identificadores da thread ou buscados em diferentes espaços de memória. A instrução não precisa receber um valor fixo: ela pode receber um endereço calculado para localizar o elemento correto de um vetor, matriz ou tensor.
 
 Os mecanismos mais importantes são:
@@ -76,7 +76,7 @@ Os mecanismos mais importantes são:
 
 Esses mecanismos não são modos de endereçamento idênticos aos de uma CPU x86. Eles representam a forma como a GPU combina identificadores de threads, ponteiros, deslocamentos e espaços de memória para encontrar os dados.
 
-## 7.10 Exemplo Concreto de Acesso
+## 7.10 Exemplo concreto de acesso
 Considere o kernel de soma de vetores:
 
 ```cuda
@@ -101,7 +101,7 @@ Para uma thread específica, a seleção dos dados ocorre assim:
 
 Quando threads consecutivas acessam posições consecutivas, os acessos podem ser agrupados e aproveitar melhor a largura de banda da memória. Se cada thread acessar posições espalhadas, o hardware precisará realizar mais transações e o desempenho poderá cair.
 
-## 7.11 Limitações do Acesso aos Dados
+## 7.11 Limitações do acesso aos dados
 - A capacidade da VRAM limita a quantidade de dados disponível para acesso rápido.
 - Endereços incorretos podem causar resultados inválidos ou falhas de execução.
 - Acessos não coalescidos desperdiçam largura de banda.
