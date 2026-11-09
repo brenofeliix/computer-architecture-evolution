@@ -33,6 +33,21 @@ Na arquitetura Harvard clássica, a divisão física dos espaços de armazenamen
 * **Potencial de Acessos Simultâneos:** Dependendo da implementação específica do hardware, essa independência abre a possibilidade de que ocorram acessos em paralelo — por exemplo, a busca (*fetch*) de uma nova instrução na memória de programa pode decorrer no mesmo ciclo temporal em que a unidade de controlo ou cálculo lê ou escreve dados na memória de dados.
 * **Ausência de Garantia Universal:** É fundamental sublinhar que a simultaneidade de acessos **não é uma regra garantida nem inerente a todos os sistemas** baseados no modelo Harvard[cite: 31, 32]. Determinados sistemas implementam caminhos separados estritamente por razões de organização lógica ou restrições de projeto, mas podem carecer de circuitos internos ou de suporte temporal que permitam o verdadeiro paralelismo de execução, servindo a separação primariamente para evitar colisões e conflitos de barramento e não para assegurar concorrência automática.
 
+Sequência explicada e resultado
+
+Abaixo encontra-se a explicação numerada correspondente ao fluxo de execução da operação demonstrada no diagrama:
+
+1. **Condição inicial:** O programa e os valores encontram-se alocados nos respetivos espaços de memória indicados.
+2. **Busca da instrução A:** O modelo busca a instrução que representa a operação de carregar o valor de A.
+3. **Leitura de A:** O operando A é lido a partir da memória de dados e transferido para o registrador temporário R1.
+4. **Busca da instrução B:** O modelo busca a instrução seguinte que representa a operação de carregar o valor de B.
+5. **Leitura de B:** O operando B é lido a partir da memória de dados e transferido para o registrador temporário R2.
+6. **Processamento aritmético:** A operação de soma encaminha os conteúdos de R1 e R2 para a Unidade Lógica e Aritmética (ULA).
+7. **Armazenamento temporário:** O resultado calculado pela ULA é direcionado e armazenado provisoriamente no registrador R3.
+8. **Gravação final:** A operação de armazenamento transfere o valor contido em R3 de volta para o destino C na memória de dados.
+
+*Nota:* Os números acima representam uma ordem lógica de execução sequencial e não ciclos de clock rígidos. Ao término deste exemplo prático, o espaço designado por C contém o resultado da operação $A + B$.
+
 ## 11.6 Armazenamento, Aceleração e Limitações
 A separação física das memórias na arquitetura Harvard clássica define seu perfil de armazenamento, potencial de desempenho e restrições, sendo necessário isolar as regras do modelo das escolhas de hardware.
  * Armazenamento: O princípio clássico exige a divisão rígida e incomunicável entre os espaços de instruções e de dados, gerando a limitação de não poder realocar o armazenamento ocioso de um para o outro. A escolha das tecnologias (como usar Flash/ROM para o código e SRAM para os dados) depende da implementação específica do sistema.
