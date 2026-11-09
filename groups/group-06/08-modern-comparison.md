@@ -37,6 +37,17 @@ Potencial da Organização (Capacidade Teórica): O limite de processamento dete
 
 Resultados de Implementação: O desempenho real obtido na prática, afetado por desvios/ramificações no código (branch mispredictions), conflitos de dependência de dados (data hazards), latência real dos periféricos e eficiência dos compiladores em gerar código paralelizável.
 
+Potencial de Desempenho vs. Resultado Medido
+O potencial de desempenho é o limite máximo teórico do hardware em condições ideais de fábrica. O resultado medido é o rendimento prático e real obtido ao rodar programas no dia a dia, sendo sempre inferior ao teórico devido a perdas e atrasos físicos do sistema.
+Influência de Componentes e Tarefas no Resultado
+A hierarquia e velocidade das memórias ditam o tempo que a CPU perde esperando dados. Caminhos e barramentos congestionados geram atrasos físicos, enquanto alta latência congela a execução e baixa largura de banda sufoca grandes volumes de arquivos. O circuito perde eficiência se a unidade de controle for mal otimizada, e o tipo de tarefa dita o gargalo, pois cálculos exigem processamento puro, enquanto bancos de dados exigem conexões e discos rápidos.
+
+Sistemas Harvard vs. Von Neumann
+Não se pode generalizar que a arquitetura Harvard é mais rápida que a Von Neumann porque o desempenho real depende da tecnologia de fabricação e da frequência de cada chip. Um processador Von Neumann moderno de alta frequência supera facilmente um microcontrolador Harvard antigo e simples. Além disso, os computadores atuais são híbridos, unindo o melhor dos dois modelos para anular essa disputa teórica.
+
+Uso de Métricas, Implementação e Fonte
+Citar números de clock ou ciclos sem identificar o modelo do chip e a fonte do dado é um erro técnico porque o clock isolado não define velocidade. Um processador moderno com menor frequência pode realizar muito mais trabalho por ciclo do que um chip antigo de clock alto. Sem especificar a implementação exata e um teste ou documento que comprove a métrica, o número perde a validade científica.
+
 ## 8.5 Armazenamento, Limitações e Gargalos
 A adoção da organização Harvard acarreta implicações diretas sobre a estrutura de armazenamento e introduz condicionantes específicos de desempenho:
 
@@ -56,3 +67,5 @@ Para preservar a precisão técnica da comparação, as seguintes característic
 * **Implementação Eletromecânica:** Funcionamento baseado em relés, interruptores e eixos mecânicos movidos a motor, em forte contraste com a microeletrónica de estado sólido atual.
 * **Instruções via fita perfurada:** A leitura sequencial de instruções através de uma fita de papel externa (*read-only*), o que tornava saltos condicionais e laços ineficientes, ao contrário do armazenamento flexível em memórias Flash ou ROM modernas.
 * **Aritmética Base 10:** Cálculos acumulativos realizados estritamente no sistema decimal mecânico (rodas dentadas), em oposição à lógica booleana e ao sistema binário universais de hoje.
+
+Além disso, O microcontrolador STM32F1 (núcleo Arm Cortex-M3), detalhado em seus manuais técnicos oficiais da STMicroelectronics, é classificado formalmente como um sistema de Arquitetura Harvard Modificada. A propriedade fundamental que o relaciona ao tema é o seu paralelismo físico interno, que utiliza caminhos elétricos independentes (barramentos I-Code para instruções e D-Code para dados) conectando o núcleo à memória, o que permite buscar uma instrução e ler um dado simultaneamente em um único ciclo, embora compartilhem um espaço de endereçamento unificado. Essa propriedade estrutural é totalmente distinta das características comerciais específicas do produto, como sua frequência de operação de 72 MHz, a presença de periféricos de comunicação, o controlador de interrupções físicas (NVIC) e a capacidade exata de memória Flash ou RAM integrada no chip.
