@@ -15,30 +15,6 @@ A separação entre os caminhos de instruções e dados permite que seus acessos
 
 *Legenda: As setas indicam o sentido do fluxo. A separação permite acessos independentes; a simultaneidade depende da implementação. Fonte: elaboração própria, com base em Arvind et al. (2015).*
 
-Componentes e suas responsabilidades
-
-1. Memória de Instruções
-Armazena as pseudoinstruções do programa (ex: carregar, somar, salvar), servindo como o roteiro passo a passo que o circuito deve seguir.
-
-2. Memória de Dados
-Guarda as variáveis persistentes A, B e C. Ela fornece os valores iniciais para o cálculo e armazena o resultado final da soma no endereço C.
-
-3. Processador
-Executa todo o ciclo da operação. Ele integra os demais componentes para buscar as instruções, mover os dados, realizar o cálculo e salvar o resultado.
-
-4. PC (Contador de Programa)
-Indica o endereço da próxima instrução a ser buscada. Ele dita o ritmo do programa, avançando posição por posição a cada etapa da soma.
-
-5. Unidade de Controle
-Decodifica as instruções e coordena o circuito. Ela interpreta o comando de "soma" e envia sinais elétricos que ativam os registradores e a ULA no momento certo.
-
-6. R1, R2 e R3 (Registradores)
-Armazenam os dados temporariamente dentro do processador:
-• R1 e R2: Seguram os valores de A e B para processamento imediato.
-• R3: Guarda o resultado da soma antes de enviá-lo para a memória.
-
-7. ULA (Unidade Lógica e Aritmética)
-Realiza o cálculo matemático da adição. Ela recebe fisicamente os valores de R1 e R2, soma-os e entrega o resultado para o registrador R3.
 
 ## 11.4 Resultados Intermediários
 No contexto da microarquitetura do processador, os resultados intermediários são valores parciais e temporários gerados pela ULA (Unidade Lógica e Aritmética) durante a execução de cálculos que exigem múltiplos passos ou ciclos de clock. Como a ULA é um circuito puramente combinacional e não consegue reter dados, esses valores parciais precisam ser salvos instantaneamente para não se perderem antes da conclusão da instrução.
