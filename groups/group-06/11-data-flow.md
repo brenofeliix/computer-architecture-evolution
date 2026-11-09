@@ -15,6 +15,7 @@ A separação entre os caminhos de instruções e dados permite que seus acessos
 
 *Legenda: As setas indicam o sentido do fluxo. A separação permite acessos independentes; a simultaneidade depende da implementação. Fonte: elaboração própria, com base em Arvind et al. (2015).*
 
+Componentes e suas responsabilidades
 
 1. Memória de Instruções
 Armazena as pseudoinstruções do programa (ex: carregar, somar, salvar), servindo como o roteiro passo a passo que o circuito deve seguir.
