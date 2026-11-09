@@ -75,3 +75,5 @@ Massachusetts Institute of Technology, “Lab 5: RISC-V Introduction—Multi-Cyc
 University of California, Berkeley, “Structural Hazards,” CS 61C Course Notes. [Online]. Disponível em: https://notes.cs61c.org/content/pipeline-hazards/structural-hazards/. Acesso em: 7 nov. 2026.
 
 Massachusetts Institute of Technology, “15.1 Annotated Slides,” Computation Structures, curso 6.004, Spring 2017. [Online]. Disponível em: https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c15/c15s1/. Acesso em: 7 nov. 2026.
+Microchip Technology Inc. ATmega328P Datasheet
+Hennessy, John L.; Patterson, David A. Computer Architecture: A Quantitative Approach. 6. ed. Morgan Kaufmann, 2017.
