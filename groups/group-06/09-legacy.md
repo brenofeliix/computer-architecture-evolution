@@ -95,4 +95,3 @@ Este tópico separa o que tem **evidência documental** do que é apenas **semel
 | **Histórica** | O modelo nasce da experiência eletromecânica do Mark I e consolidou-se como referência conceitual; sua ligação com sistemas modernos é de classificação, não de sucessão direta comprovada. |
 
 ---
-## 9.7 Future Perspectives
