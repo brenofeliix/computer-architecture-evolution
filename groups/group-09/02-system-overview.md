@@ -1,11 +1,11 @@
-# 2. System Overview
+# 2. Visão geral do sistema
 
-## 2.1 General Description
+## 2.1 Descrição geral
 Uma GPU é um processador paralelo formado por muitos núcleos menores e unidades especializadas. Ela recebe trabalhos da CPU, divide esses trabalhos em threads e executa milhares delas em grupos. Esse desenho é eficiente para operações repetitivas sobre grandes conjuntos de dados, como aplicar uma mesma fórmula a todos os pixels de uma imagem ou a todos os elementos de uma matriz.
 
 Em uma aplicação moderna, CPU e GPU formam um sistema heterogêneo. A CPU executa o sistema operacional, controla o fluxo geral e inicia os kernels. A GPU executa os kernels, que são funções preparadas para rodar em paralelo. Em IA, os kernels realizam principalmente multiplicação de matrizes, convolução, normalização e funções de ativação.
 
-## 2.2 Main Components
+## 2.2 Componentes principais
 
 - **CPU (host):** coordena a aplicação, prepara os dados e envia comandos para a GPU.
 - **Unidades de execução:** multiprocessadores de streaming (SMs, na NVIDIA) ou unidades de computação (CUs, na AMD). Cada unidade mantém grupos de threads ativos.
@@ -17,7 +17,7 @@ Em uma aplicação moderna, CPU e GPU formam um sistema heterogêneo. A CPU exec
 - **Interconexão e barramento:** conectam GPU, CPU e dispositivos. PCI Express é comum em placas dedicadas; NVLink e tecnologias semelhantes oferecem maior largura de banda em alguns sistemas.
 - **Entrada e saída:** inclui tela, armazenamento, rede, câmera e outros dispositivos. Dados podem passar pela CPU ou por mecanismos de cópia direta, dependendo do sistema.
 
-## 2.3 Block Diagram
+## 2.3 Diagrama de blocos
 ```mermaid
 flowchart LR
 	A[Aplicação na CPU] --> B[Driver e runtime]
@@ -34,7 +34,7 @@ flowchart LR
 
 O diagrama representa o caminho lógico. A organização física varia entre fabricantes e gerações.
 
-## 2.4 Data Flow
+## 2.4 Fluxo de dados
 1. A aplicação executada pela CPU reserva ou identifica os dados de entrada, como pixels, vértices, matrizes ou lotes de treinamento.
 2. O driver e o runtime, como CUDA, HIP ou OpenCL, preparam a execução e transferem os dados para a memória acessível pela GPU.
 3. A CPU inicia um kernel. O kernel é dividido em uma grade de blocos, e cada bloco contém várias threads.
@@ -44,7 +44,7 @@ O diagrama representa o caminho lógico. A organização física varia entre fab
 
 Em IA, esse fluxo se repete em várias camadas. Os dados entram como tensores, unidades especializadas executam operações matriciais e o resultado segue para a próxima camada. No treinamento, também são armazenados gradientes e pesos atualizados.
 
-## 2.5 Main Characteristics
+## 2.5 Características principais
 
 | Característica | Descrição |
 |---|---|
@@ -59,7 +59,7 @@ Em IA, esse fluxo se repete em várias camadas. Os dados entram como tensores, u
 | IA | Tensor Cores ou equivalentes aceleram matrizes, convoluções e formatos de menor precisão. |
 | Limitação principal | Transferir dados entre CPU e GPU e acessar a memória de forma inadequada pode eliminar o ganho do paralelismo. |
 
-## 2.6 Paralelismo na Prática
+## 2.6 Paralelismo na prática
 O desempenho da GPU depende de manter muitas threads prontas para executar. Um kernel tende a ser eficiente quando possui bastante trabalho independente, acessos de memória organizados e pouca divergência entre threads do mesmo warp ou wavefront. Para isso, programadores normalmente:
 
 - dividem o problema em blocos independentes;
@@ -70,7 +70,7 @@ O desempenho da GPU depende de manter muitas threads prontas para executar. Um k
 
 Assim, ter mais núcleos não garante sozinho mais velocidade. O algoritmo e a forma como os dados percorrem a hierarquia de memória são tão importantes quanto o hardware.
 
-## 2.7 Comunicação, Limitações e Impacto
+## 2.7 Comunicação, limitações e impacto
 
 Os componentes se comunicam por diferentes mecanismos, conforme o tipo de dado e a distância entre eles:
 

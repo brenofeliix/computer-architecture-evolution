@@ -1,6 +1,6 @@
-# 6. Input and Output
+# 6. Entrada e saída
 
-## 6.1 Input Devices
+## 6.1 Dispositivos de entrada
 Uma GPU normalmente não recebe dados diretamente de teclado ou mouse. Ela recebe informações do sistema hospedeiro, geralmente por meio da CPU e do driver da GPU. As principais entradas são:
 
 - **Dados gráficos:** vértices, texturas, modelos 3D, imagens e comandos de renderização.
@@ -11,7 +11,7 @@ Uma GPU normalmente não recebe dados diretamente de teclado ou mouse. Ela receb
 
 Em uma placa dedicada, os dados podem sair da memória RAM e chegar à VRAM por PCI Express. Em GPUs integradas, CPU e GPU podem compartilhar parte da memória principal.
 
-## 6.2 Output Devices
+## 6.2 Dispositivos de saída
 Os resultados produzidos pela GPU podem ter diferentes destinos:
 
 - **Tela:** a GPU gera imagens e envia o quadro final ao monitor por interfaces como HDMI ou DisplayPort, normalmente através do controlador de vídeo.
@@ -20,7 +20,7 @@ Os resultados produzidos pela GPU podem ter diferentes destinos:
 - **Codificador de vídeo ou armazenamento:** a GPU pode produzir vídeo comprimido ou dados que serão gravados por outro componente do sistema.
 - **Aplicação:** em IA, a saída pode ser uma classificação, uma previsão, uma detecção de objeto ou uma resposta gerada por um modelo.
 
-## 6.3 Communication Interfaces
+## 6.3 Interfaces de comunicação
 As interfaces de comunicação fazem a ligação entre a GPU e o ambiente externo:
 
 - **PCI Express (PCIe):** transporta comandos e dados entre CPU, RAM e GPU em placas dedicadas.
@@ -30,12 +30,12 @@ As interfaces de comunicação fazem a ligação entre a GPU e o ambiente extern
 - **HDMI e DisplayPort:** transportam imagem e áudio para dispositivos de exibição.
 - **Interfaces de memória:** conectam o processador gráfico à VRAM e determinam a largura de banda disponível para os dados.
 
-## 6.4 Peripheral Devices
+## 6.4 Dispositivos periféricos
 Os periféricos não precisam estar ligados diretamente à GPU. Eles normalmente se comunicam com a CPU ou com controladores do sistema, que encaminham os dados para a GPU quando necessário. Exemplos são monitor, câmera, armazenamento, rede, teclado e mouse.
 
 A GPU também pode interagir com dispositivos de captura de vídeo, placas de rede e aceleradores por meio de APIs, barramentos e mecanismos de cópia direta. Em servidores, várias GPUs podem trocar dados por uma interconexão própria, sem depender sempre da CPU.
 
-## 6.5 Examples
+## 6.5 Exemplos
 ### Exemplo: renderização de uma imagem
 
 **Entrada:** a aplicação fornece vértices, texturas, configurações e comandos de renderização.
@@ -52,12 +52,12 @@ A GPU também pode interagir com dispositivos de captura de vídeo, placas de re
 
 **Saída:** o resultado é mantido na VRAM ou copiado para a CPU, onde a aplicação apresenta uma classe, previsão ou detecção.
 
-## 6.6 Historical Evolution
+## 6.6 Evolução histórica
 No início, GPUs eram usadas principalmente para receber comandos gráficos da CPU e enviar imagens ao monitor. Com shaders programáveis, passaram a receber programas menores para controlar etapas da renderização. A partir de CUDA, OpenCL e HIP, também passaram a receber kernels de computação geral, dados científicos e tensores de IA.
 
 Essa evolução mudou a entrada e a saída: a GPU deixou de ser apenas um componente de exibição e passou a funcionar como acelerador de dados. Seus resultados podem ser imagens, vídeos, cálculos científicos ou respostas de modelos de inteligência artificial.
 
-## 6.7 Modern Comparison
+## 6.7 Comparação moderna
 Em uma GPU moderna, a entrada e a saída são predominantemente digitais e controladas por software. Teclado, mouse e impressora não são partes específicas da arquitetura da GPU, portanto não são necessários para explicar seu funcionamento. A interação humana acontece indiretamente, quando uma pessoa executa um programa, escolhe configurações, envia uma imagem ou solicita uma inferência.
 
 O processo pode ser automático, quando um programa envia kernels e recebe resultados sem intervenção durante cada operação, ou manual, quando o usuário inicia uma renderização, seleciona um arquivo ou altera parâmetros. As principais limitações são:
