@@ -20,7 +20,7 @@ No contexto da microarquitetura do processador, os resultados intermediários s�
 
 Para viabilizar esse fluxo, os registradores atuam como a memória de curto prazo do processador, armazenando tanto os operandos de entrada quanto os resultados intermediários e as flags de status (como zero ou overflow). Dessa forma, esses elementos do datapath permitem que os dados sejam retidos de forma estável entre um ciclo e outro, viabilizando operações encadeadas antes que o resultado final seja gravado no banco de registradores ou na memória principal.
 
-**[Figura 2 - Representação de um fluxo de soma na organização de Harvard Clássica](images/harvard-representação-fluxo-de-soma.png)**
+**[Figura 2 - Representação de um fluxo de soma na organização de Harvard Clássica](images/harvard-representacao-fluxo-de-soma.png)**
 
 *Legenda: Fluxo da soma de A e B e do armazenamento do resultado em C em um modelo didático da organização Harvard clássica. As setas indicam a direção das instruções, dos dados, dos endereços simbólicos e dos sinais de controle. Os caminhos independentes permitem acessos independentes; a ocorrência de acessos simultâneos depende da implementação. PC, Unidade de Controle, R1–R3 e ULA são componentes do modelo ilustrativo, não elementos que definem por si só a Arquitetura Harvard. Fonte: elaboração própria, com base em Arvind et al. e no modelo didático de datapath do MIT OpenCourseWare*
 
