@@ -67,3 +67,17 @@
 - NVIDIA. *CUDA C++ Programming Guide: Thread Hierarchy*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#thread-hierarchy.
 - NVIDIA. *CUDA C++ Best Practices Guide: Coalesced Access to Global Memory*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#coalesced-access-to-global-memory.
 - NVIDIA. *CUDA C++ Programming Guide: Shared Memory*. Disponível em: https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#shared-memory.
+
+## J. Evolução, aplicações e sistemas heterogêneos
+
+- Krizhevsky, Alex; Sutskever, Ilya; Hinton, Geoffrey E. *ImageNet
+  Classification with Deep Convolutional Neural Networks*. NeurIPS, 2012.
+  Disponível em: https://proceedings.neurips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf.
+- Nakamoto, Satoshi. *Bitcoin: A Peer-to-Peer Electronic Cash System*.
+  Disponível em: https://bitcoin.org/bitcoin.pdf.
+- NVIDIA. *CUDA C++ Programming Guide: Unified Memory*. Disponível em:
+  https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#unified-memory.
+- NVIDIA. *Grace Hopper Superchip*. Disponível em:
+  https://www.nvidia.com/en-us/data-center/grace-hopper-superchip/.
+- Apple. *About the Apple GPU*. Disponível em:
+  https://developer.apple.com/documentation/metal/about-the-apple-gpu.

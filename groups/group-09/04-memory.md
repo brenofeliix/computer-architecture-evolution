@@ -1,6 +1,6 @@
-# 4. Memory Organization
+# 4. Organização da memória
 
-## 4.1 Memory Hierarchy
+## 4.1 Hierarquia de memória
 Uma GPU utiliza uma hierarquia de memória. Memórias menores e mais próximas das unidades de cálculo são mais rápidas, enquanto memórias maiores têm maior latência. Essa organização permite armazenar temporariamente os dados mais usados e reduzir acessos demorados.
 
 A hierarquia típica é:
@@ -24,17 +24,17 @@ As caches L1 e L2 guardam cópias de dados acessados recentemente. A L1 normalme
 
 Além das caches, a memória compartilhada pode ser organizada pelo programador para armazenar dados reutilizados pelas threads de um bloco. Ela é rápida, mas tem capacidade limitada e exige sincronização correta.
 
-## 4.5 Storage
+## 4.5 Armazenamento
 A GPU não costuma possuir armazenamento permanente para arquivos de usuário. Modelos, programas, imagens e vídeos geralmente ficam em SSD ou HD e são carregados pelo sistema operacional. Depois, os dados necessários são transferidos para a RAM e, quando necessário, para a VRAM.
 
 Portanto, é importante separar armazenamento de memória: o SSD mantém os arquivos quando o computador está desligado, enquanto registradores, caches, VRAM e RAM mantêm dados durante a execução.
 
-## 4.6 Memory Capacity
+## 4.6 Capacidade de memória
 Não existe uma capacidade única para todas as GPUs. Ela varia conforme o modelo e o uso. Como referência, GPUs de consumo podem ter alguns gigabytes de VRAM, enquanto placas profissionais e aceleradores de servidores podem ter dezenas ou centenas de gigabytes, especialmente quando usam HBM.
 
 A capacidade disponível para cada aplicação também é reduzida por buffers gráficos, sistema operacional, bibliotecas, pesos do modelo e dados intermediários. Quando a VRAM não é suficiente, parte dos dados pode ser movida para a RAM ou para o armazenamento, mas isso aumenta bastante a latência.
 
-## 4.7 Comparison with Modern Systems
+## 4.7 Comparação com sistemas modernos
 | Área | Função | Velocidade e limitação |
 |---|---|---|
 | Registradores | Valores temporários de cada thread. | Muito rápidos, mas com pouca capacidade. |
@@ -44,14 +44,14 @@ A capacidade disponível para cada aplicação também é reduzida por buffers g
 | RAM | Dados preparados pela CPU e transferidos para a GPU. | Maior capacidade, mas a transferência por PCIe pode ser lenta. |
 | SSD/HD | Arquivos, programas, modelos e configurações permanentes. | Não perde dados ao desligar, mas é muito mais lento que as memórias da GPU. |
 
-## 4.8 Relação com o Funcionamento
+## 4.8 Relação com o funcionamento
 O desempenho da GPU depende da movimentação dos dados pela hierarquia. Kernels rápidos precisam acessar os dados de forma organizada, reutilizar informações próximas às unidades de cálculo e evitar transferências frequentes entre RAM e VRAM.
 
 No processamento gráfico, texturas, vértices e buffers são carregados na VRAM para que a GPU possa renderizar imagens. Em inteligência artificial, pesos, entradas, ativações e gradientes permanecem na VRAM durante as operações matriciais. Se a memória fica cheia ou os dados são acessados de forma desorganizada, as unidades de cálculo podem ficar ociosas.
 
 Assim, a memória não serve apenas para guardar informações: sua capacidade, velocidade, proximidade e forma de acesso influenciam diretamente o desempenho e o tamanho dos problemas que a GPU consegue processar.
 
-## 4.9 Origem e Fluxo dos Dados
+## 4.9 Origem e fluxo dos dados
 Os dados podem vir de arquivos armazenados em SSD ou HD, de dispositivos de entrada, da rede ou de outro processo. A CPU e o sistema operacional carregam esses dados na RAM. Em uma GPU dedicada, o driver e o runtime transferem o que será processado para a VRAM por meio do PCIe. Em GPUs integradas, CPU e GPU podem acessar uma área compartilhada da memória principal.
 
 Depois que os dados chegam à VRAM, as unidades de execução solicitam as informações necessárias. O acesso tenta seguir esta ordem: registradores, memória compartilhada ou cache L1, cache L2 e, por fim, memória global na VRAM. Quando o dado não está em um nível mais rápido, ele precisa ser buscado em um nível mais distante.
@@ -72,12 +72,12 @@ flowchart LR
 	B --> I[Aplicação, arquivo ou monitor]
 ```
 
-## 4.10 Ordem de Acesso e Aceleração
+## 4.10 Ordem de acesso e aceleração
 O escalonador mantém vários grupos de threads prontos. Quando um grupo espera dados da memória, outro grupo pode utilizar a unidade de execução. Esse mecanismo ajuda a esconder a latência, mas não elimina o custo de buscar dados.
 
 O acesso é acelerado quando as threads leem posições consecutivas da memória, permitindo uma transferência agrupada, e quando os dados são reutilizados na cache ou na memória compartilhada. Em IA, operações matriciais também podem usar unidades especializadas, como Tensor Cores, reduzindo o tempo de cálculo depois que os dados estão disponíveis.
 
-## 4.11 Gargalos e Limitações
+## 4.11 Gargalos e limitações
 - **Transferência CPU-GPU:** o PCIe possui menos largura de banda e maior latência que a memória interna da GPU. Cópias frequentes podem anular o ganho do processamento paralelo.
 - **Capacidade da VRAM:** modelos, imagens ou conjuntos de dados maiores que a VRAM precisam ser divididos ou transferidos em partes.
 - **Acesso irregular:** leituras espalhadas reduzem o aproveitamento da largura de banda e das caches.

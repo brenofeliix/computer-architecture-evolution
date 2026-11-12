@@ -1,12 +1,12 @@
-# Group 09
+# Grupo 09
 
-## Architecture
+## Arquitetura
 
 GPU (Graphics Processing Unit)
 
 ---
 
-## Members
+## Integrantes
 
 -Gabriel Eduardo Dembinski 
 
@@ -43,3 +43,26 @@ A GPU surgiu nos anos 1990 para resolver um problema que a CPU não conseguia at
 ## Importância para a evolução da computação
 
 A GPU representa uma mudança de paradigma na forma de projetar processadores: em vez de poucos núcleos complexos otimizados para tarefas sequenciais, ela prioriza milhares de núcleos simples executando operações em paralelo (modelo SIMT). Essa escolha arquitetural, inicialmente pensada para gráficos, tornou-se a base da computação de alto desempenho moderna — sustentando desde simulações científicas até a revolução da inteligência artificial, já que o treinamento de redes neurais depende fundamentalmente da mesma capacidade que motivou a criação da GPU: realizar um volume massivo de operações matemáticas simples e repetitivas ao mesmo tempo.
+
+## Navegação da documentação
+
+### Fundamentos e organização
+
+1. [História e contexto da GPU](01-history.md)
+2. [Visão geral do sistema](02-system-overview.md)
+3. [CPU, unidades de processamento e execução](03-cpu.md)
+4. [Organização da memória](04-memory.md)
+5. [Barramentos e interconexões](05-bus.md)
+6. [Entrada e saída](06-input-output.md)
+7. [ISA e modelo de programação](07-instruction-set.md)
+
+### Desempenho, evolução e aplicações
+
+8. [Comparação, integração e desempenho moderno](08-modern-comparison.md)
+9. [Legado, influência e perspectivas futuras](09-legacy.md)
+10. [Questões orientadas à pesquisa e respostas](10-research-question.md)
+11. [Exemplo técnico: detecção de objetos em vídeo na GPU](11-technical-example.md)
+
+### Referências
+
+- [Referências bibliográficas e documentação técnica](references.md)
