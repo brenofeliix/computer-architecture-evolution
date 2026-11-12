@@ -46,13 +46,3 @@ Caminhos independentes podem evitar que uma busca de instrução e uma transfer�
 Na organização clássica de von Neumann, instruções e dados compartilham o espaço de memória. Se uma implementação também usa um caminho de acesso compartilhado com capacidade limitada, pedidos simultâneos podem gerar contenção. Isso não autoriza afirmar que toda máquina von Neumann usa um único barramento físico.
 
 A comparação com Harvard deve se limitar ao critério analisado: espaços e caminhos separados podem permitir acessos independentes; a organização compartilhada pode oferecer maior flexibilidade de alocação entre código e dados. Uma máquina concreta pode combinar elementos dos dois modelos. Portanto, não se conclui que Harvard seja universalmente mais rápida ou mais eficiente (Arvind et al., 2015, cap. 5).
-
-## 5.8 Comparison with Current Architectures
-
-Hoje em dia, a arquitetura Harvard normal, é usada principalmente em chips mais simples e específicos, como microcontroladores (encontrados em sistemas embarcados e placas como o Arduino).
-
-Já os processadores modernos de uso geral (computadores, servidores e celulares) utilizam a Arquitetura Harvard Modificada, que mistura duas ideias para obter o melhor custo-benefício:
-
-Por dentro do processador: Funciona como Harvard. O processador possui memórias super rápidas (Caches L1) separadas para as instruções e para os dados. Isso permite que ele leia os dois ao mesmo tempo, mantendo a alta velocidade.
-
-Por fora  : Funciona como von Neumann, as instruções e os dados se misturam na mesma memória principal (RAM) e viajam pelo mesmo barramento. Isso simplifica a construção da placa-mãe e barateia o sistema.
