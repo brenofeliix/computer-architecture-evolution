@@ -5,8 +5,18 @@ Na Arquitetura de Harvard clássica, as informações utilizadas pelo processado
 Para demonstrar essa organização, será utilizada como exemplo uma operação de soma entre dois valores já disponíveis. Nesse modelo, A e B representam os valores de entrada que serão utilizados no cálculo, enquanto C representa o local destinado ao armazenamento do resultado. A operação consiste em receber os dois valores, realizar a adição e guardar o resultado obtido. Esse exemplo foi escolhido porque permite demonstrar de maneira simples três etapas fundamentais do processamento: a leitura dos valores necessários, a execução de uma operação matemática e o armazenamento do resultado. Assim, é possível compreender como as informações são utilizadas durante a execução de uma instrução.
 Entretanto, esse exemplo representa apenas um modelo didático para explicar a organização e o funcionamento de uma operação na Arquitetura de Harvard. Ele não descreve obrigatoriamente o funcionamento interno de uma máquina real, pois diferentes implementações podem utilizar instruções, registradores e mecanismos de acesso à memória distintos. Também é importante diferenciar o modelo didático de uma implementação concreta: o primeiro serve para facilitar a compreensão dos conceitos, enquanto o segundo corresponde à arquitetura efetivamente construída em um equipamento. Portanto, nenhum processador ou chip específico foi escolhido para esta demonstração, que tem como objetivo apresentar os conceitos gerais da organização de Harvard sem atribuí-los a uma implementação particular.
 
-## 11.2 Caminho das Instruções
-No modelo de arquitetura clássica, o processo de busca e execução de instruções inicia-se quando o contador de programa (PC) fornece o endereço da instrução armazenada na memória principal, o qual é temporariamente retido no registrador de endereço de memória (MAR) antes de ser enviado pelo barramento de endereços, permitindo que a célula de memória correspondente disponibilize a instrução no barramento de dados para ser capturada pelo registrador de dados de memória (MBR) e transferida ao registrador de instruções (IR) dentro da unidade de controle; a partir daí, o decodificador de instruções traduz o código de operação (opcode) para que o sequenciador e a lógica de controle gerem a sequência temporal exata de sinais de controle que coordenam os demais componentes — como a abertura de portas em multiplexadores, a ativação de registradores específicos e o acionamento da unidade lógica e aritmética (ULA) —, orientando assim a execução completa da instrução, que pode incluir a busca de operandos adicionais, o processamento dos dados e o armazenamento dos resultados, fechando o ciclo de instrução e preparando o hardware para incrementar o contador de programa e iniciar o ciclo seguinte.
+## 11.2 Programa e pseudoinstruções
+
+Para demonstrar a tarefa, considere a memória de dados inicialmente preenchida com `A = 5`, `B = 7` e `C = 0`. A memória de instruções contém a sequência abaixo:
+
+```text
+LOAD R1, [A]        ; R1 recebe o valor armazenado em A (5)
+LOAD R2, [B]        ; R2 recebe o valor armazenado em B (7)
+ADD   R3, R1, R2    ; R3 recebe R1 + R2 (12)
+STORE [C], R3       ; C recebe o valor de R3 (12)
+```
+
+`LOAD`, `ADD` e `STORE` são **pseudoinstruções didáticas**. Elas representam operações genéricas e não pertencem a uma ISA específica. `R1`, `R2`, `R3`, a ULA e uma unidade de controle são componentes de uma implementação ilustrativa; a definição Harvard não exige esses nomes ou uma sequência única de componentes. A separação relevante para o exemplo é entre a memória que fornece as instruções e a memória que fornece os valores `A`, `B` e `C` (Arvind et al., 2015).
 
 ## 11.3 Acesso e Circulação de Dados
 Na organização Harvard clássica, as instruções do programa e os dados ocupam espaços de memória separados e utilizam caminhos independentes até o processador. Para uma operação aritmética, os valores podem ser lidos de registradores e encaminhados à ULA, que produz um resultado. Quando a instrução precisa buscar um valor armazenado, o processador calcula o endereço e solicita a leitura à memória de dados; o valor retornado pode ser encaminhado a um registrador. Em uma operação de armazenamento, um valor mantido em registrador é enviado ao endereço indicado na memória de dados. Assim, o fluxo depende da instrução executada: uma operação entre registradores pode não acessar a memória de dados, enquanto uma carga ou um armazenamento envolve esse caminho.  
@@ -43,36 +53,17 @@ Armazenam os dados temporariamente dentro do processador:
 Realiza o cálculo matemático da adição. Ela recebe fisicamente os valores de R1 e R2, soma-os e entrega o resultado para o registrador R3
 
 
-## 11.4 Resultados Intermediários
-No contexto da microarquitetura do processador, os resultados intermediários são valores parciais e temporários gerados pela ULA (Unidade Lógica e Aritmética) durante a execução de cálculos que exigem múltiplos passos ou ciclos de clock. Como a ULA é um circuito puramente combinacional e não consegue reter dados, esses valores parciais precisam ser salvos instantaneamente para não se perderem antes da conclusão da instrução.
+## 11.4 Produção do resultado
 
-Para viabilizar esse fluxo, os registradores atuam como a memória de curto prazo do processador, armazenando tanto os operandos de entrada quanto os resultados intermediários e as flags de status (como zero ou overflow). Dessa forma, esses elementos do datapath permitem que os dados sejam retidos de forma estável entre um ciclo e outro, viabilizando operações encadeadas antes que o resultado final seja gravado no banco de registradores ou na memória principal.
+Na terceira pseudoinstrução, a unidade de processamento soma os operandos: `5 + 7 = 12`. O resultado fica temporariamente em `R3`; a quarta pseudoinstrução grava esse valor no endereço simbólico `C` da memória de dados. Ao final, `C = 12`. O registrador e a ULA ilustram uma forma possível de realizar a operação; sua organização exata depende do processador escolhido.
 
-**[Figura 2 - Representação de um fluxo de soma na organização de Harvard Clássica](images/harvard-representação-fluxo-de-soma.png)**
+## 11.5 Ordem lógica e acessos independentes
 
-*Legenda: Fluxo da soma de A e B e do armazenamento do resultado em C em um modelo didático da organização Harvard clássica. As setas indicam a direção das instruções, dos dados, dos endereços simbólicos e dos sinais de controle. Os caminhos independentes permitem acessos independentes; a ocorrência de acessos simultâneos depende da implementação. PC, Unidade de Controle, R1–R3 e ULA são componentes do modelo ilustrativo, não elementos que definem por si só a Arquitetura Harvard. Fonte: elaboração própria, com base em Arvind et al. e no modelo didático de datapath do MIT OpenCourseWare*
+A sequência acima descreve dependências lógicas: é preciso ler `A` e `B` antes de somá-los e produzir o resultado antes de gravá-lo em `C`. Ela não fixa ciclos de clock. A separação dos caminhos permite que a busca de instruções e os acessos à memória de dados sejam independentes; a ocorrência de acessos simultâneos depende da organização concreta das memórias, das interfaces e do controle do processador. Essa separação, isoladamente, não garante pipeline nem execução simultânea de instruções (Arvind et al., 2015).
 
-## 11.5 Ordem e Independência dos Acessos
-Na arquitetura Harvard clássica, a divisão física dos espaços de armazenamento reflete-se diretamente nos canais de comunicação com o processador. Essa separação estrutural traz implicações diretas na forma como os acessos são geridos:
+## 11.6 Escopo e limites do exemplo
 
-* **Independência de Caminhos:** Como os barramentos e caminhos de acesso para instruções e para dados são totalmente independentes, as requisições destinadas a cada um dos espaços não disputam o mesmo canal físico de comunicação.
-* **Potencial de Acessos Simultâneos:** Dependendo da implementação específica do hardware, essa independência abre a possibilidade de que ocorram acessos em paralelo — por exemplo, a busca (*fetch*) de uma nova instrução na memória de programa pode decorrer no mesmo ciclo temporal em que a unidade de controlo ou cálculo lê ou escreve dados na memória de dados.
-* **Ausência de Garantia Universal:** É fundamental sublinhar que a simultaneidade de acessos **não é uma regra garantida nem inerente a todos os sistemas** baseados no modelo Harvard[cite: 31, 32]. Determinados sistemas implementam caminhos separados estritamente por razões de organização lógica ou restrições de projeto, mas podem carecer de circuitos internos ou de suporte temporal que permitam o verdadeiro paralelismo de execução, servindo a separação primariamente para evitar colisões e conflitos de barramento e não para assegurar concorrência automática.
-
-Sequência explicada e resultado
-
-Abaixo encontra-se a explicação numerada correspondente ao fluxo de execução da operação demonstrada no diagrama:
-
-1. **Condição inicial:** O programa e os valores encontram-se alocados nos respetivos espaços de memória indicados.
-2. **Busca da instrução A:** O modelo busca a instrução que representa a operação de carregar o valor de A.
-3. **Leitura de A:** O operando A é lido a partir da memória de dados e transferido para o registrador temporário R1.
-4. **Busca da instrução B:** O modelo busca a instrução seguinte que representa a operação de carregar o valor de B.
-5. **Leitura de B:** O operando B é lido a partir da memória de dados e transferido para o registrador temporário R2.
-6. **Processamento aritmético:** A operação de soma encaminha os conteúdos de R1 e R2 para a Unidade Lógica e Aritmética (ULA).
-7. **Armazenamento temporário:** O resultado calculado pela ULA é direcionado e armazenado provisoriamente no registrador R3.
-8. **Gravação final:** A operação de armazenamento transfere o valor contido em R3 de volta para o destino C na memória de dados.
-
-*Nota:* Os números acima representam uma ordem lógica de execução sequencial e não ciclos de clock rígidos. Ao término deste exemplo prático, o espaço designado por C contém o resultado da operação $A + B$.
+O modelo Harvard caracteriza a separação entre os espaços de instruções e dados e seus caminhos de acesso. Ele não determina a capacidade, a tecnologia, a latência, a largura de palavra, o formato das instruções ou a quantidade de registradores; esses pontos dependem da implementação. A separação pode tornar menos flexível a redistribuição de capacidade entre programa e dados quando os espaços são implementados em memórias distintas, mas não permite concluir, sem especificar a máquina, que instruções nunca possam ser lidas como dados ou que programas não possam ser carregados. O exemplo explica um fluxo possível, não uma ISA ou microarquitetura universal (Arvind et al., 2015).
 
 ## 11.6 Armazenamento, Aceleração e Limitações
 A separação física das memórias na arquitetura Harvard clássica define seu perfil de armazenamento, potencial de desempenho e restrições, sendo necessário isolar as regras do modelo das escolhas de hardware.
