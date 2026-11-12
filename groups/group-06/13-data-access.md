@@ -18,14 +18,14 @@ O microcontrolador ATmega328P utiliza uma arquitetura do tipo Load/Store, separa
 ## 13.5 Exemplo de Seleção e Uso de um Dado
 Para ilustrar de forma concreta como um dado é selecionado e utilizado na arquitetura do microcontrolador ATmega328P, considera-se a operação de carregamento e manipulação de um valor utilizando uma instrução real documentada na ISA AVR:
 
-* **Instrução de Seleção:** `LDS Rd, k` (Load Direct from Data Space), que seleciona e carrega um valor diretamente de um endereço fixo da memória de dados (SRAM) para um registador de trabalho do processador[cite: 35].
+* **Instrução de Seleção:** `LDS Rd, k` (Load Direct from Data Space), que seleciona e carrega um valor diretamente de um endereço fixo da memória de dados (SRAM) para um registador de trabalho do processador(Atmel, 2015; Microchip Technology Inc., AVR Instruction Set Manual).
 
 | Etapa | Instrução / Operação | Origem do Dado | Destino do Dado / Uso Posterior |
 | :--- | :--- | :--- | :--- |
-| **1. Seleção e Leitura** | `LDS R16, 0x0100`[cite: 35] | Endereço `0x0100` da memória de dados (SRAM) do ATmega328P. | O valor armazenado nesse endereço é lido e copiado para o registador de destino `R16`[cite: 35]. |
-| **2. Utilização Prática** | `ADD R17, R16` | O operando está agora guardado no registador interno `R16`[cite: 35]. | O valor é somado ao conteúdo do registador `R17`, atualizando o resultado e as flags de estado. |
+| **1. Seleção e Leitura** | `LDS R16, 0x0100`(Atmel, 2015; Microchip Technology Inc., AVR Instruction Set Manual) | Endereço `0x0100` da memória de dados (SRAM) do ATmega328P. | O valor armazenado nesse endereço é lido e copiado para o registador de destino `R16`(Atmel, 2015; Microchip Technology Inc., AVR Instruction Set Manual). |
+| **2. Utilização Prática** | `ADD R17, R16` | O operando está agora guardado no registador interno `R16`(Atmel, 2015; Microchip Technology Inc., AVR Instruction Set Manual). | O valor é somado ao conteúdo do registador `R17`, atualizando o resultado e as flags de estado. |
 
-Este fluxo demonstra que, embora a organização Harvard garanta a separação física entre os caminhos de programa e de dados, a seleção e o endereçamento de um operando dentro da memória de dados seguem as regras específicas da arquitetura interna do microcontrolador escolhido[cite: 32, 35].
+Este fluxo demonstra que, embora a organização Harvard garanta a separação física entre os caminhos de programa e de dados, a seleção e o endereçamento de um operando dentro da memória de dados seguem as regras específicas da arquitetura interna do microcontrolador escolhido(Arvind et al., 2015; Microchip Technology Inc., AVR Instruction Set Manual).
 ## 13.6 Limitações e Relação com a Organização Harvard
 
 O princípio geral da arquitetura de Harvard reflete-se no ATmega328P através da separação física entre as memórias de instruções e de dados. Contudo, os mecanismos de acesso aos operandos, a arquitetura Load/Store e os modos de endereçamento são exclusivos desta implementação AVR e não representam regras universais teóricas. Como limitação técnica documentada, as operações na memória externa de dados exigem dois ciclos de relógio, criando um estrangulamento de desempenho face às operações executadas num único ciclo nos registadores internos.   
