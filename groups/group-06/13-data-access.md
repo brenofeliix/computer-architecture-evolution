@@ -37,4 +37,3 @@ Depois da sequência, `R17 = 12`. As instruções e os operandos são reais da I
 
 O ATmega328P exemplifica uma implementação AVR com espaços distintos de programa e dados. A organização Harvard, por si só, não determina os modos de endereçamento, a quantidade de registradores, a largura das palavras, a latência ou a quantidade de memória. Esses detalhes precisam ser verificados na documentação do processador escolhido. O exemplo descreve a ISA e alguns recursos do ATmega328P, não uma microarquitetura universal (Atmel, 2015; Pawson, 2022).
 
-`* Nota: leia-se “em R16”; a grafia correta da instrução é `LDS R16, 0x0100`.
