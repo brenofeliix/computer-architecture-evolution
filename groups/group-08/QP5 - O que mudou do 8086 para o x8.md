@@ -1,0 +1,20 @@
+QP5 - O que mudou do 8086 para o x86-64 atual?
+
+*Contexto*: O 8086, lançado pela Intel em 1978, foi o processador que deu origem à família x86. Era um processador de 16 bits. Desde então, a arquitetura evoluiu em três grandes etapas: 16 bits (8086, 1978), 32 bits (80386, 1985) e 64 bits (x86-64, desenvolvido pela AMD em 2003 e posteriormente adotado pela Intel). Apesar das mudanças, a arquitetura manteve grande parte da compatibilidade com versões anteriores, preservando características do projeto original.
+
+*Tamanho dos registradores*: No 8086, os principais registradores de propósito geral possuíam 16 bits: AX, BX, CX e DX, além de SI, DI, BP e SP. Também existiam registradores de segmento (CS, DS, SS e ES), o ponteiro de instrução (IP) e o registrador de flags (FLAGS). No 80386, esses registradores foram ampliados para 32 bits, recebendo o prefixo E (EAX, EBX, EIP, EFLAGS etc.). No x86-64, foram ampliados para 64 bits, utilizando o prefixo R (RAX, RBX, RIP, RFLAGS etc.). Os registradores antigos continuam acessíveis em partes menores, como RAX, EAX, AX, AH e AL.
+
+*Quantidade de registradores*: O x86-64 aumentou de 8 para 16 os registradores de propósito geral, adicionando R8 a R15. Essa ampliação permite armazenar mais dados diretamente no processador, reduzindo a necessidade de acessos à memória e facilitando a passagem de parâmetros em registradores durante chamadas de função.
+
+*Endereçamento de memória*: O 8086 possuía barramento de endereços de 20 bits, permitindo acessar até 1 MB de memória. Como seus registradores tinham 16 bits, utilizava a segmentação, formando endereços por meio de um par segmento:offset. O 80386 introduziu o endereçamento de 32 bits, permitindo um espaço de até 4 GB e possibilitando o uso de um modelo de memória plana (flat addressing). Já o x86-64 ampliou significativamente o espaço de endereçamento. Embora utilize endereços de até 64 bits, os processadores atuais implementam apenas uma parte desses bits, geralmente 48 ou 57 para endereçamento virtual.
+
+*Modos de operação*: O 8086 funcionava em modo real. O 80286 introduziu o modo protegido, permitindo maior controle e proteção da memória. Posteriormente, o 80386 trouxe o modo virtual-8086, permitindo executar programas antigos de 16 bits dentro de um ambiente protegido. O x86-64 introduziu o long mode, que possui um submodo de 64 bits e um modo de compatibilidade para aplicações de 32 bits. Os processadores atuais também mantêm a capacidade de iniciar em modo real, preservando a compatibilidade histórica.
+
+*Segmentação e modos de endereçamento*: No x86-64, a segmentação tradicional foi praticamente deixada de lado no modo de 64 bits, dando lugar a um espaço de endereçamento mais plano. Os registradores FS e GS continuam sendo utilizados para finalidades específicas. Os modos de endereçamento também evoluíram, permitindo combinações mais flexíveis de registradores, índices, escalas e deslocamentos, como no formato base + índice × escala + deslocamento.
+
+*Outras evoluções*: Os processadores modernos incorporaram diversas tecnologias, como memória cache integrada, execução fora de ordem, múltiplos núcleos e instruções SIMD, utilizadas para realizar operações sobre vários dados simultaneamente. A execução fora de ordem ganhou destaque com o Pentium Pro, em 1995, enquanto processadores x86 multicore já existiam antes do Intel Core 2, lançado em 2006. Internamente, as instruções complexas do x86 são frequentemente divididas em operações menores, chamadas micro-operações, que facilitam sua execução. Apesar dessas mudanças internas, o conjunto de instruções externo continua mantendo características da arquitetura CISC e compatibilidade com o legado.
+
+Fontes:
+- Intel x86 Assembly, material de aula (KAIST) - https://softsec.kaist.ac.kr/depot/sangkilc/is561/03-assembly.pdf
+- x86 segment registers in protected mode (Tech-Juice) - https://tech-juice.org/2011/08/27/x86-segment-registers-in-protected-mode/
+- x64 vs. x86: Key Differences Explained (phoenixNAP) - https://phoenixnap.com/kb/x64-vs-x86
