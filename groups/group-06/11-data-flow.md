@@ -7,6 +7,16 @@ Entretanto, esse exemplo representa apenas um modelo didático para explicar a o
 
 ## 11.2 Programa e pseudoinstruções
 
+Considere a memória de dados inicialmente preenchida com `A = 5`, `B = 7` e `C = 0`. A memória de instruções contém:
+
+```text
+LOAD R1, [A]        ; R1 recebe 5
+LOAD R2, [B]        ; R2 recebe 7
+ADD   R3, R1, R2    ; R3 recebe 12
+STORE [C], R3       ; C recebe 12
+```
+
+`LOAD`, `ADD` e `STORE` são **pseudoinstruções didáticas**, não instruções de uma ISA específica. Os registradores e a ULA representam uma implementação possível, não elementos exigidos pela definição Harvard. O exemplo separa a origem das instruções da origem dos operandos (Arvind et al., 2015, cap. 5).
 Para demonstrar a tarefa, considere a memória de dados inicialmente preenchida com `A = 5`, `B = 7` e `C = 0`. A memória de instruções contém a sequência abaixo:
 
 ```text
@@ -27,6 +37,18 @@ A separação entre os caminhos de instruções e dados permite que seus acessos
 
 *Legenda: As setas indicam o sentido do fluxo. A separação permite acessos independentes; a simultaneidade depende da implementação. Fonte: elaboração própria, com base em Arvind et al. (2015).*
 
+
+## 11.4 Produção do resultado
+
+A operação soma os operandos: `5 + 7 = 12`. O resultado fica temporariamente em `R3` e a pseudoinstrução `STORE` grava esse valor no endereço simbólico `C` da memória de dados. Ao final, `C = 12`.
+
+## 11.5 Ordem lógica e acessos independentes
+
+A sequência expressa dependências lógicas, não ciclos de clock. Os caminhos separados podem permitir a busca de uma instrução ao mesmo tempo que ocorre um acesso a dados, se a implementação conseguir atender aos dois pedidos. A separação não garante simultaneidade em toda execução nem implica pipeline ou execução simultânea de instruções completas (Arvind et al., 2015, cap. 5).
+
+## 11.6 Escopo e limites do exemplo
+
+Harvard caracteriza a separação entre espaços de instruções e dados e seus caminhos de acesso. O modelo não fixa capacidade, tecnologia, latência, largura de palavra, formato das instruções ou quantidade de registradores; esses pontos dependem da implementação. Quando os espaços usam memórias distintas, a capacidade livre de uma não é automaticamente transferida para a outra. Também não se pode concluir sem especificar a máquina que instruções nunca possam ser lidas como dados ou que programas não possam ser carregados. Este exemplo explica um fluxo possível, não uma microarquitetura universal (Arvind et al., 2015, cap. 5).
 Componentes e suas responsabilidades
 
 1. Memória de Instruções

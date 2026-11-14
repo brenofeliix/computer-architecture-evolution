@@ -71,3 +71,23 @@ Stallings, Arquitetura e Organização de Computadores, 10. ed., Pearson, 2017.
 Arvind, R. S. Nikhil, J. S. Emer e M. Vijayaraghavan, *Computer Architecture: A Constructive Approach: Using Executable and Synthesizable Specifications*, rev. 25 ago. 2015, cap. 5, seção 5.3. MIT 6.175. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/resources/archbook_2015-08-25.pdf. Acesso em: 28 out. 2026.
 
 Massachusetts Institute of Technology, “Lab 5: RISC-V Introduction—Multi-Cycle and Two-Stage Pipeline,” *6.175: Constructive Computer Architecture*. [Online]. Disponível em: https://csg.csail.mit.edu/6.175/labs/lab5-riscv-intro.html. Acesso em: 28 out. 2026.
+
+University of California, Berkeley, “Structural Hazards,” CS 61C Course Notes. [Online]. Disponível em: https://notes.cs61c.org/content/pipeline-hazards/structural-hazards/. Acesso em: 7 nov. 2026.
+
+Massachusetts Institute of Technology, “15.1 Annotated Slides,” Computation Structures, curso 6.004, Spring 2017. [Online]. Disponível em: https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c15/c15s1/. Acesso em: 7 nov. 2026.
+Microchip Technology Inc. ATmega328P Datasheet
+Hennessy, John L.; Patterson, David A. Computer Architecture: A Quantitative Approach. 6. ed. Morgan Kaufmann, 2017.
+
+## Referências revisadas para as Entregas 11 e 12
+
+ARVIND, A.; NIKHIL, R. S.; EMER, J. S.; VIJAYARAGHAVAN, M. *Computer Architecture: A Constructive Approach: Using Executable and Synthesizable Specifications*. MIT CSAIL, 2015, cap. 5. Disponível em: https://csg.csail.mit.edu/6.175/resources/archbook_2015-08-25.pdf. Acesso em: 12 nov. 2026.
+
+HARVARD UNIVERSITY. Collection of Historical Scientific Instruments. “Harvard IBM Mark I — Function”. Disponível em: https://chsi.harvard.edu/harvard-ibm-mark-1-function. Acesso em: 12 nov. 2026.
+
+MICROCHIP TECHNOLOGY INC. “AVR 8-bit Architecture”. *AVR Software User Guide*. Disponível em: https://onlinedocs.microchip.com/oxy/GUID-78362176-487F-41B9-95C7-B478A9A186EB-en-US-2/GUID-58665E03-55DB-4291-ADAA-2E3A8C9CB261.html. Acesso em: 12 nov. 2026.
+
+PAWSON, Richard. “The Myth of the Harvard Architecture”. *IEEE Annals of the History of Computing*, v. 44, n. 3, p. 59–69, 2022. DOI: https://doi.org/10.1109/MAHC.2022.3175612.
+
+ATEL, CORP. *ATmega328P: 8-bit AVR Microcontroller with 32K Bytes In-System Programmable Flash*. Datasheet 7810D–AVR–01/15, 2015. Disponível em: https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf. Acesso em: 12 nov. 2026.
+
+MICROCHIP TECHNOLOGY INC. “LDS — Load Direct from Data Space”. *AVR Instruction Set Manual*. Disponível em: https://onlinedocs.microchip.com/oxy/GUID-0B644D8F-67E7-49E6-82C9-1B2B9ABE6A0D-en-US-23/GUID-1F4B7FE1-96E0-47FE-838A-43C5D48E3F7F.html. Acesso em: 12 nov. 2026.

@@ -37,16 +37,12 @@ A organização Harvard não define uma largura universal para os barramentos. A
 
 Se o grupo apresentar valores de largura, deve associá-los a um processador ou sistema específico e usar a documentação desse sistema como fonte. Sem escolher uma implementação, a conclusão correta é que essa característica depende do projeto.
 
-## 5.7 Performance Impact
+## 5.7 Performance impact
 
-O principal impacto da Arquitetura de Harvard no desempenho de um processador é a eliminação do chamado "Gargalo de von Neumann". Como existem barramentos físicos separados para a memória de programa (instruções) e para a memória de dados, a CPU pode realizar a busca de uma instrução e acessar um dado (leitura ou gravação) simultaneamente, no mesmo ciclo de clock.
+Caminhos independentes podem evitar que uma busca de instrução e uma transferência de dados disputem o mesmo recurso. Essa possibilidade só se converte em acessos concorrentes se as memórias e a implementação conseguirem atendê-los no mesmo intervalo. Harvard não elimina todos os gargalos nem determina clock, CPI ou desempenho; latência, largura de banda, controle e carga de trabalho continuam relevantes (Arvind et al., 2015, cap. 5).
 
-## 5.8 Comparison with Current Architectures
+## 5.8 Comparison with other organizations
 
-Hoje em dia, a arquitetura Harvard normal, é usada principalmente em chips mais simples e específicos, como microcontroladores (encontrados em sistemas embarcados e placas como o Arduino).
+Na organização clássica de von Neumann, instruções e dados compartilham o espaço de memória. Se uma implementação também usa um caminho de acesso compartilhado com capacidade limitada, pedidos simultâneos podem gerar contenção. Isso não autoriza afirmar que toda máquina von Neumann usa um único barramento físico.
 
-Já os processadores modernos de uso geral (computadores, servidores e celulares) utilizam a Arquitetura Harvard Modificada, que mistura duas ideias para obter o melhor custo-benefício:
-
-Por dentro do processador: Funciona como Harvard. O processador possui memórias super rápidas (Caches L1) separadas para as instruções e para os dados. Isso permite que ele leia os dois ao mesmo tempo, mantendo a alta velocidade.
-
-Por fora  : Funciona como von Neumann, as instruções e os dados se misturam na mesma memória principal (RAM) e viajam pelo mesmo barramento. Isso simplifica a construção da placa-mãe e barateia o sistema.
+A comparação com Harvard deve se limitar ao critério analisado: espaços e caminhos separados podem permitir acessos independentes; a organização compartilhada pode oferecer maior flexibilidade de alocação entre código e dados. Uma máquina concreta pode combinar elementos dos dois modelos. Portanto, não se conclui que Harvard seja universalmente mais rápida ou mais eficiente (Arvind et al., 2015, cap. 5).
